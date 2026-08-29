@@ -29,10 +29,23 @@ The goal is not to reproduce the paper slide-by-slide. The presentation should t
 - [`docs/CHART_PLAN.md`](docs/CHART_PLAN.md): planned new figures and acceptance criteria.
 - [`docs/EXPERIMENT_PLAN.md`](docs/EXPERIMENT_PLAN.md): baseline re-analysis and modern-model replication matrix.
 - [`docs/DATA_CONTRACT.md`](docs/DATA_CONTRACT.md): path/manifest contract for data that lives outside Git.
+- [`docs/VALIDATION_TESTS.md`](docs/VALIDATION_TESTS.md): integrity, regression, leakage, cost, and figure-reproducibility checks.
 - [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md): local-first chart generation with a cloud fallback.
 - [`data/README.md`](data/README.md): what belongs in Git versus external storage.
 - [`config/data_manifest.example.yaml`](config/data_manifest.example.yaml): machine-readable path manifest template.
 - [`outputs/README.md`](outputs/README.md): expected derived tables and chart artifacts.
+
+## Issue roadmap
+
+1. [#1 — Inventory historical data/code/run artifacts](https://github.com/Tahlor/icdar_tta/issues/1): local-agent first task; recover paths and provenance before new inference.
+2. [#2 — Reconstruct canonical field-level dataset and paper-era metrics](https://github.com/Tahlor/icdar_tta/issues/2): normalized data, consensus/evaluation code, and regression tests.
+3. [#3 — Build precision/coverage and manual-review analysis](https://github.com/Tahlor/icdar_tta/issues/3): the primary deployment-oriented analysis.
+4. [#4 — Build inference-cost vs human-review frontier](https://github.com/Tahlor/icdar_tta/issues/4): measured/estimated cost accounting tied to fixed-quality operating points.
+5. [#5 — Replicate fixed TTA conditions on current Gemini and Qwen-family MLLMs](https://github.com/Tahlor/icdar_tta/issues/5): modern-model transfer test without per-model retuning.
+6. [#6 — Recompute and simplify pixel-shift periodicity analysis](https://github.com/Tahlor/icdar_tta/issues/6): new presentation-specific shifting figure.
+7. [#7 — Implement reproducible presentation chart pipeline and cloud fallback](https://github.com/Tahlor/icdar_tta/issues/7): local + generic/cloud chart generation.
+8. [#8 — Assemble and rehearse the 15-minute ICDAR presentation](https://github.com/Tahlor/icdar_tta/issues/8): final deck and Q&A backup.
+9. [#9 — Optional compound-transform/adaptive-sampling extensions](https://github.com/Tahlor/icdar_tta/issues/9): backlog only; do not block the core work.
 
 ## Immediate workflow
 

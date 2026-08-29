@@ -1,0 +1,32 @@
+# Machine-specific data/path configuration
+config/data_manifest.local.yaml
+config/*.local.yaml
+
+# Credentials and local environment
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Large/local data and caches
+data/raw/
+data/private/
+data/cache/
+scratch/
+cache/
+
+# Raw runtime outputs can be huge; commit portable manifests/derived tables intentionally
+runs/raw/
+outputs/tmp/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,86 @@
+# Reproducibility and cloud contingency
+
+## Local-first workflow
+
+The local machine is the preferred environment for:
+
+- discovering historical files;
+- image transformation/inference;
+- expensive model calls;
+- inspecting individual examples;
+- initial chart iteration.
+
+This is because the local agent has access to the full historical image/output tree and can inspect failures directly.
+
+## Cloud-ready chart contract
+
+Chart generation should be deliberately decoupled from raw-image access.
+
+Once derived tables exist, the target command should look conceptually like:
+
+```bash
+python -m icdar_tta.charts --input outputs/derived --output outputs/figures
+```
+
+A generic cloud runner should only need:
+
+1. the repository at a known commit;
+2. a Python environment defined by the repository;
+3. committed or downloaded derived chart tables;
+4. no model API keys for ordinary chart rendering.
+
+Main metric charts should render to at least **SVG and PNG**; PDF is desirable for vector insertion into slides/papers.
+
+## Proposed repository layers
+
+- `src/` — reusable normalization, alignment, metric, cost, and plotting code.
+- `scripts/` — thin orchestration/one-off migration commands when needed.
+- `tests/` — unit/regression tests.
+- `outputs/derived/` — compact machine-readable tables that are safe to commit.
+- `outputs/figures/` — generated presentation figures; commit final selected figures if useful for deck portability.
+- `runs/` — small run manifests/log summaries, not giant raw response dumps unless intentionally desired.
+
+## Cloud options
+
+### Option A — any Python compute environment
+
+This is the primary contingency. Clone the repo, install the pinned environment, download/mount derived tables if they are not committed, and run the canonical chart command.
+
+### Option B — GitHub Actions for chart regeneration
+
+After plotting code stabilizes, add a workflow that:
+
+- installs the pinned Python dependencies;
+- runs unit/regression tests that do not require private data;
+- regenerates charts from committed derived tables;
+- uploads rendered figures as a workflow artifact.
+
+Do **not** make expensive model inference a default GitHub Actions job. Inference would require explicit secret configuration and authorized access to the image corpus and should be a separate, manual workflow if ever added.
+
+### Option C — cloud inference fallback
+
+Only if local inference becomes unavailable:
+
+- provide/mount an authorized copy of the source images;
+- configure provider credentials through secret/environment mechanisms;
+- use the same run manifest schema and exact transform definitions;
+- write raw responses to durable storage and commit only manifests/derived data appropriate for the repository.
+
+## Environment requirements
+
+Once analysis code is present, pin versions via `pyproject.toml`/lockfile or an equivalent reproducible environment. Prefer a small common stack (Python, pandas/polars, numpy/scipy, matplotlib, pyarrow as needed) rather than notebook-only dependencies.
+
+Notebooks may be used for exploration but should not be the only way to regenerate a final figure.
+
+## Determinism/provenance
+
+Every generated chart should be traceable to:
+
+- repository commit SHA;
+- source-table checksum;
+- chart script/version;
+- model/run IDs represented;
+- metric/filtering definition;
+- generation timestamp if useful.
+
+The figure itself does not need to display all provenance; a sidecar manifest or build log can carry it.

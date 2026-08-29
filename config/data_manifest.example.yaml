@@ -1,0 +1,58 @@
+schema_version: 1
+project: icdar_tta
+
+# Copy to data_manifest.local.yaml for machine-specific paths.
+# The local file is intentionally ignored by Git.
+
+sources:
+  source_images:
+    path: /ABSOLUTE/PATH/TO/622_SOURCE_IMAGES
+    description: Canonical Pennsylvania death-record source images
+    expected_count: 622
+    public: null
+    checksum_manifest: null
+
+  ground_truth:
+    path: /ABSOLUTE/PATH/TO/GROUND_TRUTH
+    description: Canonical evaluated name-field labels
+    expected_nonblank_fields: 3684
+    public: null
+    sha256: null
+
+  fold_assignments:
+    path: /ABSOLUTE/PATH/TO/FOLDS
+    description: Cross-validation fold assignments used for historical selection
+    sha256: null
+
+  historical_responses:
+    path: /ABSOLUTE/PATH/TO/HISTORICAL_MODEL_OUTPUTS
+    description: Paper-era Gemini 2.0 Flash outputs, including augmentation families and controls
+    immutable: true
+
+  historical_augmentations:
+    path: /ABSOLUTE/PATH/TO/AUGMENTATION_CONFIGS_OR_IMAGES
+    description: Historical transform configurations and/or generated images
+
+  shift_analysis:
+    path: /ABSOLUTE/PATH/TO/SHIFT_ANALYSIS
+    description: Fine/coarse pixel-shift outputs used for periodicity analysis
+
+  paper_code:
+    path: /ABSOLUTE/PATH/TO/PAPER_CODE
+    description: Historical analysis/consensus/augmentation scripts or notebooks
+
+  usage_logs:
+    path: /ABSOLUTE/PATH/TO/USAGE_OR_BILLING_LOGS
+    description: Token, latency, API-usage, or billing evidence if available
+
+  modern_responses:
+    path: /ABSOLUTE/PATH/TO/NEW_MODEL_OUTPUTS
+    description: New replication outputs; keep raw responses outside Git if large
+
+  scratch:
+    path: /ABSOLUTE/PATH/TO/SCRATCH
+    description: Disposable transformed images/cache
+
+notes:
+  - Replace absolute paths only in the local manifest.
+  - A later committed config/data_manifest.yaml should omit sensitive machine-specific paths and preserve portable provenance/counts/checksums.

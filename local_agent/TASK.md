@@ -20,6 +20,10 @@ When sources disagree, follow the source-of-truth order in `AGENTS.md`: raw imag
 
 The project manager owns the deadline, dependency order, Kiro delegation, request ledger, integration, verification, and final handoff. Audits are gates to results, not the end product.
 
+## Current state (2026-08-30)
+
+The historical reference is frozen: the six-field evaluation contract and the paper/v9/v10 GT lineage are documented, while the packaged public/v7 lineage is kept separate. The focused modern screen is complete for `gemini-3.5-flash` and `gemini-3.5-flash-lite` using the fixed nine-view design; the requested `gemini-3.7-flash` route returned HTTP 403 and the Qwen route returned HTTP 500, so those model families remain blocked. Derived tables, C1–C9 figures, and the modern completion receipt are available. No tested strategy reached the 95% observed raw-agreement precision target. The original execution brief below is retained as the historical scope; it is not a statement that these completed items are still pending. See `local_agent/MODERN_FULL_RECEIPT.md`, `docs/GT_LINEAGE.md`, and `local_agent/STATUS.md` for the current handoff.
+
 ## Required outcomes, in priority order
 
 ### 1. Freeze the historical reference—without new Flash 2 runs

@@ -1,7 +1,10 @@
 """PA death-record name-field normalization and character error rate (CER).
 
-Per ``docs/DATA_CONTRACT.md`` ("Fields"), the paper evaluation focused on
-nonblank given-name/surname fields for the decedent, mother, and father.
+Per ``docs/GT_LINEAGE.md`` and ``docs/DATA_CONTRACT.md``, the paper evaluation
+contract selects six name fields and the historical exclusion rule scans a
+wider ground-truth field universe. The paper-era v9/v10 artifacts contain
+3,684 six-field rows, including one retained blank row; strict nonblank
+metrics therefore have a separate 3,683-row convention.
 Per ``docs/VALIDATION_TESTS.md`` ("Normalization/CER unit tests"), the
 normalization policy must be:
 
@@ -65,10 +68,10 @@ def normalize_field(value: Optional[str]) -> Optional[str]:
 def is_exact_match(prediction: Optional[str], ground_truth: Optional[str]) -> Optional[bool]:
     """Exact-match comparison after normalization.
 
-    Returns ``None`` (not False) when the ground truth is blank, since
-    "nonblank evaluated fields" are the denominator per
-    docs/EXPERIMENT_PLAN.md; blank ground-truth fields are out of scope
-    for accuracy rather than automatic mismatches.
+    Returns ``None`` (not False) when the ground truth is blank. Callers that
+    require strict nonblank evaluation should exclude these entries; that
+    convention is distinct from the paper-era 3,684-row artifact population
+    described in ``docs/GT_LINEAGE.md``.
     """
     norm_gt = normalize_field(ground_truth)
     if norm_gt is None:

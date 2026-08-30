@@ -1,6 +1,26 @@
 # Outputs
 
-Planned output layout once analysis code is added.
+Output layout for compact, release-safe analysis products. Historical tables
+already present in this directory are generated from the legacy/public v7
+lineage; they are not silently interchangeable with the paper-v9/v10
+3,684-row population. See [`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md).
+
+## Modern transfer-screen outputs
+
+The current derived tables include a complete nine-view PA screen for
+`gemini-3.5-flash` and `gemini-3.5-flash-lite`: 622 documents × nine views per
+model, with consensus and precision/coverage analysis derived offline from
+the stored terminal rows. The full execution, route blockers, parser repair
+counts, request ledger accounting, and exact model-specific metrics are in
+[`local_agent/MODERN_FULL_RECEIPT.md`](../local_agent/MODERN_FULL_RECEIPT.md).
+
+The predeclared 0.95 accepted-field precision target was not reached by the
+modern strategies, so `cross_model_operating_points.csv` contains no invented
+modern operating point. The 3.5 Flash model is the allowed substitute for the
+unavailable 3.7 route; Qwen and 3.7 remain explicit blockers. Raw source
+images and response bodies stay outside Git. The chart generator uses only
+the committed machine-readable tables and emits all 18 required SVG/PNG
+files.
 
 ## `outputs/derived/`
 
@@ -18,6 +38,12 @@ Machine-readable chart/analysis inputs. Candidate files:
 - `ensemble_size.csv` — ensemble size, strategy, quality, and coverage series for C8;
 - `failure_examples.csv` — stable qualitative-example lineage and release metadata for C9.
 - `modern_smoke_metadata.csv` — redacted six-row route/parser/usage metadata for the latest label-blind Gemini smoke; raw response bodies remain outside Git.
+
+Denominator rule: every table carrying `total_evaluated_fields` or an
+equivalent count must identify its GT lineage. Use “legacy/public v7, 3,682
+rows” for the existing historical tables; use “paper v9/v10, 3,684 row slots
+(3,683 strict nonblank plus one retained blank)” only after a dedicated
+paper-lineage recomputation.
 
 ## `outputs/figures/`
 

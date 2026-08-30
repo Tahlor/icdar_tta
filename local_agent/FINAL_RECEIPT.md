@@ -1,4 +1,49 @@
-# Historical offline handoff receipt — superseded only by the separate smoke addendum
+# Final modern-screen handoff — 2026-08-30 America/Denver
+
+The deadline package is complete for the two executable Gemini models. The
+full details are in [`MODERN_FULL_RECEIPT.md`](MODERN_FULL_RECEIPT.md).
+
+- `gemini-3.5-flash`: 622 × 9 terminal rows; executed as the available modern
+  Flash substitute after the PA `gemini-3.7-flash` route returned HTTP 403.
+- `gemini-3.5-flash-lite`: 622 × 9 terminal rows; requested model completed.
+- `gemini-3.7-flash`: narrowed to a documented HTTP 403 route blocker.
+- `sagemaker-qwen3-vl-8b-instruct-fp8`: narrowed to a documented HTTP 500
+  endpoint-not-found blocker.
+- Project-manager live-call authorization: `2026-08-30T09:46:56.518223+00:00`
+  UTC, limited to the two executable Gemini 3.5 models and 11,196 planned
+  scored requests.
+- Cumulative submitted ledger events: 11,307; conservative provider-boundary
+  count including one early unledgered route probe: 11,308 of 20,000.
+- Strict analysis, lineage/ledger reconciliation, chart generation, 210-test
+  suite, compilation, manifest validation, and analyzer reproducibility rerun:
+  all PASS. Temporary EC2 instance `cp` is stopped and verified stopped.
+
+The measured result supports transfer of visual-diversity/consensus behavior to
+both Gemini 3.5 models. It does not support a universal Grid-Warp accuracy
+claim or a 95% accepted-field precision operating point: observed modern
+maximum precision remains below 95%, so no fabricated operating point is
+reported. The older pre-call “gate closed/no provider calls” sections below
+are preserved as audit history and superseded by this receipt.
+
+---
+
+# Historical offline handoff receipt — later GT-lineage and smoke addenda apply
+
+## GT-lineage resolution addendum — 2026-08-30
+
+This receipt's earlier “canonical filter unresolved” wording is superseded at
+the code/configuration level. The historical metric selector is the six name
+fields in [`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md), and
+`chat2rec/processing/common.py::_add_flags` recovers the 24-record `Self*`
+exclusion used by the newer paper-lineage GT. The resulting historical row
+population is `622 × 6 − 24 × 2 = 3,684`.
+
+The v9/v10 machine-readable tables retain one blank row despite their
+`f_gt_missing: 0` configuration, so this receipt does not claim that all 3,684
+rows are nonblank. Its existing derived tables remain legacy/public v7
+products at 3,682 rows. The remaining work is a dedicated paper-lineage
+recomputation with an explicit blank-row convention, not discovery of an
+unknown 34-row exclusion artifact.
 
 This receipt records the offline preparation state as of 2026-08-29. A later
 small label-blind Gemini smoke is documented in
@@ -66,18 +111,21 @@ Completed offline gates:
   all pass. The 18 C1–C9 SVG/PNG files also pass an independent deterministic
   regeneration comparison.
 
-The canonical-filter search was run twice: first over the bounded historical
-scope and then over a fixed expanded shortlist of named non-raw code/config/
-report artifacts. Neither found a named artifact or generator producing exactly
-3,684 `doc_id`/`field_name` pairs; no filter or checksum sidecar was fabricated.
+The standalone exported-filter search was run twice: first over the bounded
+historical scope and then over a fixed expanded shortlist of named non-raw
+code/config/report artifacts. Neither found a named artifact or generator
+producing exactly 3,684 `doc_id`/`field_name` pairs; no filter or checksum
+sidecar was fabricated. A later direct code/configuration read recovered the
+historical six-field/24-record rule; see `docs/GT_LINEAGE.md`.
 The render-lineage audit likewise remains BLOCKED because the historical Pad
 adapter, deterministic Grid-Warp seed/render hashes, and executable transport
 rule are not recoverable from the inspected evidence.
 
 The modern live-call gate therefore remains **CLOSED**. Remaining blockers are
-the canonical filter, nine-view render/payload lineage, route and transport
-smokes, Qwen keepalive change, independent budget approval, and explicit live
-authorization. See `local_agent/CANONICAL_FILTER_EXPANDED_AUDIT.md`,
+the paper-lineage blank-row convention, nine-view render/payload lineage,
+route and transport smokes, Qwen keepalive change, independent budget
+approval, and explicit live authorization. See
+`local_agent/CANONICAL_FILTER_EXPANDED_AUDIT.md`,
 `local_agent/RENDER_LINEAGE_AUDIT.md`, `local_agent/PARSER_RETRY_AUDIT.md`, and
 `local_agent/REQUEST_LEDGER_AUDIT.md` for evidence.
 
@@ -102,11 +150,12 @@ inference, staging, commit, clean, reset, or raw-image copy occurred.
   byte, and cross-checked with `sha256sum`; all matched. Portable files contain
   no machine-specific paths, image bytes, label text, or credentials.
 
-The source-document identity/hash gate is therefore **PASS**. The canonical
-3,684-field filter, exact nine-view render lineage, route smokes, Qwen keepalive
-change, budget approval, and project-manager live
-authorization remain **BLOCKED**. No modern call is authorized by this
-addendum.
+The source-document identity/hash gate is therefore **PASS**. The standalone
+3,684-pair export remains absent, but the historical selector/exclusion rule
+is recovered in `docs/GT_LINEAGE.md`. Exact nine-view render lineage, route
+smokes, Qwen keepalive change, budget approval, paper-lineage row-convention
+approval, and project-manager live authorization remain **BLOCKED**. No modern
+call is authorized by this addendum.
 
 The shared parser/retry gate and the provider-neutral request-ledger gate are
 offline-PASS. Canonical fingerprints, append-only JSONL history, explicit
@@ -115,10 +164,12 @@ implemented and tested in `src/icdar_tta/request_ledger.py`; a real
 provider-backed ledger and live reconciliation still require the blocked route,
 render, and authorization gates.
 
-The canonical-filter search was independently expanded to the fixed historical
-shortlist and named non-raw code/config/report artifacts. It still found no
-evidenced 3,684-pair artifact or generator; the negative result is recorded in
-`local_agent/CANONICAL_FILTER_EXPANDED_AUDIT.md` and no filter was fabricated.
+The standalone exported-filter search was independently expanded to the fixed
+historical shortlist and named non-raw code/config/report artifacts. It still
+found no evidenced 3,684-pair artifact or generator; the negative result is
+recorded in `local_agent/CANONICAL_FILTER_EXPANDED_AUDIT.md` and no filter was
+fabricated. This artifact-level result does not reopen the recovered
+code/configuration rule in `docs/GT_LINEAGE.md`.
 
 ---
 
@@ -183,12 +234,12 @@ roots are used.
 |---|---|---|---|
 | C1 | `01_useful_diversity` | `strategy_summary.csv` | 10 measured WARP per-condition coordinates rendered; selected v7 category rows shown separated as consensus-only (no correlation coordinate, not individual CER) |
 | C2 | `02_effective_sample_size` | `error_correlation_summary.csv` | Code-generated theoretical N=10 curve plus 10 measured WARP correlations projected onto it; family-level Grid Warp/Resize correlations remain visibly blocked, not promoted from prose |
-| C3 | `03_precision_coverage` | `precision_coverage.csv` | All 1,750 raw-agreement threshold rows (Grid Warp, Pad, Resize) with supplied 95% Wilson bounds; 3,682-row denominator labeled noncanonical; score labeled raw/not calibrated |
+| C3 | `03_precision_coverage` | `precision_coverage.csv` | All 1,750 raw-agreement threshold rows (Grid Warp, Pad, Resize) with supplied 95% Wilson bounds; 3,682-row denominator labeled legacy/public v7 rather than paper-v9/v10; score labeled raw/not calibrated |
 | C4 | `04_cost_review_frontier` | `cost_by_run.csv`; `review_frontier.csv` | **Repaired in this lineage.** Prior pass had the strategy label (e.g. "GRID WARP (N=...") drawn at x=90 immediately left of a bar starting at x=250, bleeding behind the bar. Fix in `chart_4`: the strategy label now sits on its own text line above the bar at the full left margin (x=90), and the bar/track was widened to span x=90–670, so the label cannot overlap the bar regardless of name/sample-size length. One numeric review-burden coordinate is rendered; all four cost rows lack observed usage/pricing, so the cost axis and Pad/Resize target coordinates remain visibly blocked — no dollar figure was invented |
 | C5 | `05_shift_periodicity` | `shift_agreement.csv` | All 130 reported horizontal/vertical points plus 16-pixel guides; periodicity labeled observational, not architecture proof |
 | C6 | `06_cross_model_coverage` | `cross_model_operating_points.csv` | **Blocked-semantics chart.** One measured historical Grid Warp point (Gemini-2.0-Flash, rendered as a green dot, "40.4%" / "P=95.23%") and one historical Pad target-not-met row are shown; the remaining 12 cells across the three exact modern model IDs are explicit red BLOCKED cells. No modern-model result is implied or invented |
 | C7 | `07_augmentation_contribution` | `augmentation_contribution.csv` | All five family selection counts and source descriptors; selection frequency labeled descriptive, not causal contribution |
-| C8 | `08_ensemble_size` | `ensemble_size.csv` | 23 key rows across five source-reported series from the 53-row table; ~4,920-field denominator labeled noncanonical |
+| C8 | `08_ensemble_size` | `ensemble_size.csv` | 23 key rows across five source-reported series from the 53-row table; ~4,920-field historical WARP aggregate kept distinct from the paper-v9/v10 3,684-row population |
 | C9 | `09_failure_examples` | `failure_examples.csv` | **Blocked-semantics chart.** Renders a blocked evidence panel from the single available source row; no prediction, ground truth, crop, or private path is copied, because stable redacted lineage and crop-release authorization remain unavailable |
 
 Each SVG embeds a machine-readable `<metadata>` object (chart ID, 1,200x675
@@ -260,9 +311,10 @@ is authorized by this receipt.** Per `local_agent/STATUS.md` and
 `local_agent/EXPERIMENT_MATRIX.md`, all of the following must be satisfied
 before any scored/smoke call:
 
-1. Recover and verify the canonical 3,684-field filter (the exact 622-image/hash
-   manifest is now verified; current derived tables use a 3,682-row denominator,
-   explicitly labeled noncanonical in C3/C8 pending this reconciliation).
+1. Apply and independently verify the recovered paper-lineage six-field/24-record
+   rule, including an explicit decision for the one retained blank v9/v10 row
+   (the exact 622-image/hash manifest is already verified; current derived
+   tables use the legacy/public 3,682-row denominator).
 2. Render and hash all nine per-image views (3 unchanged, 3 Pad, 3 Grid-Warp)
    and prove mask coverage against the source images.
 3. Obtain project-owner acceptance of the pure-warp projection used in the

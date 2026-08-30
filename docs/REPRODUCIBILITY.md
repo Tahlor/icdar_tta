@@ -12,6 +12,11 @@ The local machine is the preferred environment for:
 
 This is because the local agent has access to the full historical image/output tree and can inspect failures directly.
 
+Before reproducing any metric, read [`GT_LINEAGE.md`](GT_LINEAGE.md). The
+paper/v9/v10 lineage and the public/v7 lineage use different processed GT
+files and different emitted row populations (3,684 versus 3,682). The raw
+3,718 `_edt` cell count is descriptive, not a metric denominator.
+
 ## Cloud-ready chart contract
 
 Chart generation should be deliberately decoupled from raw-image access.
@@ -39,6 +44,12 @@ Main metric charts should render to at least **SVG and PNG**; PDF is desirable f
 - `outputs/derived/` — compact machine-readable tables that are safe to commit.
 - `outputs/figures/` — generated presentation figures; commit final selected figures if useful for deck portability.
 - `runs/` — small run manifests/log summaries, not giant raw response dumps unless intentionally desired.
+
+The current compact historical tables under `outputs/derived/` are explicitly
+legacy/public v7 products. A cloud or local paper-lineage rerun must identify
+the newer `a5f0...` processed GT, apply the recovered historical exclusion,
+and record the v9/v10 one-blank-row convention rather than overwriting the v7
+tables in place.
 
 ## Cloud options
 

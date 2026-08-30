@@ -1,7 +1,39 @@
 # Source-lineage audit
 
+## Current modern-screen status — 2026-08-30
+
+Source identity and GT lineage are resolved for the purposes documented in
+`docs/GT_LINEAGE.md`. A prospective nine-view render manifest and private
+response archive supported a complete screen for `gemini-3.5-flash` and
+`gemini-3.5-flash-lite` (5,598 terminal rows per model). The analyzer used
+the raw six-name nonblank population of 3,718 and explicitly did not apply
+the historical 3,684-row rule. The requested 3.7 route is blocked by HTTP
+403 and Qwen by HTTP 500 endpoint-not-found; neither has a full PA screen.
+
+The historical exact-render and paper-lineage recomputation limitations in
+the audit below remain active and are not contradicted by the prospective
+modern manifest.
+
 Audit date: 2026-08-29
 Scope: bounded, read-only inspection of four authorized Windows roots and named historical artifacts. No network, provider call, inference, archive extraction, raw-image copy, or external-repository edit occurred.
+
+## GT-lineage resolution addendum — 2026-08-30
+
+The earlier denominator verdict below is superseded for the field selector and
+historical exclusion rule. The exact six metric fields are recovered from
+`chat2rec/processing/3_7_COLLAPSE.py` and the v9 analysis configuration. The
+historical `chat2rec/processing/common.py::_add_flags` code scans the wider
+configured GT field universe for `stillborn`, `infant`, `know`, `maiden`, and
+`baby`, then removes `Self*` rows for flagged records. The newer paper-lineage
+GT flags 24 records, giving the 3,684-row formula
+`622 × 6 − 24 × 2`.
+
+This does not erase the artifact caveat: v9/v10 emit 3,684 rows containing
+3,683 `f_gt_missing=0` rows and one blank row. The older f1b978 processed file
+used by v7 and the public release is a separate 3,682-row lineage. Full hashes,
+paths, and use guidance are centralized in
+[`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md). The render and live-provider
+gates below are unchanged.
 
 ## Addendum — source-candidate resolution (same date, later pass)
 
@@ -21,31 +53,31 @@ This resolves the **622 source-document identity and SHA manifest** gate to
 re-verifiable (row count, uniqueness, sort order, and file hash) without any
 machine-specific path, image, or label text.
 
-This addendum does **not** change any other verdict below. The canonical
-3,684-field filter is still **BLOCKED** (no new inclusion/exclusion evidence
-was sought or found beyond the prior pass). Exact nine-view render pixels are
-still **BLOCKED** (seed/renderer/input-rule evidence is unchanged; resolving
-source identity narrows but does not by itself satisfy this gate). No render
-hash was fabricated.
+This addendum does **not** change the exact nine-view render verdict below:
+render pixels remain **BLOCKED** (seed/renderer/input-rule evidence is
+unchanged; resolving source identity narrows but does not by itself satisfy
+this gate). The older standalone-filter wording below is superseded by the
+2026-08-30 GT-lineage addendum. No render hash was fabricated.
 
-## Verdict
+## Historical bounded verdict — superseded for GT rule
 
-The closed modern-experiment gate remains **BLOCKED**, though one prerequisite
-narrowed in the addendum above. The four originally audited 622-TIFF Windows
-roots are segmentation masks or derived mask renders, not source document
-images; source-document identity itself is now resolved via the fifth
-candidate root and is no longer a blocker on its own. The available
-ground-truth and analysis artifacts produce 3,718, 3,719, 3,682, 3,678, 3,677,
-3,648, or 3,732 evaluated-name candidates under evidenced predicates, never
-the required 3,684. Fold assignments are recoverable, and the historical
-shortlist/configuration is identifiable, but exact nine-view pixels are not
-reproducible from the bounded evidence.
+The closed modern-experiment gate remains **BLOCKED**, though source identity
+and the GT rule have since been resolved. This historical bounded pass only
+inspected the four 622-TIFF Windows roots (segmentation masks or derived mask
+renders, not source-document images); source-document identity itself is now
+resolved via the fifth candidate root. The later code/configuration follow-up
+recovers the six-field selector and 24-record exclusion, while the v9/v10
+tables expose a 3,684-row population with one blank row. Fold assignments are
+recoverable, and the historical shortlist/configuration is identifiable, but
+exact nine-view pixels are not reproducible from the bounded evidence.
 
 ## Logical aliases
 
 - `SOURCE_ROOT_WINDOWS`: parent of the four authorized Windows evidence roots.
 - `PA_DEATH_ROOT`: historical PA experiment root.
 - `OFFICIAL_ROOT`: official Chat2Rec PA analysis root.
+- `OFFICIAL_ROOT_V2`: newer `projects2` official PA analysis root used by the
+  paper/v9/v10 processed GT and consensus artifacts.
 - `TRANSFORM_ROOT`: historical transform-code checkout.
 
 These aliases intentionally replace machine-specific locations.
@@ -71,11 +103,12 @@ Set and byte comparisons:
 
 Three lexically first TIFFs were sampled per root. `OUTPUT_MASKS` and `ORIGINAL_MASKS` are uniformly 1536 by 1536, 32-bit ARGB; 82.2% to 89.9% of the 1,024 deterministic sample points were fully transparent. `RESIZED_MASKS` samples have variable dimensions (2848 by 3476, 2868 by 3500, and 3048 by 2820), are opaque 24-bit RGB, and have only 18 to 21 sampled colors. `OUTPUT2048_MASKS` has those same variable sample dimensions, is 32-bit ARGB, and has 82.0% to 88.7% fully transparent sample points. Together with the ZIP name, overlay, low-color content, exact ZIP/direct identity, and configured mask role, this establishes that all four roots contain masks/renders. None is verified as the source-document corpus.
 
-## Ground-truth and canonical denominator
+## Ground-truth and evaluation lineages
 
 | Candidate | Rows | Columns | SHA-256 | Six edited-name result |
 |---|---:|---:|---|---|
 | `OFFICIAL_ROOT/raw_5164_gts_622_FIXED_v2.csv` | 622 | 62 | `ea4b7a7c39ea7179b22219bd9f8c7f16ede84fd50b3b81686b5537a1f5e4e954` | 3,718 raw and normalized nonblank fields |
+| `OFFICIAL_ROOT_V2/5164_gts.csv` | 622 | 30 | `a5f0f9e45d78f270d213f31a1f765bd7a5cdd587f0020cdeb1d0b664184aa306` | paper/v9/v10 processed GT; 24 historical flagged records produce 3,684 row slots |
 | `OFFICIAL_ROOT/5164_gts.csv` | 622 | 30 | `f1b978699fda076ea75a87a991f7656de18a2195ed84b767ebb7c9758cb75727` | 3,719; three edited values differ from fixed v2 |
 | `PA_DEATH_ROOT/WARP/5164_gts.csv` | 622 | 18 | `cf24e896875280560023f6c8976ca6ab32de5d0bc8426c59c00b4d58b235810d` | 3,718; all six edited fields match fixed v2 |
 | `PA_DEATH_ROOT/BIG_SHIFT/CONSISTENCY/SHIFT/5164_gts.csv` | — | — | — | exact path absent |
@@ -84,7 +117,11 @@ Fixed-v2/WARP nonblank counts are: SelfGivenName 609, SelfSurname 622, FatherGiv
 
 The v7 consensus CSVs each contain 3,682 unique record/field rows: all four parent fields for 622 records and both Self fields for the same 597 records. Their `f_gt_missing` value is zero for every row. `OFFICIAL_ROOT/analysis - v7/paper/top_cer_table.csv` explicitly records `sample_count=3682` on all 20 rows. The WARP master has 68,880 rows, exactly 14 experiments by 4,920 rows. Its baseline has 3,678 six-name keys (four parent fields for 621 records and both Self fields for 597), or 3,677 after its ground-truth-missing flag.
 
-**Canonical-filter verdict: BLOCKED.** No bounded evidence produces 3,684. The missing artifact is the historical canonical inclusion/exclusion list or generating code that explains the 34 exclusions from fixed-v2's 3,718 labels. Available historical snapshots instead encode 3,682 or 3,678. No new filter was invented.
+**Standalone exported-key-list verdict: BLOCKED in this bounded pass.** The
+later direct code/configuration follow-up recovers the historical selector and
+24-record `Self*` exclusion. The 34-count difference between raw `_edt`
+nonblank cells and the 3,684 paper row target is not an exclusion count; see
+[`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md).
 
 ## Fold lineage
 
@@ -115,13 +152,13 @@ Historical Grid-Warp order was resize to maximum dimension 1,504, then `handwrit
 |---|---|---|
 | 622 segmentation-mask identity and coverage | **PASS** | equal complete stem sets; complete hashes; 622 ZIP/direct matches |
 | 622 source-document identity and SHA manifest | **PASS** (addendum) | fifth candidate root verified: 622 unique JPEGs, unique hashes, zero mask-stem differences; `config/source_image_manifest.csv` + `.sha256` are present in the working tree (no commit was made) |
-| exact canonical 3,684 fields | **BLOCKED** | no evidenced predicate; missing canonical exclusion artifact/generator |
+| paper-lineage six-field/3,684-row contract | **VERIFIED WITH CAVEAT** | selector and 24-record historical exclusion recovered; v9/v10 retain one blank row; strict-nonblank convention still needs a dedicated recomputation |
 | recover 622 fold assignments | **PASS** | v7 snapshot and mapping hash |
 | original fold-generation provenance | **BLOCKED** | seed/generator absent |
 | historical transform IDs and parameter dictionaries | **PASS** | active config, ranking, and run settings hashed |
 | exact nine rendered views | **BLOCKED** | Pad renderer, Grid seed/render hashes, and pure-warp lineage unresolved; source identity is now verified |
 | provider/model calls | **PASS (none made)** | this audit was offline and read-only |
-| modern live-experiment gate | **BLOCKED** | source, denominator, parser/render, and authorization gates remain closed |
+| modern live-experiment gate | **BLOCKED** | source identity and GT rule are resolved; paper-row convention, parser/render, route, and authorization gates remain closed |
 
 ## Commands and bounded methods
 

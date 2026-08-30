@@ -45,14 +45,40 @@ sources:
     missing_stem_list_sha256: 7B7EB11209A8355A05FF67FA6529E1B84BC7AD519E1A9CFFB1F5B43316F27F5A
 
   ground_truth:
-    description: Audited 622-row candidates are not interchangeable, and no evidenced predicate reproduces the 3,684 regression target.
-    canonical_status: unresolved
-    canonical_nonblank_evaluated_name_fields_regression_target: 3684
+    description: Historical PA evaluation contract recovered from the exact field selector, GT-processing configuration, exclusion code, and v9/v10 consensus artifacts; one retained blank row is documented below.
+    canonical_status: recovered_field_selector_and_historical_exclusion_with_one_blank_row_caveat
+    metric_field_names: [SelfGivenName, SelfSurname, FatherGivenName, FatherSurname, MotherGivenName, MotherSurname]
+    canonical_evaluation_row_count: 3684
+    canonical_evaluation_row_count_formula: "622 records * 6 metric fields - 24 flagged records * 2 Self fields"
+    paper_reported_nonblank_evaluated_name_fields_regression_target: 3684
     raw_six_name_nonblank_count: 3718
-    filter_gap_count: 34
-    filter_status: blocked_missing_canonical_exclusion_artifact_or_generator
+    raw_to_paper_display_count_difference: 34
+    raw_to_paper_difference_semantics: raw_edt_nonblank_cells and historical evaluation rows are different populations; 34 is not an exclusion count
+    historical_filter:
+      status: recovered_from_chat2rec_common_py_add_flags
+      source_path: chat2rec/processing/common.py
+      function: _add_flags
+      gt_value_precedence: original_value_then_edited_fallback
+      scan_scope: all 12 configured included base fields before the six-field metric projection
+      exclusion_terms: [stillborn, infant, know, maiden, baby]
+      match_semantics: case_insensitive_unanchored_substring_regex
+      removed_rows: field_name starts with Self for every flagged record
+      newer_paper_lineage_flagged_records: 24
+      older_legacy_lineage_flagged_records: 25
+      caveat: historical behavior; the unanchored know term can match unknown and must not be generalized as a new semantic label policy
+    paper_artifact_row_semantics:
+      v9_v10_rows: 3684
+      v9_v10_field_counts: {FatherGivenName: 622, FatherSurname: 622, MotherGivenName: 622, MotherSurname: 622, SelfGivenName: 598, SelfSurname: 598}
+      f_gt_missing_counts: {0: 3683, 1: 1}
+      strict_nonblank_rows: 3683
+      caveat: Analysis config requests f_gt_missing=0, but emitted v9/v10 tables retain one blank MotherSurname row; do not silently relabel the row count as entirely nonblank.
+    paper_lineage:
+      processed_gt_sha256: A5F0F9E45D78F270D213F31A1F765BD7A5CDD587F0020CDEB1D0B664184AA306
+      processed_gt_path: chat2rec_analysis/projects2/pa_death_records622_official/5164_gts.csv
+      consensus_snapshots: [analysis - v9, analysis - v10]
+      evidence: local_agent/GT_LINEAGE.md
     raw_per_field_database_probe:
-      status: metadata_verified_canonical_filter_unresolved
+      status: legacy_database_metadata_only_not_canonical_filter_definition
       logical_path: historical/PA_DEATH/WARP/metrics_no_punc/master_first_sample_database.csv
       byte_size: 23014921
       sha256: 34cce8d33ce772af0fce762549b2d89b2c166e8c7e55cc21bdcfb332949ffb96
@@ -64,7 +90,7 @@ sources:
       immediate_directory_entry_count: 30
       immediate_directory_filter_or_generator_name_matches: 0
       evidence_artifact: local_agent/CANONICAL_FILTER_RAW_PROBE_AUDIT.md
-      caveat: Metadata does not define the canonical 3,684 doc_id/field_name population; no filter is inferred from a count coincidence.
+      caveat: This older WARP database metadata does not define the paper-lineage 3,684 doc_id/field_name population; the recovered code-level rule is documented in local_agent/GT_LINEAGE.md.
     raw_status_aggregate_probe:
       status: complete_negative_partial
       data_rows: 68880
@@ -85,12 +111,21 @@ sources:
         rows: 622
         sha256: EA4B7A7C39EA7179B22219BD9F8C7F16EDE84FD50B3B81686B5537A1F5E4E954
         six_name_nonblank_fields: 3718
-      official_30_column:
+      paper_processed_30_column:
+        columns: 30
+        rows: 622
+        sha256: A5F0F9E45D78F270D213F31A1F765BD7A5CDD587F0020CDEB1D0B664184AA306
+        six_name_nonblank_fields: 3718
+        source_role: paper_v9_v10_processed_ground_truth
+        caveat: Relevant name/place original and edited cells match official raw fixed v2; this is distinct from the older public-release processed file.
+      legacy_public_30_column:
         columns: 30
         rows: 622
         sha256: F1B978699FDA076EA75A87A991F7656DE18A2195ED84B767EBB7C9758CB75727
         six_name_nonblank_fields: 3719
-        caveat: Three edited-name values differ from fixed v2.
+        source_role: public_release_official_csv_and_v7_processed_ground_truth
+        historical_v7_evaluation_rows: 3682
+        caveat: Three edited-name values differ from fixed v2; this is the official processed CSV in the public release archive and is not the v9/v10 paper-lineage GT.
       warp_18_column:
         columns: 18
         rows: 622
@@ -183,13 +218,13 @@ sources:
 
   usage_logs:
     description: Historical token, latency, usage, and billing evidence.
-    status: not_yet_located
+    status: historical_not_located_modern_usage_reconciled_without_pricing
     public: false
-    caveat: Generation settings exist, but observed usage and cost logs were not found in the bounded inventory.
+    caveat: Historical generation settings exist, but historical usage/pricing logs were not found; modern two-model usage totals are recorded in the external screen receipt and derived cost table without a pricing snapshot.
 
   parser_retry_gate:
-    description: Offline parser and retry-policy evidence for the frozen PA v1.49 modern-screen contract; no provider call or inference was performed.
-    status: offline_pass_live_execution_still_blocked
+    description: Offline parser and retry-policy evidence for the frozen PA v1.49 modern-screen contract, plus reconciliation of the completed two-model screen.
+    status: offline_pass_modern_screen_reconciled
     public: true
     parser_spec_id: pa_v149_json_repair_v0
     parser_implementation_path: src/icdar_tta/parser.py
@@ -202,11 +237,11 @@ sources:
     retry_policy_implementation_sha256: b35f840a7cd0d8969e250fa62f89fef5a31ee7afc99232c03130e8b5ac4f7f0d
     retry_hash_serialization: SHA-256 over exact file bytes as stored; no text decoding, newline conversion, prefix, or suffix.
     retry_focused_unittest_count: 21
-    caveat: Offline implementation and tests close only the parser/retry policy gate; route, rendered-view lineage, model smoke, budget approval, and live-call authorization remain blocked or pending.
+    caveat: Offline implementation/tests and the modern receipt reconcile the two executable Gemini screens; they do not make the blocked Gemini 3.7 or Qwen routes pass.
 
   request_ledger_gate:
-    description: Dependency-free provider-neutral append-only JSONL request/response ledger; offline implementation and tests only, with no sample provider records or inference.
-    status: offline_pass_live_execution_still_blocked
+    description: Dependency-free provider-neutral append-only JSONL request/response ledger with the completed modern-screen ledger chain kept outside Git.
+    status: offline_pass_modern_screen_ledger_reconciled
     public: true
     implementation_path: src/icdar_tta/request_ledger.py
     implementation_sha256: 6c727ee40ccada307f185d6c6ad56c2b5c608d7d2dc20a66ead9c76460929479
@@ -214,28 +249,46 @@ sources:
     record_serialization: Canonical JSON with sorted keys and compact separators, encoded as UTF-8, one object per line with terminal LF on append.
     request_fingerprint_serialization: SHA-256 over canonical UTF-8 JSON with sorted keys, compact separators, and finite JSON values; closed required dimensions are model, prompt/schema, source image, transform, sample index, generation parameters, and route/transport version.
     focused_unittest_count: 24
-    caveat: Offline implementation and tests do not claim a provider route, rendered-view lineage, live durable ledger, provider smoke, budget approval, or live-call authorization passed.
+    caveat: The two-model screen's submitted-attempt chain is reconciled in the private runtime receipt; the ledger does not imply that the blocked 3.7/Qwen routes or a historical exact-render reproduction passed.
 
   modern_responses:
-    description: Six label-blind U0 smoke responses for three predeclared source documents and two Gemini IDs exist in private local storage; only redacted usage and lineage metadata is committed.
-    status: metadata_only_smoke_outside_git
+    description: Full nine-view responses for two executable Gemini models exist in private local storage; only redacted usage, lineage, and aggregate metric metadata is committed.
+    status: complete_two_model_screen_raw_outside_git
     public: false
     metadata_path: outputs/derived/modern_smoke_metadata.csv
-    receipt_path: local_agent/MODERN_SMOKE_RECEIPT.md
+    analysis_receipt_path: local_agent/MODERN_FULL_RECEIPT.md
+    analysis_run_id: modern_screen_v1
+    executed_models: [gemini-3.5-flash, gemini-3.5-flash-lite]
+    terminal_response_rows_per_model: 5598
+    terminal_response_rows_total: 11196
+    raw_response_files_hashed: 11196
+    submitted_ledger_events: 11307
+    field_level_input_artifact_sha256: 722a0f763e31ad5d16838d979564c8f9bac80009e7533e1016e52e449476bd03
     raw_response_content: outside_git
     raw_source_and_rendered_images: outside_git
 
+  modern_render_manifest:
+    description: Prospective frozen nine-view render manifest used by the completed two-model modern screen; rendered image bytes remain private.
+    status: complete_5598_rows_external_manifest
+    public: false
+    logical_path: PA_DEATH/TTA_MODERN/rendered_views_full_parallel/render_manifest.csv
+    rows: 5598
+    sha256: ED3C80E0554B670C17FF649C99C318E807E74B9D7C6267BC2E570A2D267DC301
+    screen_run_id: modern_screen_v1
+    caveat: This is a reproducible transfer-screen render manifest, not proof that the missing historical Pad renderer or historical Grid-Warp seed schedule has been recovered.
+
   modern_model_execution_code:
-    description: Exact requested model IDs remain frozen; one requested Gemini Lite ID and one related Gemini ID have passed a small label-blind smoke, while the full PA screen remains gated.
-    status: partial_label_blind_smoke_execution_blocked
+    description: Exact requested model IDs remain frozen; the two executable Gemini models completed the nine-view screen, while Gemini 3.7 and Qwen remain route-blocked.
+    status: two_model_screen_complete_other_routes_blocked
     public: false
     exact_model_ids:
       gemini_flash: gemini-3.7-flash
       gemini_flash_lite: gemini-3.5-flash-lite
       qwen_vision: sagemaker-qwen3-vl-8b-instruct-fp8
     smoke_evidence_path: local_agent/MODERN_SMOKE_RECEIPT.md
-    smoke_status: gemini-3.5-flash-lite_passed; gemini-3.5-flash_related_only_passed; gemini-3.7-flash_pending; qwen_pending
-    caveat: The smoke is label-blind and U0-only; it is not a claim about accuracy, CER, precision, coverage, render completeness, capacity, or full-screen authorization.
+    full_screen_evidence_path: local_agent/MODERN_FULL_RECEIPT.md
+    execution_status: gemini-3.5-flash_complete; gemini-3.5-flash-lite_complete; gemini-3.7-flash_http_403; qwen_http_500_endpoint_not_found
+    caveat: Modern aggregate metrics use the raw six-name 3,718-cell population because the analyzer did not apply the recovered historical exclusion; they are not paper/v9/v10 denominator results.
 
   analysis_snapshots:
     description: Historical paper-era analysis snapshots and presentation tables.
@@ -255,7 +308,7 @@ sources:
 caveats:
   portability: This committed manifest contains no machine-specific absolute locations; resolve logical roots through the ignored local manifest.
   privacy: Raw images, labels, and model responses remain private unless their release status is separately established.
-  evaluation: The 3718 raw six-name count is not canonical; 3684 remains an unresolved regression target requiring the missing 34-exclusion artifact or generator.
-  execution: Exact model IDs and frozen historical evidence do not authorize provider calls; the experiment matrix live-call gate remains closed.
-  render_lineage: Source-image identity and mask coverage are verified; exact Pad/Grid rendered pixels remain unresolved because seed, renderer, and input-rule evidence is incomplete.
-  provenance: Full bounded evidence and unresolved gates are recorded in local_agent/SOURCE_LINEAGE_AUDIT.md, local_agent/SHORTLIST_EVIDENCE.md, and local_agent/EXPERIMENT_MATRIX.md.
+  evaluation: The six-field selector and historical exclusion rule are recovered. Use 3684 as the paper-era row-population target with the documented one-blank-row caveat; use 3682 only for the legacy/public v7 lineage. The raw 3718 _edt count is descriptive and is not a denominator.
+  execution: The two-model modern transfer screen is complete and reconciled; Gemini 3.7 and Qwen full screens remain blocked by route failures, and no additional provider calls are implied by this manifest.
+  render_lineage: A 5,598-row prospective modern render manifest was verified for the completed screen; exact historical Pad/Grid rendered pixels, historical seeds, and historical input-rule recovery remain unresolved.
+  provenance: Current GT lineage is in docs/GT_LINEAGE.md; modern results are summarized in local_agent/MODERN_FULL_RECEIPT.md and outputs/derived/*.csv, while remaining historical/render/route caveats are recorded in local_agent/SOURCE_LINEAGE_AUDIT.md, local_agent/RENDER_LINEAGE_AUDIT.md, and local_agent/EXPERIMENT_MATRIX.md.

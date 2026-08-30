@@ -2,7 +2,9 @@
 
 By default :func:`parse_response_json` requires the exact 44-field response
 schema in ``prompt_v1.49_confidence.txt``.  The six historically evaluated
-name fields are a downstream projection, not the model-response schema.
+name fields are a downstream projection, not the model-response schema; their
+source lineage and record-level exclusion are documented in
+``docs/GT_LINEAGE.md``.
 Callers may explicitly pass ``allowed_fields`` for a legacy/custom closed
 schema; that opt-in never changes the strict default.
 

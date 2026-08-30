@@ -86,6 +86,12 @@ Suggested columns: `model_id,strategy,n_samples,individual_cer,individual_field_
 
 **Important:** do not call a raw agreement score a calibrated probability unless calibration has actually been applied and evaluated.
 
+**Denominator note:** the current historical chart tables are legacy/public
+v7 products using 3,682 rows. The paper-lineage target is a separate 3,684-row
+population under the recovered GT rule, with one retained blank row in the v9/v10
+artifacts. Every chart/table must state which lineage it uses; see
+[`GT_LINEAGE.md`](GT_LINEAGE.md).
+
 **Required derived table:** `outputs/derived/precision_coverage.csv`
 
 Suggested columns: `model_id,strategy,n_samples,confidence_threshold,accepted_fields,coverage,accepted_correct,precision,review_fields` plus uncertainty bounds when computed.
@@ -166,6 +172,10 @@ This chart exists to support one sentence, not a major section.
 ### C8. Ensemble size / diminishing returns
 
 Plot coverage-at-fixed-precision and/or consensus CER against sample count for the key strategies. This is especially useful if adaptive stopping is added.
+
+The committed historical C8 source is the legacy/public v7 3,682-row lineage,
+not a paper-v9/v10 3,684-row recomputation. Keep that distinction visible in
+the chart subtitle or receipt.
 
 **Required derived table:** `outputs/derived/ensemble_size.csv`
 

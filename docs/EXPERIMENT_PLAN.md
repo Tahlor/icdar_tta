@@ -20,7 +20,7 @@ Do not spend API money until the local data inventory is complete.
 Locate and identify:
 
 - 622 source images and release/provenance information;
-- ground-truth name fields and the exact filtering/normalization used in the paper;
+- ground-truth name fields and the exact filtering/normalization used in the paper (see [`GT_LINEAGE.md`](GT_LINEAGE.md));
 - fold assignments / validation split logic;
 - Gemini 2.0 Flash baseline responses;
 - all existing blur/resize, noise, resize, pad/shift, grid-warp, and temperature/repeat responses;
@@ -61,13 +61,16 @@ Where available also include usage, latency, API status/retry, prompt hash, tran
 Recompute and reconcile the paper reference values, including:
 
 - 622 images;
-- 3,684 nonblank evaluated name fields;
+- the 3,684 paper-era six-field evaluation row population, with the v9/v10 one-blank-row caveat documented in [`GT_LINEAGE.md`](GT_LINEAGE.md);
 - baseline 71.2% field accuracy and 9.0% CER;
 - best validation-consensus 10-sample 75.2% field accuracy and 7.2% CER;
 - Pad 10-sample 74.8% field accuracy;
 - historical family-level error correlations (especially Grid Warp 0.575 and Resize 0.973).
 
 A mismatch is not automatically a bug in the new code: trace filtering, parser versions, response revisions, and fold selection until the discrepancy is explained.
+Do not overwrite the existing legacy/public v7 tables while building the
+paper-lineage comparison; retain separate output paths and denominator
+metadata for the two GT lineages.
 
 ## Phase 2 — new analysis on existing outputs
 

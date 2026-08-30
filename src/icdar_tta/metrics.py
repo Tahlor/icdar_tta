@@ -28,8 +28,9 @@ from typing import Optional, Sequence
 def exact_field_accuracy(is_exact_correct: Sequence[Optional[bool]]) -> Optional[float]:
     """Fraction of True among non-None entries. None entries (blank
     ground truth, out-of-scope fields) are excluded from both numerator
-    and denominator, matching docs/EXPERIMENT_PLAN.md's "nonblank
-    evaluated fields" denominator.
+    and denominator. This is the strict nonblank metric convention; the
+    paper-era v9/v10 artifact population is a separate 3,684-row contract
+    with one retained blank row, documented in ``docs/GT_LINEAGE.md``.
     """
     scored = [v for v in is_exact_correct if v is not None]
     if not scored:

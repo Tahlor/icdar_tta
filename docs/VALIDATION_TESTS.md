@@ -8,14 +8,19 @@ Expected checks once the historical inventory is connected:
 
 - exactly 622 canonical source documents for the benchmark;
 - unique `doc_id` values;
-- expected 3,684 nonblank evaluated name fields after applying the canonical filter;
+- expected 3,684 paper-era six-field evaluation rows after applying the recovered historical filter; separately report strict nonblank rows because the v9/v10 artifact contains one retained blank row (see [`GT_LINEAGE.md`](GT_LINEAGE.md));
+- selected GT SHA-256 and lineage role agree with [`GT_LINEAGE.md`](GT_LINEAGE.md) (paper/v9/v10 `a5f0...` versus public/v7 `f1b978...`);
+- exactly these six metric field names are used, while the wider 12-field GT inclusion universe is used only for the historical exclusion scan;
 - no duplicate `(doc_id, field_name)` ground-truth keys;
 - all evaluated predictions map to a known document and field;
 - every transform ID resolves to a transform specification;
 - every modern response maps to a request/model/prompt/image provenance record;
 - no secret-like values or absolute local paths appear in committed portable manifests.
 
-Reference counts should be configurable if the inventory proves the paper-era artifact differs; discrepancies must be documented rather than hidden by changing a constant.
+Reference counts should be selected by explicit GT lineage: paper/v9/v10
+targets use the 3,684-row population with its one-blank-row caveat, while
+public/v7 regression tables use 3,682 rows. Discrepancies must be documented
+rather than hidden by changing a constant.
 
 ## 2. Normalization/CER unit tests
 

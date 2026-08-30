@@ -1,84 +1,125 @@
 {
   "schema_version": 1,
-  "status": "pre_call_blocked_unspent",
+  "status": "complete_two_model_screen",
+  "execution_date_local": "2026-08-30 America/Denver",
   "hard_cap": 20000,
   "cohort_images": 622,
   "views_per_image": 9,
   "requested_model_families": 3,
-  "exact_available_model_ids_from_local_evidence": [
-    "gemini-3.7-flash",
-    "gemini-3.5-flash-lite",
-    "sagemaker-qwen3-vl-8b-instruct-fp8"
+  "executed_model_ids": [
+    "gemini-3.5-flash",
+    "gemini-3.5-flash-lite"
   ],
-  "formulas": {
-    "scored_per_model": "622 * 9 = 5598",
-    "scored_three_models": "622 * 9 * 3 = 16794",
-    "remaining_after_scored_only": "20000 - 16794 = 3206",
-    "worst_case_total": "spent + scheduled + reserved = 0 + 16794 + 3190 = 19984",
-    "remaining_after_worst_case": "20000 - 19984 = 16"
+  "blocked_model_ids": {
+    "gemini-3.7-flash": "PA route probe returned HTTP 403",
+    "gemini-3.6-flash": "PA route probe returned HTTP 403",
+    "sagemaker-qwen3-vl-8b-instruct-fp8": "L3 route returned HTTP 500 endpoint_not_found"
   },
   "scored_requests": {
     "per_model": 5598,
-    "three_model_formula": 16794,
-    "scheduled": 16794,
+    "executed_model_count": 2,
+    "executed_total": 11196,
+    "planned_three_model_total": 16794,
     "by_model": {
-      "gemini-3.7-flash": 5598,
-      "gemini-3.5-flash-lite": 5598,
-      "sagemaker-qwen3-vl-8b-instruct-fp8": 5598
+      "gemini-3.5-flash": 5598,
+      "gemini-3.5-flash-lite": 5598
     },
     "derived_ensemble_calls": 0
   },
-  "reserve_breakdown": {
-    "smoke": {
-      "reserved": 9,
-      "formula": "3 predeclared images * 3 models"
+  "provider_attempts": {
+    "ledger_submitted": 11307,
+    "unledgered_route_probe": 1,
+    "conservative_provider_total": 11308,
+    "remaining_under_cap": 8692,
+    "requested_model_submitted": {
+      "gemini-3.5-flash": 5649,
+      "gemini-3.5-flash-lite": 5642
     },
-    "qwen_warmup_keepalive": {
-      "reserved": 81,
-      "formula": "1 initial warmup request + at most 80 pings at 15-second intervals during a 20-minute warmup window",
-      "constraint": "No concurrent keepalive during active scored traffic; scored calls serve as activity. Stop when this reserve is exhausted."
+    "non_scored_probe_submitted": {
+      "gemini-3.7-flash": 1,
+      "gemini-3.6-flash": 2,
+      "sagemaker-qwen3-vl-8b-instruct-fp8": 13
     },
-    "retries_and_capacity_failures": {
-      "reserved": 3000,
-      "constraint": "Shared cap across models; at most one retry for a failed scored/smoke call, never exceeding this ledger reserve; stop after five consecutive network/capacity failures."
-    },
-    "ambiguous_submission_reconciliation_contingency": {
-      "reserved": 100,
-      "constraint": "No blind resubmission. This count is available only after reconciliation proves no duplicate; otherwise stop with a failure receipt."
-    },
-    "total": 3190
-  },
-  "ledger": {
-    "reserved": 3190,
-    "scheduled": 16794,
-    "spent": 0,
-    "remaining": 16,
-    "worst_case_total": 19984
-  },
-  "fewer_exact_id_scenarios": {
-    "two_models": {
-      "scored_formula": "622 * 9 * 2",
-      "scored_requests": 11196,
-      "status": "scenario_only; omission requires an explicit evidence-backed matrix decision"
-    },
-    "one_model": {
-      "scored_formula": "622 * 9 * 1",
-      "scored_requests": 5598,
-      "status": "scenario_only; omission requires an explicit evidence-backed matrix decision"
-    },
-    "zero_models": {
-      "scored_requests": 0,
-      "status": "blocked"
+    "event_status_counts_all_ledgers": {
+      "capacity_failure": 20,
+      "failed": 4,
+      "network_failure": 12,
+      "non_retryable_failure": 25,
+      "ok": 10494,
+      "parse_fail_kept": 741,
+      "reserved": 22419,
+      "submitted": 11307
     }
   },
-  "assumptions": [
-    "One scored provider request is counted for every document-view-model tuple, regardless of success, parse result, capacity result, or billing outcome.",
-    "The nine views are three unchanged calls, three Pad calls, and three Grid-Warp calls.",
-    "Single-run, unchanged, Pad, Grid-Warp, visual-mixed, and all-view ensembles are derived from the nine stored responses and generate no provider calls.",
-    "Smoke calls are conservatively additional to scored calls; no reuse credit is assumed.",
-    "The recommended synchronous direct routes have no provider-budget-consuming poll calls. Selecting a batch fallback requires a revised ledger that explicitly counts any poll/control calls that consume the same cap.",
-    "The existing Qwen runner's always-on 15-second keepalive thread is not authorized; it must be disabled during active scored traffic.",
-    "Historical Gemini 2.0 Flash responses consume zero new requests and no new Gemini 2.0 Flash call is allowed.",
-    "All fields are counts, not monetary cost estimates. Pricing and token-cost provenance must be recorded separately if execution is authorized."
+  "pre_call_freeze": {
+    "three_model_scheduled": 16794,
+    "reserve": 3190,
+    "worst_case_total": 19984,
+    "remaining_after_worst_case": 16,
+    "note": "The frozen three-model plan was not exceeded; model-specific route blockers resolved the run to the two executable 3.5 models."
+  },
+  "route_history": [
+    {
+      "ledger": "modern_request_ledger_prod.jsonl",
+      "submitted": 5973,
+      "terminal": "ok=5536; parse_fail_kept=433",
+      "stop": "provider budget exceeded"
+    },
+    {
+      "ledger": "modern_request_ledger_prod_ds.jsonl",
+      "submitted": 4770,
+      "terminal": "ok=4501; parse_fail_kept=266",
+      "stop": "route/account recovery continuation"
+    },
+    {
+      "ledger": "modern_request_ledger_prod_svc.jsonl and resume2-resume13",
+      "submitted": 404,
+      "terminal": "continuation shards and route repairs"
+    },
+    {
+      "ledger": "modern_request_ledger_prod_svc_resume14.jsonl",
+      "submitted": 19,
+      "terminal": "ok=15; parse_fail_kept=4; final cells complete"
+    }
+  ],
+  "quality_contract": {
+    "accepted_field_precision_target": 0.95,
+    "target_reached": false,
+    "operating_point_claim": "none; no modern strategy reached the predeclared target",
+    "denominator": "3718 raw six-name nonblank fields; historical 3684 exclusion not applied by the modern analyzer"
+  },
+  "accounting_ledgers": [
+    "modern_request_ledger.jsonl",
+    "modern_request_ledger_v2.jsonl",
+    "modern_request_ledger_prod.jsonl",
+    "modern_request_ledger_prod_fallback.jsonl",
+    "modern_request_ledger_prod_fallback_l3.jsonl",
+    "modern_request_ledger_prod_ds.jsonl",
+    "modern_request_ledger_prod_svc.jsonl",
+    "modern_request_ledger_prod_svc_resume2.jsonl",
+    "modern_request_ledger_prod_svc_resume3.jsonl",
+    "modern_request_ledger_prod_svc_resume4.jsonl",
+    "modern_request_ledger_prod_svc_resume5.jsonl",
+    "modern_request_ledger_prod_svc_resume6.jsonl",
+    "modern_request_ledger_prod_svc_resume7.jsonl",
+    "modern_request_ledger_prod_svc_resume8.jsonl",
+    "modern_request_ledger_prod_svc_resume9.jsonl",
+    "modern_request_ledger_prod_svc_resume10.jsonl",
+    "modern_request_ledger_prod_svc_resume11.jsonl",
+    "modern_request_ledger_prod_svc_resume12.jsonl",
+    "modern_request_ledger_prod_svc_resume13.jsonl",
+    "modern_request_ledger_prod_svc_resume14.jsonl"
+  ],
+  "integrity": {
+    "no_gemini_2_0_calls": true,
+    "raw_images_and_response_bodies_external": true,
+    "derived_ensembles_make_no_provider_calls": true,
+    "credentials_committed": false
+  },
+  "notes": [
+    "gemini-3.5-flash was used as the available Flash substitute after the requested 3.7 route failed its PA probe.",
+    "The final run used the native Gemini inline-image route and completed all 622 x 9 cells for both executable models.",
+    "The 11308 conservative total includes one early direct route probe that was not written to the append-only ledger.",
+    "The temporary EC2 worker used for execution has been stopped and verified stopped."
   ]
 }

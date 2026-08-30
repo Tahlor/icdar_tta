@@ -1,19 +1,69 @@
-# Frozen pre-call experiment matrix
+# Modern execution resolution addendum — 2026-08-30
 
-Status: **conditions frozen; live execution BLOCKED**
+Status: **complete for the two executable modern Gemini models**. The final
+label-blind screen evaluated all 622 documents × nine frozen views for
+`gemini-3.5-flash` and `gemini-3.5-flash-lite` (11,196 terminal rows and zero
+derived provider calls). The requested 3.7 route was not usable in the PA
+gateway, so the available 3.5 Flash route was used as the explicitly allowed
+substitute. The Qwen route was attempted only at its Vermont-style boundary
+and failed before any PA scored matrix was claimed.
+
+Project-manager live-call authorization was recorded at
+`2026-08-30T09:46:56.518223+00:00` for the two-model executable scope and
+11,196 planned scored requests. The redacted authorization record is kept in
+ignored runtime state; the resulting request accounting is portable in
+`local_agent/request_budget.json`.
+
+| Model | Result | Evidence |
+|---|---|---|
+| `gemini-3.5-flash` | Complete: 5,598/5,598 rows | `local_agent/MODERN_FULL_RECEIPT.md`, `outputs/derived/strategy_summary.csv` |
+| `gemini-3.5-flash-lite` | Complete: 5,598/5,598 rows | `local_agent/MODERN_FULL_RECEIPT.md`, `outputs/derived/strategy_summary.csv` |
+| `gemini-3.7-flash` | Blocked at PA route probe, HTTP 403 | `local_agent/ROUTE_AUDIT.md` |
+| `sagemaker-qwen3-vl-8b-instruct-fp8` | Blocked at L3 route, HTTP 500 endpoint-not-found | `local_agent/ROUTE_AUDIT.md` |
+
+The pre-call freeze, fixed nine-view transform contract, no-modern-label
+tuning rule, and Gemini 2.0 reuse-only rule remain in force. The precision
+target was not reached by either executed model; no unsupported operating
+point is promoted. Complete request and retry accounting is in
+`local_agent/request_budget.json` and the full receipt.
+
+The modern analyzer intentionally evaluated the six raw `_edt` name fields
+available in the private run (`3,718` nonblank cells); it did not apply the
+historical 3,684-row exclusion rule. This is a modern-screen denominator
+choice, not a replacement for the paper/v9/v10 or public/v7 historical
+lineages. See `docs/GT_LINEAGE.md` and the full receipt for the distinction.
+
+## Historical pre-call experiment matrix (preserved audit)
+
+Historical status at the 2026-08-29 freeze: **conditions frozen; live execution had not begun**
 Freeze date: 2026-08-29
-Scope: deadline screen only, 622 documents × 9 views × 3 requested modern models. No provider, network, or inference call was made in this audit.
+Scope at freeze: deadline screen only, 622 documents × 9 views × 3 requested modern models. No provider, network, or inference call was made in that pre-call audit.
+
+The model/status table and checklist below are retained as the pre-call
+snapshot. They are not the current execution status; the completion addendum
+at the top is current.
 
 This remains the pre-call freeze. A later six-request, label-blind `U0`
 Gemini smoke is recorded separately in `MODERN_SMOKE_RECEIPT.md`; it does not
 change the three-model/full-nine-view matrix or make a label-based result
 claim.
 
+## GT-lineage addendum — 2026-08-30
+
+The earlier blocker wording below is superseded for ground-truth identity. The
+metric field selector and historical record-level exclusion rule are recovered
+from the historical scripts/configuration; see [`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md).
+The paper-lineage row target is `622 × 6 − 24 × 2 = 3,684`. The v9/v10
+machine-readable tables contain 3,683 rows with `f_gt_missing=0` plus one
+retained blank row, so the matrix must preserve that caveat rather than call
+all 3,684 rows nonblank. The existing repository tables remain legacy/public
+v7 products with 3,682 rows.
+
 ## Cohort and evaluation roles
 
 - Cohort: the fixed Pennsylvania death-record cohort of 622 source documents. A provider call is blocked until a portable `doc_id`/source-image SHA-256 manifest proves exactly 622 unique inputs.
-- Ground truth: the candidate CSVs all have 622 rows but are not interchangeable. The two schemas/hashes and the unresolved 3,684-field filter are documented in `SHORTLIST_EVIDENCE.md`; the exact historical per-field database was reached but its safe aggregate audits did not recover the inclusion artifact (`CANONICAL_FILTER_RAW_PROBE_AUDIT.md`, `CANONICAL_FILTER_STATUS_AGGREGATE_AUDIT.md`). No score may be computed until the canonical schema/filter is recovered and frozen.
-- Primary evaluated fields: the six edited name fields for self, father, and mother, after the historical canonical nonblank/evaluability filter. The raw CSV count is 3,718, not 3,684; 3,684 remains a blocked regression target rather than an assumed denominator.
+- Ground truth: use the lineage and filter contract in `docs/GT_LINEAGE.md`. The newer processed GT (`a5f0f9e4...`) is the paper/v9/v10 lineage; the older processed GT (`f1b97869...`) is the public/v7 lineage. They are not interchangeable.
+- Primary evaluated fields: `SelfGivenName`, `SelfSurname`, `FatherGivenName`, `FatherSurname`, `MotherGivenName`, and `MotherSurname`. The paper-era population is 3,684 historical row slots after the recovered 24-record Self exclusion; v9/v10 retain one blank row. The raw `_edt` count of 3,718 and the legacy v7 count of 3,682 are separate, explicitly labeled populations.
 - Primary deployment comparison: accepted-field precision/risk versus automatic coverage/manual review at targets frozen before labels are revealed. Raw agreement is not called a calibrated probability.
 - Comparability metrics: exact field accuracy and CER; extraction precision/recall only if the recovered canonical event definition makes false positives/negatives meaningful.
 - Modern labels must remain hidden while routes are smoked and while image/prompt/parser lineage is checked. No transform, prompt, threshold, model, or ensemble may be selected from modern test-label performance.
@@ -86,12 +136,12 @@ Grid selection rule: top three active grid IDs by descending historical `ensembl
 5. Resume: skip only a terminal response with matching request fingerprint. An armed/ambiguous batch is reconcile-only, never blindly resubmitted.
 6. Stop after five consecutive network/capacity failures, any ambiguous submission outcome, returned-model mismatch, parser/schema drift, or exhaustion of the reserved ledger.
 
-## Paid-call gate — currently FAIL/CLOSED
+## Historical paid-call gate snapshot (at freeze)
 
 **No paid/provider call is authorized until every item below passes and the project manager records the approval timestamp.**
 
 - [x] Exact 622-image source manifest is recovered and hashed (`config/source_image_manifest.csv`; source gate PASS).
-- [ ] Canonical 3,684-field evaluation filter is recovered and hashed (raw database and status-aggregate audits negative/partial; filter gate remains BLOCKED).
+- [x] Six-field selector and historical 24-record exclusion rule are recovered and documented (the v9/v10 one-blank-row discrepancy remains an explicit reconciliation item; no filter CSV is fabricated from labels).
 - [ ] All nine view definitions render correctly; source/mask/render lineage manifests and hashes exist.
 - [x] Shared PA parser/schema implementation and fixture tests pass; the exact 44-field schema is embedded in the hashed parser implementation and the parser hash is frozen above.
 - [ ] A route is selected per model; credentials are external to artifacts; direct/batch image transport is verified without signed URLs in portable files.

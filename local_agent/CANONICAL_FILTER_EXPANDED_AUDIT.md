@@ -1,7 +1,14 @@
 # Expanded Canonical 3,684-Pair Filter Recovery Audit
 
-Status: **NEGATIVE — acceptance evidence not found.** No canonical filter or
-sidecar was created.
+> **Superseded status note — 2026-08-30:** this expanded search was negative for
+> a standalone filter artifact in the named report/config scope. A later direct
+> code/configuration follow-up recovered the six-field selector and the
+> historical 24-record `Self*` exclusion rule. See
+> [`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md). This receipt still documents
+> why no filter CSV was fabricated from aggregate counts.
+
+Status: **NEGATIVE for a standalone artifact — acceptance evidence not found.**
+No canonical-filter CSV or sidecar was created.
 
 ## Decision
 

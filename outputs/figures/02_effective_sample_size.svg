@@ -46,11 +46,21 @@
 <circle cx="664.16" cy="551.832" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
 <circle cx="636.798" cy="549.238" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
 <circle cx="591.184" cy="544.376" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="835.236" cy="564.17" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="733.024" cy="557.496" r="6" fill="#e87924" stroke="#ffffff" stroke-width="2"/>
+<circle cx="746.108" cy="558.453" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="730.395" cy="557.3" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="750.993" cy="558.802" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="704.68" cy="555.3" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="634.077" cy="548.968" r="6" fill="#e87924" stroke="#ffffff" stroke-width="2"/>
+<circle cx="654.967" cy="550.985" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="638.136" cy="549.37" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="653.545" cy="550.852" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
 <text x="566.282" y="530.009" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="end">GW all 3: rho=0.633</text>
 <text x="820.218" y="587.589" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="end">Pad/shift: rho=0.967</text>
 <rect x="885" y="145" width="265" height="420" fill="#ffffff" stroke="#d9e0ea" stroke-width="1"/>
 <text x="905" y="176" fill="#2563eb" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">EMPIRICAL OVERLAY</text>
-<text x="905" y="199" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="start">10 measured WARP</text>
+<text x="905" y="199" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="start">20 measured WARP</text>
 <text x="905" y="219" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="start">correlations (5-member rows)</text>
 <text x="905" y="252" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">Points are projected onto</text>
 <text x="905" y="270" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">the N=10 theory curve.</text>

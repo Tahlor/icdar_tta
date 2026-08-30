@@ -27,6 +27,8 @@ MODERN_MODEL_IDS = (
     "gemini-3.5-flash-lite",
     "sagemaker-qwen3-vl-8b-instruct-fp8",
 )
+# Paper-era six-field row-population target. See docs/GT_LINEAGE.md for the
+# recovered historical exclusion rule and the v9/v10 one-blank-row caveat.
 PAPER_DENOMINATOR_TARGET = 3684
 RAW_NAME_FIELDS = (
     "SelfGivenName_edt",
@@ -260,7 +262,7 @@ def derive_precision_rows(
     output: list[dict[str, str]] = []
     points: list[dict[str, object]] = []
     total = len(scored)
-    denom_status = f"historical_v7_{total}_rows_noncanonical_target_{PAPER_DENOMINATOR_TARGET}"
+    denom_status = f"historical_v7_{total}_rows_legacy_public_lineage_paper_target_{PAPER_DENOMINATOR_TARGET}"
     for threshold in thresholds:
         accepted = [correct for score, correct in scored if score >= threshold]
         accepted_count = len(accepted)
@@ -287,7 +289,7 @@ def derive_precision_rows(
             "evidence_status": "recomputed_historical_noncanonical",
             "source_artifact": logical,
             "source_sha256": source_hash,
-            "notes": "Correct means source CER equals zero. Raw agreement is not a calibrated probability; v7 has 3682 rows, not the unresolved canonical 3684.",
+            "notes": "Correct means source CER equals zero. Raw agreement is not a calibrated probability; this table uses the legacy/public v7 row population, while the paper-lineage target is the separate 3684-row contract in docs/GT_LINEAGE.md.",
         })
         output.append(row)
         points.append({
@@ -446,7 +448,7 @@ def derive_all(pa_root: Path, analysis_root: Path) -> tuple[dict[str, list[dict[
             "denominator_status": "historical_warp_about_4920_noncanonical",
             "evidence_status": "reported_historical_aggregate",
             "source_artifact": logical, "source_sha256": hashes,
-            "notes": "individual_cer is WARP avg_cer; consensus_cer is weighted_CER at the maximum available k. This is not the unresolved canonical 3684-field evaluation.",
+            "notes": "individual_cer is WARP avg_cer; consensus_cer is weighted_CER at the maximum available k. This is a legacy/public v7 aggregate and is not a paper-lineage 3684-row recomputation.",
         })
         strategy_rows.append(row)
 
@@ -576,7 +578,7 @@ def derive_all(pa_root: Path, analysis_root: Path) -> tuple[dict[str, list[dict[
                 "n_samples": "3" if strategy != "visual_mixed_6" else "6",
                 "target_precision": target_text, "denominator_status": "unavailable_modern_screen_blocked",
                 "evidence_status": "blocked_unavailable", "source_artifact": "local_agent/EXPERIMENT_MATRIX.md",
-                "notes": "No modern PA responses exist. Provider calls are outside this offline task and the source-image/hash, canonical-filter, parser, mask/render, route-smoke, and authorization gates remain closed.",
+                "notes": "No modern PA responses exist. Provider calls are outside this offline task and the source-image/hash, paper-row-convention, historical-GT-lineage, parser, mask/render, route-smoke, and authorization gates remain closed.",
             })
             cross_rows.append(row)
 
@@ -661,7 +663,7 @@ def derive_all(pa_root: Path, analysis_root: Path) -> tuple[dict[str, list[dict[
             "denominator_status": "historical_warp_about_4920_noncanonical",
             "evidence_status": "reported_historical_aggregate",
             "source_artifact": paths["warp_by_k"][1], "source_sha256": source_by_key["warp_by_k"]["sha256"],
-            "notes": "weighted_CER and field_accuracy copied from the aggregate by-k source; canonical 3684 filter is unresolved.",
+            "notes": "weighted_CER and field_accuracy copied from the aggregate by-k source; this is the legacy/public v7 denominator, not the paper-lineage 3684-row population.",
         })
         ensemble_rows.append(row)
 
@@ -694,7 +696,7 @@ def derive_all(pa_root: Path, analysis_root: Path) -> tuple[dict[str, list[dict[
         "ground_truth": {"warp_18_column": gt_warp, "shift_20_column": gt_shift},
         "shift_variant_counts": shift_counts,
         "canonical_denominator_target": PAPER_DENOMINATOR_TARGET,
-        "canonical_denominator_status": "blocked_unresolved_34_exclusions_from_3718_raw_nonblank",
+        "canonical_denominator_status": "historical_filter_recovered_current_recompute_uses_legacy_v7_source",
         "source_paths": paths,
         "source_records_by_key": source_by_key,
     }
@@ -702,7 +704,9 @@ def derive_all(pa_root: Path, analysis_root: Path) -> tuple[dict[str, list[dict[
 
 
 def yaml_quote(value: str) -> str:
-    return json.dumps(value, ensure_ascii=True)
+    # YAML single-quoted scalars preserve Windows backslashes verbatim while
+    # still escaping the only special character in this quoting mode.
+    return "'" + value.replace("'", "''") + "'"
 
 
 def write_local_manifest(path: Path, pa_root: Path, analysis_root: Path, sources: Sequence[Mapping[str, object]], metadata: Mapping[str, object]) -> None:
@@ -720,9 +724,9 @@ def write_local_manifest(path: Path, pa_root: Path, analysis_root: Path, sources
         "  pa_root:", f"    path: {yaml_quote(str(pa_root))}", "    mode: read_only",
         "  analysis_root:", f"    path: {yaml_quote(str(analysis_root))}", "    mode: read_only",
         "  ground_truth:",
-        f"    canonical_target_nonblank_fields: {PAPER_DENOMINATOR_TARGET}",
-        "    raw_six_name_nonblank_fields: 3718", "    discrepancy: 34",
-        "    denominator_status: blocked_unresolved_canonical_filter",
+        f"    paper_target_evaluation_rows: {PAPER_DENOMINATOR_TARGET}",
+        "    raw_six_name_nonblank_fields: 3718", "    raw_to_paper_display_count_difference: 34",
+        "    denominator_status: legacy_v7_source_not_paper_lineage",
         "    schema_groups:",
         "      group_18_column:", f"        path: {yaml_quote(str(pa_root / 'WARP/5164_gts.csv'))}",
         f"        rows: {metadata['ground_truth']['warp_18_column']['rows']}", "        columns: 18",
@@ -752,7 +756,8 @@ def write_local_manifest(path: Path, pa_root: Path, analysis_root: Path, sources
         f"    gemini_flash: {MODERN_MODEL_IDS[0]}", f"    gemini_flash_lite: {MODERN_MODEL_IDS[1]}",
         f"    qwen_vision: {MODERN_MODEL_IDS[2]}", "    status: ids_evidenced_execution_blocked",
         "notes:", "  - No credentials or secrets are stored here.",
-        "  - The 3718 raw count is not canonical; the 3684 filter remains unresolved.",
+        "  - The current script intentionally recomputes legacy/public v7 tables from the WARP/SHIFT sources; it does not yet emit paper-lineage v9/v10 tables.",
+        "  - See docs/GT_LINEAGE.md for the six fields, 24-record historical exclusion, 3684 row formula, and one blank-row caveat.",
         "  - Source-image and mask coverage gates remain closed; no inference is authorized.",
     ])
     path.parent.mkdir(parents=True, exist_ok=True)

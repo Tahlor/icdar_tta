@@ -51,9 +51,13 @@ Avoid a dense formal derivation here.
 Very short setup:
 
 - 622 Pennsylvania death certificates
-- 3,684 nonblank name fields
+- 3,684 paper-era six-field evaluation rows (the v9/v10 artifact retains one blank row; see [`GT_LINEAGE.md`](GT_LINEAGE.md))
 - historical paper-era model: Gemini 2.0 Flash
 - cross-validated augmentation selection
+
+Keep the current repository chart package labeled as legacy/public v7 when it
+uses the 3,682-row tables; do not present those tables as a paper/v9/v10
+3,684-row recomputation until the dedicated paper-lineage rerun is complete.
 
 Show the headline accuracy/CER improvement as large numbers, not as a full table. This establishes that the method works, then move on.
 
@@ -103,20 +107,33 @@ Frame the objective as:
 
 **How much inexpensive inference do we buy to avoid one human review while holding accepted-field precision fixed?**
 
-Show ensemble size/adaptive-sampling points and, if available, modern-model alternatives. Prefer actual measured API usage/cost records; otherwise clearly label a pricing-based estimate and snapshot date.
+Show ensemble size/adaptive-sampling points and the measured modern-model
+alternatives where they clarify the review tradeoff. The current modern run
+has provider-reported token usage but no portable pricing snapshot, so do not
+invent dollar costs; label the comparison by request/token budget instead.
 
-### 12. Modern-model replication (optional main slide, otherwise backup) (12:45–13:30)
+### 12. Measured modern-model replication (12:45–13:30)
 
-If the new experiments are mature, show whether the same qualitative behavior persists across newer Gemini-family and Qwen-family multimodal models.
+Show the completed nine-view PA screen for `gemini-3.5-flash` and
+`gemini-3.5-flash-lite` (622 documents per model). The exact metrics and
+lineage are in `local_agent/MODERN_FULL_RECEIPT.md` and the derived tables.
 
-Success is **not** defined as reproducing a +4 point accuracy gain. More important replication questions:
+The measured message is deliberately mixed:
 
-- Do visual perturbations reduce error correlation relative to unchanged-image repetition?
-- Does agreement predict correctness?
-- Does TTA increase automatic coverage at a fixed precision target?
-- Does grid warp/padding retain their qualitative roles?
+- Visual variants reduce error correlation relative to unchanged repetition,
+  and consensus CER improves for both models.
+- Pad is the strongest individual tested family on consensus accuracy in this
+  screen; Grid Warp is useful but is not the top-accuracy family.
+- The predeclared 95% accepted-field precision target is not reached by any
+  modern strategy, so there is no claimed modern auto-accept operating point.
+- `gemini-3.5-flash` is the allowed substitute after the 3.7 PA route returned
+  HTTP 403; Qwen's route returned HTTP 500 endpoint-not-found. These are
+  honest route limitations, not silently omitted models.
 
-If results are mixed, say so.
+Success is **not** defined as reproducing a fixed accuracy gain. The useful
+replication result is that perturbation diversity and consensus effects can be
+measured on modern models, while the deployment precision target remains an
+open limitation.
 
 ### 13. Takeaways (13:30–14:00)
 

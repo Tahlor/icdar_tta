@@ -1,7 +1,15 @@
 # Canonical Field Filter Audit — Negative Result
 
-Status: **NEGATIVE**. No exact 3,684 doc_id/field_name inclusion/exclusion artifact
-or generator was found within the bounded search scope. No filter file was created.
+> **Superseded status note — 2026-08-30:** this bounded search was negative for
+> a standalone filter file inside its original scope, but a later direct read
+> recovered the historical selector and record-level exclusion code. See
+> [`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md). The negative result below is
+> still valid for the existence of a portable `doc_id`/`field_name` artifact;
+> it is not the current verdict on whether the historical rule is known.
+
+Status: **NEGATIVE for a standalone artifact**. No exact 3,684
+doc_id/field_name inclusion/exclusion artifact or generator was found within
+the bounded search scope. No filter file was created.
 
 ## Objective
 

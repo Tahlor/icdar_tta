@@ -8,9 +8,10 @@ defined in ``docs/DATA_CONTRACT.md`` ("Fields"):
     (doc_id, field_name, model_id, run_id, strategy, transform_id, sample_index)
 
 This module intentionally does not hardcode any paper-era reference
-constant as ground truth. Reference counts (622 documents, 3,684
-nonblank evaluated fields) are exposed as *documented defaults* that
-callers may override once local inventory is connected, per
+constant as ground truth. Reference counts (622 documents, 3,684 paper-era
+evaluation rows; the paper describes them as nonblank) are exposed as
+*documented defaults* that callers may override once local inventory is
+connected, per
 ``docs/VALIDATION_TESTS.md`` ("Reference counts should be configurable
 if the inventory proves the paper-era artifact differs").
 """
@@ -24,7 +25,12 @@ from typing import Any, Optional
 # against recomputed evidence, not assumed ground truth (AGENTS.md,
 # "Source-of-truth priority").
 PAPER_REFERENCE_DOCUMENT_COUNT = 622
-PAPER_REFERENCE_NONBLANK_FIELD_COUNT = 3684
+PAPER_REFERENCE_EVALUATION_ROW_COUNT = 3684
+# Backward-compatible name for callers that imported the original constant.
+# Its historical name reflects the paper's wording, not a strict blankness
+# assertion; the v9/v10 artifact has one retained blank row. See
+# docs/GT_LINEAGE.md.
+PAPER_REFERENCE_NONBLANK_FIELD_COUNT = PAPER_REFERENCE_EVALUATION_ROW_COUNT
 
 #: Minimum required columns for the normalized field-level prediction
 #: table, per docs/EXPERIMENT_PLAN.md Phase 1.
@@ -183,8 +189,10 @@ def count_distinct_documents(rows: list) -> int:
 def count_nonblank_ground_truth_fields(rows: list) -> int:
     """Count distinct (doc_id, field_name) pairs with a nonblank ground truth.
 
-    Mirrors docs/VALIDATION_TESTS.md's "expected 3,684 nonblank evaluated
-    name fields after applying the canonical filter" check target.
+    Counts the strict nonblank keys present in the supplied rows. Callers must
+    apply the intended six-field/filter contract before using this count. The
+    paper-era 3,684-row artifact target and its one retained blank row are
+    documented separately in ``docs/GT_LINEAGE.md``.
     """
     keys = set()
     for row in rows:

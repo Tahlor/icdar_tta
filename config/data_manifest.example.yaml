@@ -14,10 +14,11 @@ sources:
 
   ground_truth:
     path: /ABSOLUTE/PATH/TO/GROUND_TRUTH
-    description: Canonical evaluated name-field labels
-    expected_nonblank_fields: 3684
-    public: null
+    description: Paper-lineage processed GT or another explicitly identified GT lineage
+    expected_rows: 622
     sha256: null
+    public: null
+    lineage_role: paper_v9_v10_or_legacy_public_v7
 
   fold_assignments:
     path: /ABSOLUTE/PATH/TO/FOLDS
@@ -52,6 +53,27 @@ sources:
   scratch:
     path: /ABSOLUTE/PATH/TO/SCRATCH
     description: Disposable transformed images/cache
+
+evaluation:
+  metric_field_names:
+    - SelfGivenName
+    - SelfSurname
+    - FatherGivenName
+    - FatherSurname
+    - MotherGivenName
+    - MotherSurname
+  paper_row_population: 3684
+  paper_row_population_formula: "622 records * 6 metric fields - 24 flagged records * 2 Self fields"
+  paper_reported_nonblank_target: 3684
+  paper_artifact_strict_nonblank_rows: 3683
+  legacy_public_v7_row_population: 3682
+  raw_edt_six_name_nonblank_count: 3718
+  historical_filter:
+    implementation: chat2rec/processing/common.py::_add_flags
+    terms: [stillborn, infant, know, maiden, baby]
+    match: case_insensitive_unanchored_substring_regex
+    action: remove_field_rows_whose_name_starts_with_Self_on_flagged_records
+  documentation: docs/GT_LINEAGE.md
 
 notes:
   - Replace absolute paths only in the local manifest.

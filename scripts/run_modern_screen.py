@@ -61,9 +61,8 @@ MODELS = {
     "sagemaker-qwen3-vl-8b-instruct-fp8": "qwen",
 }
 DEFAULT_MODELS = (
-    "gemini-3.7-flash",
+    "gemini-3.5-flash",
     "gemini-3.5-flash-lite",
-    "sagemaker-qwen3-vl-8b-instruct-fp8",
 )
 GEMINI_BASE_ENV = "AI_GATEWAY_GEMINI_BASE"
 QWEN_BASE_ENV = "AI_GATEWAY_QWEN_BASE"
@@ -142,7 +141,10 @@ def gateway_base(env_name: str) -> str:
     value = os.environ.get(env_name)
     if not value:
         raise RuntimeError(f"{env_name} is not present")
-    return value.rstrip("/")
+    value = value.strip().strip('"').strip("'").rstrip("/")
+    if not value.startswith(("http://", "https://")):
+        raise RuntimeError(f"{env_name} must be an HTTP(S) URL")
+    return value
 
 
 class LedgerStore:
@@ -156,9 +158,18 @@ class LedgerStore:
         self.records = read_ledger(path)
         validate_history(self.records)
         self.latest_by_key: dict[tuple[str, str, str, int], dict[str, Any]] = {}
+        self.max_attempt_by_identity: dict[tuple[tuple[str, str, str, int], str], tuple[int, int]] = {}
         for record in self.records:
             key = (record["doc_id"], record["model_id"], record["transform_id"], record["sample_index"])
             self.latest_by_key[key] = record
+            identity = (key, str(record["request_fingerprint"]))
+            self.max_attempt_by_identity[identity] = (
+                max(self.max_attempt_by_identity.get(identity, (0, 0))[0], int(record["attempt_count"])),
+                max(self.max_attempt_by_identity.get(identity, (0, 0))[1], int(record["retry_count"])),
+            )
+        self.accounting_latest_by_identity: dict[
+            tuple[tuple[str, str, str, int], str], dict[str, Any]
+        ] = {}
         self.provider_attempts = sum(1 for record in self.records if record["status"] == "submitted")
         self.accounted_provider_attempts: dict[Path, int] = {}
         for accounting_path in self.accounting_paths:
@@ -169,10 +180,36 @@ class LedgerStore:
             count = sum(1 for record in accounting_records if record["status"] == "submitted")
             self.accounted_provider_attempts[accounting_path] = count
             self.provider_attempts += count
+            for record in accounting_records:
+                key = (record["doc_id"], record["model_id"], record["transform_id"], record["sample_index"])
+                if key not in self.latest_by_key:
+                    identity = (key, str(record["request_fingerprint"]))
+                    prior_max = self.max_attempt_by_identity.get(identity, (0, 0))
+                    self.max_attempt_by_identity[identity] = (
+                        max(prior_max[0], int(record["attempt_count"])),
+                        max(prior_max[1], int(record["retry_count"])),
+                    )
+                    self.accounting_latest_by_identity[identity] = record
 
-    def latest(self, key: tuple[str, str, str, int]) -> dict[str, Any] | None:
+    def latest(
+        self,
+        key: tuple[str, str, str, int],
+        request_fingerprint: str | None = None,
+    ) -> dict[str, Any] | None:
         with self.lock:
-            return self.latest_by_key.get(key)
+            primary = self.latest_by_key.get(key)
+            if primary is not None:
+                return primary
+            if request_fingerprint is not None:
+                return self.accounting_latest_by_identity.get((key, request_fingerprint))
+            candidates = [
+                record
+                for (candidate_key, _), record in self.accounting_latest_by_identity.items()
+                if candidate_key == key
+            ]
+            if candidates:
+                return candidates[-1]
+            return None
 
     def append(self, record: dict[str, Any]) -> None:
         with self.lock:
@@ -189,8 +226,44 @@ class LedgerStore:
                 os.fsync(stream.fileno())
             self.records.append(record)
             self.latest_by_key[key] = record
+            identity = (key, str(record["request_fingerprint"]))
+            prior_max = self.max_attempt_by_identity.get(identity, (0, 0))
+            self.max_attempt_by_identity[identity] = (
+                max(prior_max[0], int(record["attempt_count"])),
+                max(prior_max[1], int(record["retry_count"])),
+            )
             if record["status"] == "submitted":
                 self.provider_attempts += 1
+
+    def append_submitted_if_capacity(self, record: dict[str, Any]) -> None:
+        """Durably append one submitted attempt while holding the cap lock."""
+        with self.lock:
+            if self.provider_attempts >= HARD_CAP:
+                raise RuntimeError(f"hard provider-request cap exhausted: {HARD_CAP}")
+            validate_record(record)
+            key = (record["doc_id"], record["model_id"], record["transform_id"], record["sample_index"])
+            prior = self.latest_by_key.get(key)
+            if prior is not None:
+                validate_history([prior, record])
+            encoded = (canonical_json(record) + "\n").encode("utf-8")
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            with self.path.open("ab") as stream:
+                stream.write(encoded)
+                stream.flush()
+                os.fsync(stream.fileno())
+            self.records.append(record)
+            self.latest_by_key[key] = record
+            identity = (key, str(record["request_fingerprint"]))
+            prior_max = self.max_attempt_by_identity.get(identity, (0, 0))
+            self.max_attempt_by_identity[identity] = (
+                max(prior_max[0], int(record["attempt_count"])),
+                max(prior_max[1], int(record["retry_count"])),
+            )
+            self.provider_attempts += 1
+
+    def next_attempt_after_history(self, key: tuple[str, str, str, int], fingerprint: str) -> tuple[int, int]:
+        attempt, retry_count = self.max_attempt_by_identity.get((key, fingerprint), (0, 0))
+        return attempt + 1, retry_count + 1
 
     def reserve_provider_attempt(self) -> None:
         with self.lock:
@@ -236,7 +309,7 @@ def make_schema_hash() -> str:
     return sha256_bytes(canonical_json(schema).encode("utf-8"))
 
 
-def load_render_rows(path: Path) -> list[dict[str, str]]:
+def load_render_rows(path: Path, *, full: bool = False) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as stream:
         rows = list(csv.DictReader(stream))
     required = {"doc_id", "view_id", "transform_id", "source_image_sha256", "rendered_image_sha256", "rendered_relative_filename", "status"}
@@ -244,6 +317,15 @@ def load_render_rows(path: Path) -> list[dict[str, str]]:
         raise ValueError(f"render manifest missing required columns: {sorted(required)}")
     if any(row["status"] != "rendered" for row in rows):
         raise ValueError("render manifest contains a non-rendered row")
+    if full:
+        expected_views = {"U0", "U1", "U2", "P0", "P1", "P2", "G0", "G1", "G2"}
+        keys = {(row["doc_id"], row["view_id"]) for row in rows}
+        if len(rows) != 622 * len(expected_views) or len(keys) != len(rows):
+            raise ValueError(
+                f"full render manifest must contain 622*9 unique document-view rows; found {len(rows)} rows"
+            )
+        if {row["view_id"] for row in rows} != expected_views or len({row["doc_id"] for row in rows}) != 622:
+            raise ValueError("full render manifest must cover exactly 622 documents and views U0-U2/P0-P2/G0-G2")
     return rows
 
 
@@ -303,14 +385,20 @@ def normalize_returned_model(value: str | None) -> str | None:
     return value
 
 
-def provider_payload(model_id: str, prompt: str, image_bytes: bytes) -> tuple[str, dict[str, str], dict[str, Any]]:
+def provider_payload(
+    model_id: str,
+    prompt: str,
+    image_bytes: bytes,
+    *,
+    gemini_key_env: str = "AI_GATEWAY_KEY",
+) -> tuple[str, dict[str, str], dict[str, Any]]:
     family = MODELS[model_id]
     encoded = base64.b64encode(image_bytes).decode("ascii")
     if family == "gemini":
         url = f"{gateway_base(GEMINI_BASE_ENV)}/v1beta/models/{model_id}:generateContent"
-        key = os.environ.get("AI_GATEWAY_KEY")
+        key = os.environ.get(gemini_key_env)
         if not key:
-            raise RuntimeError("AI_GATEWAY_KEY is not present")
+            raise RuntimeError(f"{gemini_key_env} is not present")
         headers = {
             "Content-Type": "application/json",
             "x-goog-api-key": key,
@@ -377,11 +465,20 @@ def run_one(
     failure_counter: FailureCounter,
     stop_event: threading.Event,
     require_returned_model: bool,
+    gemini_key_env: str,
+    allow_capacity_retry: bool = False,
+    allow_route_repair: bool = False,
 ) -> dict[str, Any]:
     model_id = task["model_id"]
     rendered_path = render_root / task["rendered_relative_filename"]
     if not rendered_path.exists():
         raise FileNotFoundError(f"rendered image missing: {rendered_path}")
+    actual_rendered_hash = sha256_file(rendered_path)
+    if actual_rendered_hash.lower() != str(task["rendered_image_sha256"]).lower():
+        raise RuntimeError(
+            f"rendered image hash mismatch for {task['doc_id']} {task['view_id']}: "
+            f"manifest={task['rendered_image_sha256']} actual={actual_rendered_hash}"
+        )
     image_bytes = transport_bytes(model_id, rendered_path)
     route_version, _ = model_transport(model_id)
     descriptor = {
@@ -389,43 +486,54 @@ def run_one(
         "prompt_hash": PROMPT_SHA256,
         "schema_hash": schema_hash,
         "source_image_hash": task["source_image_sha256"],
-        "rendered_image_hash": task["rendered_image_sha256"],
+        "rendered_image_hash": actual_rendered_hash,
         "payload_hash": sha256_bytes(image_bytes),
         "transform_id": task["transform_id"],
         "sample_index": int(task["sample_index"]),
         "generation_params": GENERATION_PARAMS[MODELS[model_id]],
         "route_transport_version": route_version,
+        "gemini_key_env": gemini_key_env if MODELS[model_id] == "gemini" else None,
     }
     fingerprint = request_fingerprint(descriptor)
     key = (task["doc_id"], model_id, task["transform_id"], int(task["sample_index"]))
-    prior = store.latest(key)
+    prior = store.latest(key, request_fingerprint=fingerprint)
+    capacity_retry = False
+    if prior is not None and prior["status"] in {"capacity_failure", "non_retryable_failure", "network_failure", "failed"} and (allow_capacity_retry or allow_route_repair):
+        attempt, retry_count = store.next_attempt_after_history(key, fingerprint)
+        capacity_retry = True
+        prior = None
     if prior is not None:
         if prior["request_fingerprint"] != fingerprint:
             raise RuntimeError(f"ledger fingerprint mismatch for {key}")
         if prior["status"] in {"ok", "parse_fail_kept"}:
             return {"status": "skipped_terminal", "model_id": model_id, "doc_id": task["doc_id"]}
-        if prior["status"] in {"ambiguous_submission", "reconciling", "capacity_failure", "non_retryable_failure", "failed"}:
+        if prior["status"] in {"submitted", "ambiguous_submission", "reconciling", "capacity_failure", "non_retryable_failure", "failed"}:
             raise RuntimeError(f"ledger requires manual reconciliation for {key}: {prior['status']}")
         attempt = int(prior["attempt_count"]) + 1
         retry_count = int(prior["retry_count"])
     else:
-        attempt = 1
-        retry_count = 0
-        store.append(base_record(task, descriptor, "reserved", attempt=0, retry_count=0))
+        if not capacity_retry:
+            attempt = 1
+            retry_count = 0
+            store.append(base_record(task, descriptor, "reserved", attempt=attempt - 1, retry_count=retry_count))
 
     while True:
         if stop_event.is_set():
             return {"status": "stopped_before_submit", "model_id": model_id, "doc_id": task["doc_id"]}
-        store.reserve_provider_attempt()
         submitted = base_record(task, descriptor, "submitted", attempt=attempt, retry_count=retry_count)
         submitted["request_timestamp_utc"] = now_utc()
-        store.append(submitted)
+        store.append_submitted_if_capacity(submitted)
         started = time.perf_counter()
         raw_ref = f"{model_id}/{task['doc_id']}__{task['view_id']}__attempt_{attempt}.json"
         raw_path = raw_root / raw_ref
         raw_path.parent.mkdir(parents=True, exist_ok=True)
         try:
-            url, headers, payload = provider_payload(model_id, prompt, image_bytes)
+            url, headers, payload = provider_payload(
+                model_id,
+                prompt,
+                image_bytes,
+                gemini_key_env=gemini_key_env,
+            )
             with httpx.Client(verify=False, timeout=180) as client:
                 response = client.post(url, headers=headers, json=payload)
             elapsed = time.perf_counter() - started
@@ -494,7 +602,26 @@ def run_one(
             event = base_record(task, descriptor, "parse_fail_kept", attempt=attempt, retry_count=retry_count)
             event.update({"response_timestamp_utc": now_utc(), "latency_seconds": elapsed, "raw_response_ref": raw_ref, "parser_version": PARSER_VERSION, "parse_failure_reason": "provider_body_not_json"})
             store.append(event)
-            result = {**task, "model_id": model_id, "status": "parse_fail_kept", "raw_response_ref": raw_ref, "parser_failure_reason": "provider_body_not_json", "attempt_count": attempt, "retry_count": retry_count}
+            result = {
+                **task,
+                "model_id": model_id,
+                "status": "parse_fail_kept",
+                "raw_response_ref": raw_ref,
+                "parser_failure_reason": "provider_body_not_json",
+                "attempt_count": attempt,
+                "retry_count": retry_count,
+                "screen_run_id": SCREEN_RUN_ID,
+                "parser_version": PARSER_VERSION,
+                "prompt_hash": PROMPT_SHA256,
+                "schema_hash": schema_hash,
+                "request_fingerprint": fingerprint,
+                "source_image_hash": descriptor["source_image_hash"],
+                "rendered_image_hash": descriptor["rendered_image_hash"],
+                "payload_hash": descriptor["payload_hash"],
+                "route_transport_version": descriptor["route_transport_version"],
+                "gemini_key_env": descriptor["gemini_key_env"],
+                "generation_params": descriptor["generation_params"],
+            }
             result_writer.append(model_id, result)
             return result
         text, returned_model, usage = extract_gemini(body) if MODELS[model_id] == "gemini" else extract_qwen(body)
@@ -525,7 +652,30 @@ def run_one(
         if normalized_returned is not None:
             event["returned_model_id"] = normalized_returned
         store.append(event)
-        result = {**task, "model_id": model_id, "status": status, "raw_response_ref": raw_ref, "returned_model_id": normalized_returned, "usage": usage, "latency_seconds": elapsed, "attempt_count": attempt, "retry_count": retry_count, "parsed": parsed_payload, "parser_failure": parser_failure}
+        result = {
+            **task,
+            "model_id": model_id,
+            "status": status,
+            "raw_response_ref": raw_ref,
+            "returned_model_id": normalized_returned,
+            "usage": usage,
+            "latency_seconds": elapsed,
+            "attempt_count": attempt,
+            "retry_count": retry_count,
+            "parsed": parsed_payload,
+            "parser_failure": parser_failure,
+            "screen_run_id": SCREEN_RUN_ID,
+            "parser_version": PARSER_VERSION,
+            "prompt_hash": PROMPT_SHA256,
+            "schema_hash": schema_hash,
+            "request_fingerprint": fingerprint,
+            "source_image_hash": descriptor["source_image_hash"],
+            "rendered_image_hash": descriptor["rendered_image_hash"],
+            "payload_hash": descriptor["payload_hash"],
+            "route_transport_version": descriptor["route_transport_version"],
+            "gemini_key_env": descriptor["gemini_key_env"],
+            "generation_params": descriptor["generation_params"],
+        }
         result_writer.append(model_id, result)
         return result
 
@@ -559,8 +709,7 @@ def warmup_qwen(prompt: str, store: LedgerStore, raw_root: Path) -> dict[str, An
     for attempt in range(1, QWEN_WARMUP_MAX_ATTEMPTS + 1):
         if store.latest(key) is None:
             store.append(base_record(op_task, descriptor, "reserved", attempt=0, retry_count=0))
-        store.reserve_provider_attempt()
-        store.append(base_record(op_task, descriptor, "submitted", attempt=attempt, retry_count=0))
+        store.append_submitted_if_capacity(base_record(op_task, descriptor, "submitted", attempt=attempt, retry_count=0))
         started = time.perf_counter()
         raw_ref = f"sagemaker-qwen3-vl-8b-instruct-fp8/__operational__warmup__attempt_{attempt}.json"
         try:
@@ -611,7 +760,10 @@ def main() -> int:
     parser.add_argument("--accounting-ledger", action="append", default=[], type=Path, help="additional ledger(s) counted toward the shared hard cap")
     parser.add_argument("--raw-root", type=Path, default=None)
     parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--allow-capacity-retry", action="store_true")
+    parser.add_argument("--allow-route-repair", action="store_true")
     parser.add_argument("--models", default=",".join(DEFAULT_MODELS), help="comma-separated exact model IDs")
+    parser.add_argument("--gemini-key-env", default="AI_GATEWAY_KEY", help="environment variable holding the Gemini gateway key")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
     if args.workers <= 0:
@@ -633,7 +785,7 @@ def main() -> int:
         raise ValueError(f"prompt SHA mismatch: {prompt_path}")
     prompt = prompt_bytes.decode("utf-8")
     render_manifest = args.render_manifest.resolve()
-    render_rows = load_render_rows(render_manifest)
+    render_rows = load_render_rows(render_manifest, full=args.full)
     render_root = render_manifest.parent
     raw_root = args.raw_root or resolve_native_path(nested(local, "sources", "scratch", "response_root") or "local_agent/runtime/modern_responses")
     raw_root.mkdir(parents=True, exist_ok=True)
@@ -658,6 +810,16 @@ def main() -> int:
     if args.dry_run:
         print(json.dumps({"mode": "smoke" if args.smoke else "full", "rows": len(selected_rows), "models": list(requested_models), "provider_requests": len(tasks), "render_root": str(render_root)}, sort_keys=True))
         return 0
+
+    families = {MODELS[model_id] for model_id in requested_models}
+    if "gemini" in families:
+        gateway_base(GEMINI_BASE_ENV)
+        if not os.environ.get(args.gemini_key_env):
+            raise RuntimeError(f"{args.gemini_key_env} is not present")
+    if "qwen" in families:
+        gateway_base(QWEN_BASE_ENV)
+        if not os.environ.get("AI_GATEWAY_KEY_PROD_L3"):
+            raise RuntimeError("AI_GATEWAY_KEY_PROD_L3 is not present")
 
     auth = {
         "authorized_at_utc": now_utc(),
@@ -684,7 +846,7 @@ def main() -> int:
     print(f"Starting {len(tasks)} provider requests with workers={args.workers}; ledger_attempts={store.provider_attempts}", flush=True)
     results: list[dict[str, Any]] = []
     with ThreadPoolExecutor(max_workers=min(args.workers, len(tasks))) as executor:
-        futures = [executor.submit(run_one, task, prompt=prompt, schema_hash=make_schema_hash(), render_root=render_root, raw_root=raw_root, store=store, result_writer=result_writer, failure_counter=failure_counter, stop_event=stop_event, require_returned_model=args.smoke) for task in tasks]
+        futures = [executor.submit(run_one, task, prompt=prompt, schema_hash=make_schema_hash(), render_root=render_root, raw_root=raw_root, store=store, result_writer=result_writer, failure_counter=failure_counter, stop_event=stop_event, require_returned_model=args.smoke, gemini_key_env=args.gemini_key_env, allow_capacity_retry=args.allow_capacity_retry, allow_route_repair=args.allow_route_repair) for task in tasks]
         for index, future in enumerate(as_completed(futures), start=1):
             result = future.result()
             results.append(result)
@@ -697,6 +859,7 @@ def main() -> int:
         "mode": "smoke" if args.smoke else "full",
         "run_id": SCREEN_RUN_ID,
         "models": list(requested_models),
+        "gemini_key_env": args.gemini_key_env,
         "render_manifest": str(render_manifest),
         "render_rows": len(selected_rows),
         "planned_scored_requests": len(tasks),

@@ -23,4 +23,9 @@ Good candidates:
 - credentials/tokens;
 - workstation-specific absolute paths.
 
-Use `docs/DATA_CONTRACT.md` and `config/data_manifest.local.yaml` to connect local storage to repository code.
+Use [`docs/DATA_CONTRACT.md`](../docs/DATA_CONTRACT.md),
+[`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md), and
+`config/data_manifest.local.yaml` to connect local storage to repository code.
+The public-release processed GT and the paper/v9/v10 processed GT are distinct
+lineages; do not treat a same-named `5164_gts.csv` as interchangeable without
+checking its SHA-256.

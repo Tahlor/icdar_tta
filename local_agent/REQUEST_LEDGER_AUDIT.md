@@ -1,6 +1,19 @@
 # Provider-neutral request-ledger audit
 
-Status: **PARTIAL** — the bounded offline request-ledger implementation and tests are **PASS**; every provider, rendered-view lineage, durable live-ledger, budget-approval, and live-call authorization gate remains **BLOCKED** or pending. No route, provider smoke, inference, credential, private-image, raw-response, or live-capacity gate is claimed passed.
+## Current modern-screen accounting addendum — 2026-08-30
+
+The completed modern screen has a private append-only ledger chain with
+11,307 submitted events and 11,196 terminal response rows (5,598 per
+executed Gemini model). All terminal response files were hashed and reconciled
+to the modern analysis receipt; raw ledger/response bodies remain outside
+Git. The full accounting, including the conservative 11,308 provider-boundary
+count and the 20,000 hard cap, is in `MODERN_FULL_RECEIPT.md`.
+
+The status below is the 2026-08-29 offline/pre-call audit scope. It remains
+the implementation contract and test record, but its statement that no live
+records existed is historical and does not describe the later private screen.
+
+Status: **offline implementation PASS; modern two-model ledger reconciliation PASS; 3.7/Qwen route attempts blocked**. Historical exact-render and paper-lineage gates remain distinct.
 
 Audit date: 2026-08-29
 Scope: offline code, temporary-directory tests, portable hash/test evidence, and local validation only. No network access or provider call was made, and no tracked provider record was created.

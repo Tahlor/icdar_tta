@@ -1,3 +1,37 @@
+# GT-lineage resolution addendum — 2026-08-30
+
+## Current modern-screen completion addendum — 2026-08-30
+
+The two executable Gemini routes completed the frozen nine-view screen:
+`gemini-3.5-flash` (available substitute after the 3.7 PA route returned
+HTTP 403) and `gemini-3.5-flash-lite`, with 5,598 terminal rows per model.
+The predeclared 95% accepted-field precision target was not reached, so no
+modern auto-accept operating point is claimed. Qwen returned HTTP 500
+endpoint-not-found at its L3 route and has no scored PA screen. Full metrics,
+raw-file/ledger reconciliation, and exact route details are in
+`local_agent/MODERN_FULL_RECEIPT.md`.
+
+The “live PA verification pending” and “no paid call authorized” wording in
+the older goal snapshot below is preserved as pre-run history, not current
+status.
+
+The ground-truth discrepancy is resolved at the field-selector and historical
+filter level. The paper-era metric selector is exactly the six fields
+`SelfGivenName`, `SelfSurname`, `FatherGivenName`, `FatherSurname`,
+`MotherGivenName`, and `MotherSurname`. `chat2rec/processing/common.py::_add_flags`
+scans the wider configured GT field universe for the historical terms
+`stillborn`, `infant`, `know`, `maiden`, and `baby`, then removes `Self*` rows
+for flagged records. The newer paper-lineage processed GT flags 24 records,
+so the historical row population is `622 × 6 − 24 × 2 = 3,684`.
+
+The v9/v10 tables contain 3,683 rows with `f_gt_missing=0` and one retained
+blank row; the paper's “3,684 nonblank” wording and the emitted row count must
+remain distinguished. The older `f1b978...` processed GT is the public-release
+and v7 lineage, with 3,682 rows. Full hashes, source paths, and replication
+instructions are in [`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md).
+
+---
+
 # Targeted follow-up resolution — 2026-08-29
 
 This section supersedes the provisional shortlist statements below but preserves them as an audit trail. The follow-up made no provider/network/inference calls.
@@ -9,17 +43,26 @@ This section supersedes the provisional shortlist statements below but preserves
 - **Implementation:** active WARP rows use registry type `handwriting_kernel_warp`, not `gridwarp.py` or `gridwarp2.py`. The registry and implementation hashes are recorded in `SHORTLIST_EVIDENCE.md`. Historical grid rows also cycled the five Pad variants; the deadline matrix freezes a disjoint pure-warp projection and gates it on project-owner acceptance.
 - **Commented variants:** 18 `r60`/`d005` definitions remain non-active evidence. Three active `warp_hw_*` rows have no row in the 10-row ranking TSV.
 
-## Ground truth correction
+## Ground truth correction — superseded by the 2026-08-30 addendum above
 
-The recurring CSV basenames are not one interchangeable file. Nine candidates split into two 622-row groups: SHA-256 `14219f17eeaaf45ffa4cec49f624de1edb3a739b40a87f0f838355a7fa414ccd` (20 columns, includes SelfBirthPlace) and `cf24e896875280560023f6c8976ca6ab32de5d0bc8426c59c00b4d58b235810d` (18 columns, omits SelfBirthPlace). Both contain 3,718 nonblank cells across the six edited name fields. The 3,684 evaluation denominator therefore depends on an unrecovered 34-field exclusion/filter rule; it must not be reconstructed by silently merging or dropping schema columns.
+The recurring CSV basenames are not one interchangeable file. Nine candidates
+split into two 622-row historical schema groups: SHA-256 `14219f17...414ccd`
+(20 columns, includes SelfBirthPlace) and `cf24e896...5810d` (18 columns,
+omits SelfBirthPlace). This original bounded-pass paragraph incorrectly treated
+the 34-count difference as an unrecovered filter; it is superseded by the
+2026-08-30 code-level resolution in `docs/GT_LINEAGE.md`. The newer `a5f0...`
+paper-lineage processed GT and older `f1b978...` public/v7 processed GT are
+also distinct 30-column artifacts.
 
-## Exact modern IDs and route state
+## Exact modern IDs and route state (pre-run snapshot)
 
 - Flash 3.7 → `gemini-3.7-flash` (10/10 returned `modelVersion` rows in local Milan L3 batch evidence).
 - Flash-Lite 3.5 → `gemini-3.5-flash-lite` (Vertex global completed evidence, including 500/500 returned-model records).
 - Vermont Qwen → `sagemaker-qwen3-vl-8b-instruct-fp8` (SageMaker L3 chat runner and raw metadata).
 
-The IDs are mapped, but live PA verification remains pending. Direct inline Gemini is the simplest proposed transport but is locally proven only for earlier `gemini-3.5-flash` and `gemini-3.1-flash-lite`; the requested IDs require fresh three-image smokes. Exact-ID batch fallbacks are evidenced but operationally heavier. Qwen requires a budget-safe change that disables its redundant 15-second keepalive during active scored traffic and fixes prompt-ID lineage.
+The text in this paragraph is the pre-run route assessment. It is superseded
+for the two executable Gemini IDs by the current completion addendum above;
+the 3.7 and Qwen blockers remain.
 
 ## Gate decision
 
@@ -54,12 +97,13 @@ read-only inspection of the six named roots; no new inference was run.
   `gemini-20-flash_blur_11/` (visible at this depth) — i.e. raw responses are
   organized per-experiment-condition subdirectory. `gemini - confidence_analysis/`
   (1,250 files) appears to be a parallel/derived confidence-scored response set.
-- **Ground truth**: `5164_gts.csv` / `5164_gts.pkl` (and a
-  `_no_post_processing` variant) recur identically across `BIG_SHIFT/`,
-  `CONSISTENCY/`, `SHIFT/`, and `WARP/` — strong evidence of one canonical
-  label set reused across experiment families, consistent with the 622-image
-  cohort (the `_no_post_processing` variant suggests a raw vs. normalized label
-  distinction worth preserving downstream).
+- **Ground truth — superseded lineage conclusion**: `5164_gts.csv` /
+  `5164_gts.pkl` (and a `_no_post_processing` variant) recur identically across
+  `BIG_SHIFT/`, `CONSISTENCY/`, `SHIFT/`, and `WARP/`, but that basename reuse
+  does not establish one universal processed label set. The later lineage
+  audit identifies separate paper/v9/v10 and public/v7 processed GT files;
+  preserve the schema/hash distinction and use [`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md)
+  for the current six-field contract.
 - **Grid-warp transform parameter IDs** (from the *uncommented*, i.e. actually
   run, variants in `PA_DEATH/WARP/PA_DEATH_WARP.yaml`):
   - `baseline`

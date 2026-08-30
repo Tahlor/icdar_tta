@@ -1,6 +1,40 @@
-# C1-C9 chart receipt
+# Modern chart update addendum — 2026-08-30
 
-Status: **all 18 required files rendered offline; evidence limitations are shown rather than filled with unsupported values**. Receipt regenerated 2026-08-29 (16:59 local) after fixing the C4 row-label overlap identified in the prior visual QA pass in `scripts/generate_charts.py`, from repository HEAD `cebf7778cea92692da9837f8914ae0b61a29c399` and the working-tree inputs listed below. No provider, network, cloud, inference, credential, or external/private image access was used.
+The chart set has been regenerated from the completed modern analysis. All 18
+required stable basenames (C1–C9, SVG and PNG) exist under `outputs/figures/`.
+The modern rows are included in C1, C2, C3, C4, C6, and C8; C5, C7, and C9
+retain their historical/blocked semantics where the modern screen does not
+provide a corresponding shift or release-safe failure-example artifact.
+
+The modern source-table snapshots used for this regeneration are:
+
+| Table | Rows | SHA-256 |
+|---|---:|---|
+| `strategy_summary.csv` | 43 | `15e2ac03cf3c343366bcac8729a5b0be04c3f413e38c10f32e57b931c2ecbb14` |
+| `precision_coverage.csv` | 2,499 | `596541de76942030f3070f8ac5b74757c044bba09174da371819e2b3fd179ef` |
+| `error_correlation_summary.csv` | 22 | `b85036eb073f98c21cb43ec2b941829665a63808207313888b82ee968cb92255` |
+| `cost_by_run.csv` | 5 | `489d13a789b8f2ad3142623e58d8fba1155f2ebbf42f396445a6a4fe0bc7d07b` |
+| `cross_model_operating_points.csv` | 18 | `565557e69c11276452e8497388677a0940f41d65191c670f77f979ee8eaeff01` |
+| `ensemble_size.csv` | 65 | `e8db65df14ffb42beff7301f97861372ce8fa03eae4db9edf593ca0fc54c1e5f` |
+
+The exact command remains `python3 scripts/generate_charts.py
+--derived-dir outputs/derived --figure-dir outputs/figures`. This is an
+offline deterministic rendering step; raw images and response bodies are not
+required. The full modern execution receipt and request accounting are in
+`local_agent/MODERN_FULL_RECEIPT.md`.
+
+# Historical C1-C9 chart receipt (preserved pre-modern snapshot)
+
+## GT-lineage addendum — 2026-08-30
+
+The chart source tables in this receipt are legacy/public v7 products. C3 uses
+the v7 3,682-row reliability tables, and C8 uses the approximately 4,920-row
+historical WARP aggregate; neither is a paper-v9/v10 3,684-row recomputation.
+The six-field selector and 24-record historical exclusion are now recovered,
+but the v9/v10 3,684-row artifacts retain one blank row. The precise lineage
+and reporting rule are in [`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md).
+
+Historical snapshot status: **all 18 required files rendered offline; evidence limitations are shown rather than filled with unsupported values**. Receipt regenerated 2026-08-29 (16:59 local) after fixing the C4 row-label overlap identified in the prior visual QA pass in `scripts/generate_charts.py`, from repository HEAD `cebf7778cea92692da9837f8914ae0b61a29c399` and the working-tree inputs listed below. The modern execution-resolution addendum above supersedes its pre-modern “no provider” and blocked-modern-cell descriptions.
 
 ## Exact generation command
 
@@ -20,15 +54,15 @@ Renderer: `scripts/generate_charts.py`; canvas: 1,200 x 675 pixels; numeric inpu
 
 | ID / basename | Numeric input table(s) | Render status and limitation |
 |---|---|---|
-| C1 `01_useful_diversity` | `strategy_summary.csv` | Rendered 10 measured WARP per-condition coordinates. Selected v7 category rows are visibly separated as consensus-only; they have no correlation coordinate and are not called individual CER. |
-| C2 `02_effective_sample_size` | `error_correlation_summary.csv` | Rendered the code-generated theoretical N=10 curve plus 10 measured WARP correlations projected onto it. Family-level Grid Warp and Resize correlations remain visibly blocked; prose values were not promoted. |
-| C3 `03_precision_coverage` | `precision_coverage.csv` | Rendered all 1,750 raw-agreement threshold rows for Grid Warp, Pad, and Resize, including supplied 95% Wilson bounds. The 3,682-row denominator is labeled noncanonical and the score is labeled raw/not calibrated. |
-| C4 `04_cost_review_frontier` | `cost_by_run.csv`; `review_frontier.csv` | Rendered the one numeric review-burden coordinate. All four cost rows lack observed usage/pricing; the cost axis and Pad/Resize target coordinates remain visibly blocked. No dollars were invented. |
+| C1 `01_useful_diversity` | `strategy_summary.csv` | Rendered historical and modern measured coordinates with source labels. Selected v7 category rows remain visibly separated as consensus-only; they have no correlation coordinate and are not called individual CER. |
+| C2 `02_effective_sample_size` | `error_correlation_summary.csv` | Rendered the theoretical N=10 curve plus 20 measured historical/modern correlations. Family-level historical Grid Warp and Resize correlations remain visibly blocked; prose values were not promoted. |
+| C3 `03_precision_coverage` | `precision_coverage.csv` | Rendered all 2,499 raw-agreement threshold rows: 1,750 legacy/public-v7 rows plus 749 modern rows. Historical and modern denominator statuses remain explicit; the score is labeled raw/not calibrated. |
+| C4 `04_cost_review_frontier` | `cost_by_run.csv`; `review_frontier.csv` | Rendered the numeric review-burden coordinate. The five cost rows include measured modern usage but no pricing, so the cost axis and Pad/Resize target coordinates remain visibly blocked. No dollars were invented. |
 | C5 `05_shift_periodicity` | `shift_agreement.csv` | Rendered all 130 reported horizontal/vertical points and 16-pixel guides. Periodicity is labeled observational, not architecture proof. |
-| C6 `06_cross_model_coverage` | `cross_model_operating_points.csv` | Rendered one measured historical Grid Warp point, one historical Pad target-not-met row, and explicit blocked cells for all 12 rows across the three exact modern IDs. No modern result is implied. |
+| C6 `06_cross_model_coverage` | `cross_model_operating_points.csv` | Rendered one measured historical Grid Warp point, one historical Pad target-not-met row, eight measured modern target-not-met rows, and eight explicit route-blocked rows for 3.7/Qwen. Empty modern coverage is a measured failure to reach the target, not a fabricated zero. |
 | C7 `07_augmentation_contribution` | `augmentation_contribution.csv` | Rendered all five family selection counts and source descriptors. Selection frequency is explicitly descriptive, not causal contribution. |
-| C8 `08_ensemble_size` | `ensemble_size.csv` | Rendered 23 key rows across five source-reported series from the 53-row table. The approximately 4,920-field denominator is labeled noncanonical. |
-| C9 `09_failure_examples` | `failure_examples.csv` | Rendered a blocked evidence panel from the single source row. No prediction, ground truth, crop, or private path was copied; stable redacted lineage and crop authorization remain unavailable. |
+| C8 `08_ensemble_size` | `ensemble_size.csv` | Rendered 53 historical source-reported rows plus 12 modern measured strategy points. The approximately 4,920-field source aggregate is labeled historical WARP lineage; modern points use the raw 3,718-cell denominator and are not the paper-v9/v10 3,684-row population. |
+| C9 `09_failure_examples` | `failure_examples.csv` | Rendered a blocked evidence panel from three count-only rows. No prediction, ground truth, crop, or private path was copied; stable redacted lineage and crop authorization remain unavailable. |
 
 Each SVG contains a machine-readable `<metadata>` object with chart ID, 1,200 x 675 dimensions, numeric input filenames, renderer, one-sentence takeaway, and limitations. The same takeaway is visible as a subtitle. Measured, theoretical, reported, recomputed, and blocked roles are distinguished in chart text and styling.
 
@@ -39,15 +73,15 @@ Rows exclude the header.
 | Source table | Rows | Bytes | SHA-256 |
 |---|---:|---:|---|
 | `outputs/derived/augmentation_contribution.csv` | 5 | 2,427 | `6d6e2c4be232d77e94ee31560bbc327c04e9596721a79e34c456e78b6f1ceab6` |
-| `outputs/derived/cost_by_run.csv` | 4 | 911 | `bad4ed762ddf9761a6ea3b57171f26e3a8086c225d3672e4c023837fba17e665` |
-| `outputs/derived/cross_model_operating_points.csv` | 14 | 5,145 | `ee1c9f00ccfa5014ab34c69a1a4c07d2870277f513ee9a5a4e1a5f79b7b4b438` |
-| `outputs/derived/ensemble_size.csv` | 53 | 24,457 | `3deecacbf92eb76b17521adbef3e3294cbb4fe49dd96a68f02abd3d09b79d0cf` |
-| `outputs/derived/error_correlation_summary.csv` | 12 | 5,368 | `93157ddd6c16b8f928df5f32cc6b29d353b0cea2b921c71d8a158473d90b985b` |
-| `outputs/derived/failure_examples.csv` | 1 | 495 | `c4ecf82d3d5e5c0f909d0992cd2b3a3acaf0e3b2d87130b49c22541618b54b55` |
-| `outputs/derived/precision_coverage.csv` | 1,750 | 998,692 | `619210cd328762df6b87b8195f18d506bf61dcfa236c44e27c207b31d83bd53a` |
+| `outputs/derived/cost_by_run.csv` | 5 | 1,541 | `489d13a789b8f2ad3142623e58d8fba1155f2ebbf42f396445a6a4fe0bc7d07b` |
+| `outputs/derived/cross_model_operating_points.csv` | 18 | 6,878 | `565557e69c11276452e8497388677a0940f41d65191c670f77f979ee8eaeff01` |
+| `outputs/derived/ensemble_size.csv` | 65 | 29,532 | `e8db65df14ffb42beff7301f97861372ce8fa03eae4db9edf593ca0fc54c1e5f` |
+| `outputs/derived/error_correlation_summary.csv` | 22 | 9,850 | `b85036eb073f98c21cb43ec2b941829665a63808207313888b82ee968cb92255` |
+| `outputs/derived/failure_examples.csv` | 3 | 1,464 | `30f027e10639a469db528f87db33f6d3ea91d2deba59e1e650ee82ea28938aec` |
+| `outputs/derived/precision_coverage.csv` | 2,499 | 1,415,590 | `596541deb76942030f3070f8ac5b74757c044bba09174da371819e2b3fd179ef` |
 | `outputs/derived/review_frontier.csv` | 3 | 1,667 | `3192b4c711a30e15ffb3febd8c6cd8f3c0ecf203ba5c61456787157c7c03f4de` |
 | `outputs/derived/shift_agreement.csv` | 130 | 54,974 | `3e18fa536faf11992ae55ed8b5901f5a0d4c6b7ac1e394f07851d86158e77e96` |
-| `outputs/derived/strategy_summary.csv` | 31 | 15,951 | `815c0d66b688f75cb736fe7765979dc14ad67ab370407e1804ff12981977f9c7` |
+| `outputs/derived/strategy_summary.csv` | 43 | 22,922 | `15e2ac62cf3c343366bcac8729a5b0be04c3f413e38c10f32e57b931c2ecbb14` |
 
 ## Output provenance
 
@@ -84,7 +118,10 @@ Full-repository `python3 -m unittest discover -s tests` currently reports `Ran 1
 
 An explicit temporary rerun (`python3 scripts/generate_charts.py --derived-dir outputs/derived --figure-dir <mktemp -d>`) followed by `cmp -s` against every one of the 18 files in `outputs/figures/` showed 18/18 byte-identical, 0 mismatches. The temporary directory was removed after comparison.
 
-All paths in this receipt and chart metadata are repository-relative. C4, C6, and C9 are truthful blocked/partial evidence artifacts; their existence does not resolve the missing usage/pricing, modern inference, canonical denominator, or release-authorization blockers.
+All paths in this receipt and chart metadata are repository-relative. C4, C6,
+and C9 are truthful blocked/partial evidence artifacts; their existence does
+not resolve the missing usage/pricing, modern inference, paper-lineage
+recomputation, or release-authorization blockers.
 
 ## Visual inspection (post C4 row-label-overlap fix)
 

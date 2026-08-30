@@ -1,3 +1,35 @@
+# GT-lineage resolution addendum — 2026-08-30
+
+## Current modern-screen completion addendum — 2026-08-30
+
+The inventory now has a separate completion receipt for the modern screen.
+`gemini-3.5-flash` and `gemini-3.5-flash-lite` each have 5,598 terminal rows
+over the 622-document, nine-view matrix. The modern analysis used 3,718 raw
+six-name nonblank cells and did not apply the historical 3,684-row exclusion;
+this is explicitly recorded in the derived-table denominator metadata. The
+3.7 route is HTTP 403 and Qwen is HTTP 500 endpoint-not-found, so those model
+IDs have no full PA screen. See `MODERN_FULL_RECEIPT.md`.
+
+Statements below that say modern execution was pending belong to the earlier
+inventory snapshot and are retained for audit history.
+
+The earlier “canonical 3,684 filter remains unresolved” wording is superseded.
+The exact six metric fields are recovered from the collapse script and v9
+analysis config. The historical `_add_flags` implementation in
+`chat2rec/processing/common.py` scans the wider configured GT field universe
+for `stillborn`, `infant`, `know`, `maiden`, or `baby`, then removes `Self*`
+rows on flagged records. It flags 24 records in the newer paper-lineage GT,
+giving `622 × 6 − 24 × 2 = 3,684` row slots. The v9/v10 outputs retain one
+blank row despite the configured `f_gt_missing: 0`; see
+[`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md) for the exact source hashes and
+the strict-nonblank distinction.
+
+The older `f1b978...` processed GT is the public-release/v7 lineage, yielding
+3,682 rows. It is not interchangeable with the newer `a5f0...` paper-lineage
+GT. Existing inventory statements below are retained for audit history.
+
+---
+
 # Targeted evidence addendum — 2026-08-29
 
 This addendum refines the original bounded inventory below. No provider/network/inference call occurred.
@@ -5,7 +37,7 @@ This addendum refines the original bounded inventory below. No provider/network/
 - WARP config SHA-256: `bb5b5a8fe53381f3139a413d148d8aa5bd74ebde51a4854d91679007ed95164c`; 14 active variants and 18 commented variants. The 10-row ranking TSV contains `shift_only` plus nine mask-aware warp rows; active `warp_hw_d003_r30_s10_std{2,15,3}` has no TSV row.
 - Exact v4 top three and all parameter dictionaries/ranks are now in `local_agent/SHORTLIST_EVIDENCE.md`. `std15` means 1.5. Registry inspection proves `handwriting_kernel_warp` wiring; `gridwarp.py`/`gridwarp2.py` are not the active WARP YAML implementation.
 - SHIFT `run_settings.csv` has three rows: diagonal 20 variants, horizontal 33, vertical 32, all parsed CSV-safely. The adjacent weighted-CER rows are `0.09329832717612387`, `0.09350656538403`, and `0.0931695495848084`; these are sweep-level, not per-variant scores.
-- Candidate `5164_gts.csv` files split into two non-interchangeable schema/hash groups: 20-column `14219f17...414ccd` and 18-column `cf24e896...5810d`, all 622 rows. Six edited name fields total 3,718 nonblank; the canonical 3,684 filter remains unresolved.
+- Candidate historical `5164_gts.csv` files split into two non-interchangeable schema/hash groups: 20-column `14219f17...414ccd` and 18-column `cf24e896...5810d`, all 622 rows. The paper/v9/v10 processed GT and the older public/v7 processed GT are separate 30-column lineages; see the 2026-08-30 addendum above.
 - Exact modern IDs are now locally evidenced: `gemini-3.7-flash`, `gemini-3.5-flash-lite`, and `sagemaker-qwen3-vl-8b-instruct-fp8`. Prior direct raw metadata also proves `gemini-3.5-flash` and `gemini-3.1-flash-lite`.
 - Route details and blockers are frozen in `local_agent/ROUTE_AUDIT.md`. Existing exact-ID Gemini batch routes are proven but complex; the simpler direct Gemini route needs requested-ID smoke verification. Qwen uses 1,280-pixel longest-side RGB JPEG quality 85 inline transport, thinking off, 180-second scored timeout, one retry, and capacity/five-error stop; its active-traffic keepalive must be disabled to fit the ledger.
 - Source hashes and repository SHAs used in this pass are recorded in the new artifacts. External worktrees were already dirty and were read only.
@@ -126,7 +158,9 @@ files — raw/derived per-response records). Top-level dirs (14, depth 1):
   pattern (sampled filenames match the `SHIFT` root's response naming), a
   parallel confidence-scored response tree.
 - `5164_gts.pkl` / `5164_gts_no_post_processing.pkl` also present at this
-  root's top level — same canonical label set as `PA_DEATH`.
+  root's top level — consistent with the older public/v7 processed lineage,
+  but **not** evidence that the same processed file is used by the newer
+  paper/v9/v10 root. See [`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md).
 
 ## 4. `repository ancestry/chat2rec_v1/chat2rec/degradations`
 

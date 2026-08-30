@@ -1,6 +1,17 @@
 # Historical Gemini 2.0 Flash re-analysis
 
-Status: **offline products generated; canonical denominator and modern screen remain blocked**. This report records only aggregate, portable evidence. No provider call, network request, inference run, external-root write, raw response copy, or private field-value copy was performed.
+## GT-lineage addendum — 2026-08-30
+
+The tables in this report were generated from the legacy/public v7 evidence and
+therefore intentionally remain 3,682-row products. The earlier wording that
+the 3,684 filter was “unresolved” is superseded at the rule level: the six
+metric fields and the historical 24-record `Self*` exclusion are recovered.
+The paper/v9/v10 row target is `622 × 6 − 24 × 2 = 3,684`, but those artifacts
+retain one blank row despite the configured `f_gt_missing: 0`. This report has
+not silently converted its v7 tables to the paper-lineage population. See
+[`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md).
+
+Status: **offline legacy-v7 products generated; paper-lineage recomputation and modern screen remain pending**. This report records only aggregate, portable evidence. No provider call, network request, inference run, external-root write, raw response copy, or private field-value copy was performed.
 
 ## Scope and evidence semantics
 
@@ -10,7 +21,12 @@ Status: **offline products generated; canonical denominator and modern screen re
 - `blocked_*`: the requested coordinate cannot be supported by available evidence; numeric result cells are left empty.
 - No paper prose value is promoted to a measured row. In particular, v7 Grid Warp/Resize correlation rows are blocked because the inspected machine-readable v7 table does not encode those correlations.
 
-The six edited name columns contain **3,718 raw nonblank cells** in both located 622-row ground-truth schema groups: Self given 609, Self surname 622, Father given 622, Father surname 622, Mother given 622, Mother surname 621. The paper target is **3,684**, leaving **34 unresolved exclusions**. Neither 3,718 nor the v7 reliability-table count of 3,682 is labeled canonical.
+The six edited name columns in the fixed-v2 source contain **3,718 raw
+nonblank cells** (Self given 609, Self surname 622, Father given 622, Father
+surname 622, Mother given 622, Mother surname 621). That raw count is not the
+paper row population. The legacy/public v7 reliability tables contain 3,682
+rows; the newer paper-lineage v9/v10 tables contain the separate 3,684-row
+population described in `docs/GT_LINEAGE.md`.
 
 ## Source inventory
 
@@ -44,7 +60,7 @@ Raw historical JSON was not needed because the available aggregate and v7 consen
 ## Computations
 
 1. **Useful diversity and error correlation.** WARP rows join exact `experiment_name` values between the 10-row ranking table and the maximum available `k` in the 53-row by-k table. `individual_cer` is ranking-table `avg_cer`; `consensus_cer` is by-k `weighted_CER`. Category-level v7 consensus CER is stored only in `consensus_cer`, never `individual_cer`. The stylized quantity is `N_eff = N / (1 + (N - 1) * rho)` and is explicitly not a measured sample count.
-2. **Precision/coverage.** For each of Grid Warp, Pad, and Resize, the source has 3,682 20-member consensus rows. At every distinct `consensus_confidence` threshold `t`, accept when `confidence >= t`; correctness is source `cer == 0`; `coverage = accepted / 3682`; `precision = accepted_correct / accepted`; `review = 3682 - accepted`. Intervals are two-sided 95% Wilson score intervals. The score is labeled raw character agreement, not calibrated probability.
+2. **Precision/coverage.** For each of Grid Warp, Pad, and Resize, the legacy/public v7 source has 3,682 20-member consensus rows. At every distinct `consensus_confidence` threshold `t`, accept when `confidence >= t`; correctness is source `cer == 0`; `coverage = accepted / 3682`; `precision = accepted_correct / accepted`; `review = 3682 - accepted`. Intervals are two-sided 95% Wilson score intervals. The score is labeled raw character agreement, not calibrated probability. These are not v9/v10 3,684-row metrics.
 3. **Descriptive operating point.** The offline table uses a clearly labeled descriptive target of 0.95 and chooses maximum empirical coverage among thresholds meeting it. Grid Warp reaches 0.95225285810356419 precision at threshold 0.96666666666666679, accepting 1,487/3,682 fields (coverage 0.40385659967409016). Pad has no empirical threshold meeting 0.95, so its row is an explicit negative result with no fabricated coordinates. This target is not presented as the frozen modern-test target.
 4. **Shift series.** The horizontal and vertical aggregate series are copied with direction, signed/absolute displacement, and a computed multiple-of-16 flag. The evidence is observational and does not prove model architecture.
 5. **Contribution.** The 55 CV-rank rows are grouped by transform family; `selection_count` sums source `frequency`, and `mean_mrr` averages source `MRR`. This is descriptive selection frequency, not a causal leave-one-family-out result.
@@ -56,7 +72,7 @@ Raw historical JSON was not needed because the available aggregate and v7 consen
 |---|---:|---:|---|---|
 | `outputs/derived/strategy_summary.csv` | 31 | 15,951 | `815c0d66b688f75cb736fe7765979dc14ad67ab370407e1804ff12981977f9c7` | reported aggregates; denominator explicit |
 | `outputs/derived/error_correlation_summary.csv` | 12 | 5,368 | `93157ddd6c16b8f928df5f32cc6b29d353b0cea2b921c71d8a158473d90b985b` | 10 WARP rows plus 2 blocked v7 family rows |
-| `outputs/derived/precision_coverage.csv` | 1,750 | 998,692 | `619210cd328762df6b87b8195f18d506bf61dcfa236c44e27c207b31d83bd53a` | recomputed on 3,682-row noncanonical sources |
+| `outputs/derived/precision_coverage.csv` | 1,750 | 998,692 | `619210cd328762df6b87b8195f18d506bf61dcfa236c44e27c207b31d83bd53a` | recomputed on legacy/public v7 3,682-row sources |
 | `outputs/derived/cost_by_run.csv` | 4 | 911 | `bad4ed762ddf9761a6ea3b57171f26e3a8086c225d3672e4c023837fba17e665` | blocked: no observed historical usage; no modern runs |
 | `outputs/derived/review_frontier.csv` | 3 | 1,667 | `3192b4c711a30e15ffb3febd8c6cd8f3c0ecf203ba5c61456787157c7c03f4de` | review burden partial; cost axis blocked |
 | `outputs/derived/shift_agreement.csv` | 130 | 54,974 | `3e18fa536faf11992ae55ed8b5901f5a0d4c6b7ac1e394f07851d86158e77e96` | reported aggregate series |
@@ -67,8 +83,8 @@ Raw historical JSON was not needed because the available aggregate and v7 consen
 
 ## Blockers and nonclaims
 
-- **Canonical evaluation:** the 34 exclusions needed to reconcile 3,718 raw nonblank fields with 3,684 remain unidentified; v7 reliability data contain 3,682 rows. All affected rows carry `denominator_status`.
-- **Modern transfer:** exact IDs are recorded for `gemini-3.7-flash`, `gemini-3.5-flash-lite`, and `sagemaker-qwen3-vl-8b-instruct-fp8`, but no modern responses exist. The exact 622-image/hash manifest, canonical filter, shared parser hash, source/mask/render lineage, route smoke, and explicit live-call authorization remain closed gates.
+- **Paper-lineage evaluation:** the six-field selector and 24-record historical exclusion are recovered, but this report's tables remain legacy/public v7 at 3,682 rows. The v9/v10 emitted 3,684-row population retains one blank row, so a dedicated paper-lineage recomputation still needs to freeze its strict-nonblank reporting convention. All existing table rows carry `denominator_status`.
+- **Modern transfer:** exact IDs are recorded for `gemini-3.7-flash`, `gemini-3.5-flash-lite`, and `sagemaker-qwen3-vl-8b-instruct-fp8`, but no modern scored responses exist. The exact 622-image/hash manifest, paper-lineage row convention, shared parser hash, source/mask/render lineage, route smoke, and explicit live-call authorization remain closed gates.
 - **Cost:** run settings do not provide observed token/usage/billing records or a pricing snapshot. No dollar estimate is invented.
 - **Qualitative examples:** no stable redacted high-agreement-wrong IDs with authorized crop references were found. Predictions, labels, image paths, and crops are left empty.
 - **Correlation cross-check:** the v7 transform table contains family CER and field accuracy but not family error correlation. Prose regression targets remain targets, not measured output rows.

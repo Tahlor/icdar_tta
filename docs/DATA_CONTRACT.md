@@ -54,6 +54,29 @@ For every logical source, record when applicable:
 - associated model/prompt/config version;
 - known caveats.
 
+## Current PA 622 evaluation contract
+
+The exact field selector, historical record-level exclusion, source hashes,
+and the distinction between the paper/v9/v10 and public/v7 lineages are
+maintained in [`docs/GT_LINEAGE.md`](GT_LINEAGE.md). Read that document before
+joining labels to predictions. In brief, the paper-era metric selector is the
+six fields `SelfGivenName`, `SelfSurname`, `FatherGivenName`, `FatherSurname`,
+`MotherGivenName`, and `MotherSurname`.
+
+The historical pipeline first built a wider ground-truth table, searched its
+original-first/fallback-edited values for the terms `stillborn`, `infant`,
+`know`, `maiden`, and `baby`, and removed the two `Self*` rows for each flagged
+record. On the newer paper-lineage GT this flags 24 records, giving the
+historical six-field row count `622 × 6 − 24 × 2 = 3,684`. This is the
+historical rule; it is not a license to infer a filter from a count alone.
+
+The paper calls 3,684 rows “nonblank,” but the v9/v10 machine-readable tables
+contain one retained blank `MotherSurname` row (`f_gt_missing=1`) and 3,683
+rows with `f_gt_missing=0`. Every derived table must state whether it uses the
+3,684 historical row population, a strict 3,683-row nonblank subset, or the
+legacy/public 3,682-row v7 population. The raw six-name `_edt` count of 3,718
+must not be substituted for any of those populations.
+
 ## Canonical IDs
 
 ### Documents
@@ -62,7 +85,11 @@ Create or recover a stable `doc_id` mapping. Never use an absolute path as the d
 
 ### Fields
 
-Use stable field names matching the evaluation schema. The paper evaluation focused on nonblank given-name/surname fields for the decedent, mother, and father; the inventory should recover the exact canonical names used by the historical scripts.
+Use stable field names matching the evaluation schema. For this project, the
+paper-era metric fields are the six names listed in the current PA 622
+evaluation contract above. Preserve the wider GT inclusion universe separately
+when reproducing the historical exclusion scan; it is not the reported metric
+field set.
 
 A field observation should be uniquely addressable by at least:
 

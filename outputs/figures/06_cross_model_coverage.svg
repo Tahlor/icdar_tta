@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img">
 <title>Cross-model auto-acceptance</title>
-<desc>Modern transfer is not yet measured, so the cross-model claim remains blocked rather than implied.</desc>
-<metadata>{&quot;chart_id&quot;:&quot;06_cross_model_coverage&quot;,&quot;dimensions&quot;:[1200,675],&quot;limitations&quot;:[&quot;Only one historical Grid Warp operating point is numeric.&quot;,&quot;All rows for the three exact modern model IDs are blocked and shown as unavailable.&quot;],&quot;numeric_inputs&quot;:[&quot;cross_model_operating_points.csv&quot;],&quot;renderer&quot;:&quot;python-standard-library-svg-and-deterministic-bitmap-png&quot;,&quot;takeaway&quot;:&quot;Modern transfer is not yet measured, so the cross-model claim remains blocked rather than implied.&quot;}</metadata>
+<desc>Modern transfer is measured at a fixed descriptive precision target, with unresolved or unavailable routes shown explicitly.</desc>
+<metadata>{&quot;chart_id&quot;:&quot;06_cross_model_coverage&quot;,&quot;dimensions&quot;:[1200,675],&quot;limitations&quot;:[&quot;Operating points are descriptive rows at the predeclared target precision.&quot;,&quot;Unavailable routes or targets remain explicit rather than being filled with estimates.&quot;],&quot;numeric_inputs&quot;:[&quot;cross_model_operating_points.csv&quot;],&quot;renderer&quot;:&quot;python-standard-library-svg-and-deterministic-bitmap-png&quot;,&quot;takeaway&quot;:&quot;Modern transfer is measured at a fixed descriptive precision target, with unresolved or unavailable routes shown explicitly.&quot;}</metadata>
 <rect x="0" y="0" width="1200" height="675" fill="#f8fafc" stroke="none" stroke-width="1"/>
-<text x="55" y="40" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="bold" text-anchor="start">Cross-model transfer remains an open measurement</text>
-<text x="55" y="72" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">Modern transfer is not yet measured, so the cross-model claim remains blocked rather</text>
-<text x="55" y="92" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">than implied.</text>
+<text x="55" y="40" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="bold" text-anchor="start">Cross-model transfer at a fixed precision target</text>
+<text x="55" y="72" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">Modern transfer is measured at a fixed descriptive precision target, with unresolved</text>
+<text x="55" y="92" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">or unavailable routes shown explicitly.</text>
 <text x="70" y="158" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" text-anchor="start">MODEL / EXACT ID</text>
 <text x="565" y="158" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="middle">unchanged_3</text>
 <text x="705" y="158" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Pad</text>
@@ -32,7 +32,7 @@
 <rect x="953" y="280" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
 <text x="985" y="300" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
 <rect x="55" y="363" width="1095" height="73" fill="#ffffff" stroke="none" stroke-width="1"/>
-<text x="70" y="393" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="start">gemini-3.5-flash-lite</text>
+<text x="70" y="393" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="start">sagemaker-qwen3-vl-8b-instruct-fp8</text>
 <rect x="533" y="374" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
 <text x="565" y="394" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
 <rect x="673" y="374" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
@@ -42,7 +42,7 @@
 <rect x="953" y="374" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
 <text x="985" y="394" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
 <rect x="55" y="457" width="1095" height="73" fill="#f1f5f9" stroke="none" stroke-width="1"/>
-<text x="70" y="487" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="start">sagemaker-qwen3-vl-8b-instruct-fp8</text>
+<text x="70" y="487" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="start">gemini-3.5-flash</text>
 <rect x="533" y="468" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
 <text x="565" y="488" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
 <rect x="673" y="468" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
@@ -51,7 +51,17 @@
 <text x="845" y="488" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
 <rect x="953" y="468" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
 <text x="985" y="488" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<rect x="55" y="551" width="1095" height="73" fill="#ffffff" stroke="none" stroke-width="1"/>
+<text x="70" y="581" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="start">gemini-3.5-flash-lite</text>
+<rect x="533" y="562" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
+<text x="565" y="582" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<rect x="673" y="562" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
+<text x="705" y="582" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<rect x="813" y="562" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
+<text x="845" y="582" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<rect x="953" y="562" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
+<text x="985" y="582" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
 <rect x="55" y="585" width="1095" height="42" fill="#ffedd5" stroke="none" stroke-width="1"/>
-<text x="72" y="611" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" text-anchor="start">MEASURED: 1 historical point | HISTORICAL TARGET NOT MET: 1 row | BLOCKED MODERN: 12 rows across 3 exact IDs</text>
-<text x="55" y="654" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">Target precision is the descriptive CSV target, not a frozen modern-test target | 3,682-field historical denominator</text>
+<text x="72" y="611" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" text-anchor="start">NUMERIC POINTS: 1 across 1 models | UNAVAILABLE/TARGET NOT MET: 17</text>
+<text x="55" y="654" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">Target precision is the predeclared descriptive 95% target | Source denominators remain explicit in the table</text>
 </svg>

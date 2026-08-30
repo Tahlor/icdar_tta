@@ -481,7 +481,6 @@ def main() -> int:
     grid_renderer_sha = sha256_file(grid_renderer_path)
     pad_renderer_path = transform_root.parent / "chat2rec_project" / "chat2rec" / "transformations" / "effects" / "pad.py"
     pad_renderer_sha = sha256_file(pad_renderer_path) if pad_renderer_path.exists() else ""
-    grid_warpers: dict[tuple[str, int], Any] = {}
     started = time.time()
     processed = 0
 

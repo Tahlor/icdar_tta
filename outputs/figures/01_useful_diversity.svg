@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img">
 <title>Useful diversity: complete historical coordinates</title>
-<desc>Useful ensembles need informative members that make different mistakes; the complete historical coordinates here exist only for WARP conditions.</desc>
-<metadata>{&quot;chart_id&quot;:&quot;01_useful_diversity&quot;,&quot;dimensions&quot;:[1200,675],&quot;limitations&quot;:[&quot;Only WARP per-condition rows contain both individual CER and error correlation.&quot;,&quot;v7 category rows contain consensus CER only and are not plotted as individual metrics.&quot;],&quot;numeric_inputs&quot;:[&quot;strategy_summary.csv&quot;],&quot;renderer&quot;:&quot;python-standard-library-svg-and-deterministic-bitmap-png&quot;,&quot;takeaway&quot;:&quot;Useful ensembles need informative members that make different mistakes; the complete historical coordinates here exist only for WARP conditions.&quot;}</metadata>
+<desc>Useful ensembles need informative members that make different mistakes; modern and historical coordinates are labelled by source.</desc>
+<metadata>{&quot;chart_id&quot;:&quot;01_useful_diversity&quot;,&quot;dimensions&quot;:[1200,675],&quot;limitations&quot;:[&quot;Only WARP per-condition rows contain both individual CER and error correlation.&quot;,&quot;v7 category rows contain consensus CER only and are not plotted as individual metrics.&quot;],&quot;numeric_inputs&quot;:[&quot;strategy_summary.csv&quot;],&quot;renderer&quot;:&quot;python-standard-library-svg-and-deterministic-bitmap-png&quot;,&quot;takeaway&quot;:&quot;Useful ensembles need informative members that make different mistakes; modern and historical coordinates are labelled by source.&quot;}</metadata>
 <rect x="0" y="0" width="1200" height="675" fill="#f8fafc" stroke="none" stroke-width="1"/>
 <text x="55" y="40" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="bold" text-anchor="start">Useful diversity: accuracy and different mistakes</text>
-<text x="55" y="72" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">Useful ensembles need informative members that make different mistakes; the complete</text>
-<text x="55" y="92" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">historical coordinates here exist only for WARP conditions.</text>
+<text x="55" y="72" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">Useful ensembles need informative members that make different mistakes; modern and</text>
+<text x="55" y="92" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">historical coordinates are labelled by source.</text>
 <line x1="90" y1="490.937" x2="780" y2="490.937" stroke="#d9e0ea" stroke-width="1"/>
 <text x="80" y="495.937" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="end">0.08</text>
 <line x1="90" y1="362.812" x2="780" y2="362.812" stroke="#d9e0ea" stroke-width="1"/>
@@ -39,7 +39,17 @@
 <circle cx="358.191" cy="431.318" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
 <circle cx="296.087" cy="387.391" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
 <circle cx="192.555" cy="251.48" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
-<text x="105" y="166" fill="#2563eb" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="start">MEASURED WARP CONDITIONS (n=10 rows; 5 members each)</text>
+<circle cx="746.489" cy="834.861" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="514.494" cy="838.025" r="7" fill="#e87924" stroke="#ffffff" stroke-width="2"/>
+<circle cx="544.193" cy="817.636" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="508.528" cy="827.83" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="555.279" cy="830.174" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="450.161" cy="514.096" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="289.911" cy="493.532" r="7" fill="#e87924" stroke="#ffffff" stroke-width="2"/>
+<circle cx="337.326" cy="404.421" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="299.125" cy="448.976" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="334.098" cy="470.683" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="105" y="166" fill="#2563eb" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="start">MEASURED WARP CONDITIONS (n=20 rows; 5 members each)</text>
 <rect x="815" y="145" width="335" height="410" fill="#ffffff" stroke="#d9e0ea" stroke-width="1"/>
 <text x="835" y="174" fill="#7557b8" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="bold" text-anchor="start">V7 CATEGORY CONSENSUS</text>
 <text x="835" y="196" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">Not individual CER; x coordinate unavailable</text>

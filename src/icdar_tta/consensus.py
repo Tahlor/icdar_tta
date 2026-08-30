@@ -24,6 +24,7 @@ Per ``docs/VALIDATION_TESTS.md``:
 
 from __future__ import annotations
 
+from collections import Counter
 from dataclasses import dataclass
 from typing import Optional, Sequence
 
@@ -66,7 +67,32 @@ def _votes_at_position(aligned_consensus: Sequence, aligned_sample: Sequence) ->
     return votes
 
 
-def progressive_consensus(
+def _mode(tokens: Sequence[Optional[str]], previous: Optional[str]) -> Optional[str]:
+    """Return a deterministic mode, retaining ``previous`` on a tie."""
+    counts = Counter(tokens)
+    if not counts:
+        return previous
+    maximum = max(counts.values())
+    candidates = [token for token, count in counts.items() if count == maximum]
+    if previous in candidates:
+        return previous
+    return sorted(candidates, key=lambda token: (token is not None, token or ""))[0]
+
+
+def _representative(tokens: Sequence[Optional[str]], previous: Optional[str]) -> Optional[str]:
+    """Choose a character for aligning a later sample to this column.
+
+    A column whose gap is currently the mode still needs a representative
+    character so later samples can revisit the same insertion/deletion
+    position and potentially reverse that decision.
+    """
+    characters = [token for token in tokens if token is not None]
+    if not characters:
+        return None
+    return _mode(characters, previous if previous is not None else characters[0])
+
+
+def _legacy_progressive_consensus(
     samples: Sequence[Optional[str]],
     *,
     match_score: int = 2,
@@ -179,5 +205,97 @@ def progressive_consensus(
         n_valid_samples=len(valid),
         n_missing_samples=n_missing,
         char_vote_fractions=char_vote_fractions,
+        field_confidence=field_confidence,
+    )
+
+
+def progressive_consensus(
+    samples: Sequence[Optional[str]],
+    *,
+    match_score: int = 2,
+    mismatch_score: int = -1,
+    gap_penalty: int = -1,
+) -> ConsensusResult:
+    """Fold samples in the supplied order into a profile consensus.
+
+    ``None`` samples are unavailable observations and are excluded from the
+    alignment profile, but are counted in ``n_missing_samples``. Every valid
+    sample contributes a token (including alignment gaps) to each profile
+    column. The column mode is the consensus, so substitutions, insertions,
+    and deletions can all be resolved by later majority votes.
+    """
+    valid = [sample for sample in samples if sample is not None]
+    n_missing = len(samples) - len(valid)
+    if not valid:
+        return ConsensusResult("", 0, n_missing, tuple(), 0.0)
+
+    # Each column stores one token per valid sample. None is an alignment gap
+    # here; unavailable samples were removed above.
+    columns: list[list[Optional[str]]] = [[character] for character in valid[0]]
+    consensus_tokens: list[Optional[str]] = list(valid[0])
+    processed = 1
+
+    for sample in valid[1:]:
+        # Keep a representative character even when a gap is currently the
+        # column mode. This preserves insertion/deletion positions for later
+        # samples that may reverse the majority.
+        representatives = [
+            _representative(column, consensus_tokens[index])
+            for index, column in enumerate(columns)
+        ]
+        active = [
+            (index, character)
+            for index, character in enumerate(representatives)
+            if character is not None
+        ]
+        aligned = needleman_wunsch(
+            "".join(character for _, character in active),
+            sample,
+            match_score=match_score,
+            mismatch_score=mismatch_score,
+            gap_penalty=gap_penalty,
+        )
+
+        active_position = 0
+        new_columns: list[list[Optional[str]]] = []
+        new_tokens: list[Optional[str]] = []
+        for old_character, sample_character in zip(aligned.aligned_a, aligned.aligned_b):
+            if old_character is GAP:
+                # A sample-only insertion: prior samples vote for a gap.
+                new_columns.append([None] * processed + [sample_character])
+                new_tokens.append(None)
+                continue
+
+            old_index = active[active_position][0]
+            active_position += 1
+            column = list(columns[old_index])
+            column.append(sample_character)
+            new_columns.append(column)
+            new_tokens.append(_mode(column, consensus_tokens[old_index]))
+
+        if active_position != len(active):
+            raise AssertionError("alignment did not consume every profile column")
+        columns = new_columns
+        consensus_tokens = new_tokens
+        processed += 1
+
+    final_tokens: list[Optional[str]] = []
+    char_vote_fractions: list[float] = []
+    for column, previous in zip(columns, consensus_tokens):
+        winner = _mode(column, previous)
+        final_tokens.append(winner)
+        if winner is not None:
+            # Alignment gaps in a valid sample are disagreement with a
+            # character winner. Whole-sample availability is handled by the
+            # caller using n_valid_samples/n_missing_samples.
+            char_vote_fractions.append(sum(token == winner for token in column) / len(valid))
+
+    consensus_text = "".join(token for token in final_tokens if token is not None)
+    field_confidence = sum(char_vote_fractions) / len(char_vote_fractions) if char_vote_fractions else 0.0
+    return ConsensusResult(
+        consensus_text=consensus_text,
+        n_valid_samples=len(valid),
+        n_missing_samples=n_missing,
+        char_vote_fractions=tuple(char_vote_fractions),
         field_confidence=field_confidence,
     )

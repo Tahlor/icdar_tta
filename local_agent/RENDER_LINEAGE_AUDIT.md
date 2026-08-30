@@ -1,5 +1,20 @@
 # Render-lineage recovery audit
 
+## Current modern-screen render addendum — 2026-08-30
+
+The historical exact-render audit below remains **BLOCKED**: it cannot recover
+the original Grid-Warp seeds, granular Pad implementation, or historical
+rendered-image hashes. A separate prospective render manifest was nevertheless
+created for the completed modern screen and is the actual input to that run:
+`PA_DEATH/TTA_MODERN/rendered_views_full_parallel/render_manifest.csv`, 5,598
+rows, SHA-256
+`ED3C80E0554B670C17FF649C99C318E807E74B9D7C6267BC2E570A2D267DC301`.
+
+This manifest proves provenance for the current nine-view modern payload; it
+does not retroactively make U0–G2 historically reproducible or resolve the
+historical Pad/Grid lineage gaps described below. The modern screen's raw
+images and response bodies remain in private storage.
+
 **Status: BLOCKED**
 **Audit date:** 2026-08-29
 **Repository HEAD inspected:** `cebf7778cea92692da9837f8914ae0b61a29c399`

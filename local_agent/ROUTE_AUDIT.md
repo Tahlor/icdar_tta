@@ -1,12 +1,37 @@
-# Modern-model route audit
+# Modern execution resolution addendum — 2026-08-30
 
-Status: the latest evidence includes a six-request, label-blind Gemini smoke on
-three PA documents and `U0`; the full requested matrix remains unverified.
+The route gate is now resolved for the two working Gemini 3.5 models. The
+successful route is the native Gemini `generateContent` path through the L1
+gateway: the configured Raptor/LiteLLM host is normalized to its `/v1` root,
+then the native Gemini `/gemini/v1beta/models/...:generateContent` path is
+used with inline JPEG bytes, temperature 0, minimal thinking, and a 4,096
+token cap. The route key is recorded as
+`gemini_l1_native_inline_jpeg95_minimal4096_v2`; no credential value is
+stored.
+
+The final run completed 5,598 cells for each of `gemini-3.5-flash` and
+`gemini-3.5-flash-lite`. `gemini-3.7-flash` returned HTTP 403 at its PA
+probe, and the Vermont-era `gemini-3.6-flash` alternative also returned HTTP
+403. The Qwen L3 attempts returned HTTP 500 endpoint-not-found, so Qwen was
+not represented as a PA scored result. All route failures and repairs are
+ledgered or explicitly called out in `local_agent/MODERN_FULL_RECEIPT.md`;
+the remaining sections below preserve the pre-call audit history.
+
+# Historical pre-call modern-model route audit (preserved)
+
+Historical pre-call status (superseded): the latest evidence then included a six-request,
+label-blind Gemini smoke on three PA documents and `U0`; the full requested
+matrix was unverified at that point. The execution-resolution addendum above
+is the current route result.
 Paths below are portable logical paths rooted in the named evidence
 repositories. Credential values, endpoint URLs, signed object URLs, and raw
 response bodies are intentionally omitted.
 
 ## Latest small PA smoke
+
+This section is the smaller pre-call smoke receipt. It is retained to show
+the route progression; it is superseded for completion status by the full
+two-model screen described at the top of this file.
 
 `gemini-3.5-flash` and `gemini-3.5-flash-lite` each completed three `U0`
 requests with exact returned model IDs. All six requests were `ok`, with zero
@@ -15,10 +40,16 @@ response hashes are in `outputs/derived/modern_smoke_metadata.csv`; the raw
 JSON bodies and source/rendered images remain outside Git.
 
 This smoke validates a direct Gemini route/parser/usage path only. It does not
-test `gemini-3.7-flash`, Qwen, Pad/Grid-Warp views, the canonical 3,684-field
-filter, or any label-based metric. The full scored transfer remains gated.
+test `gemini-3.7-flash`, Qwen, Pad/Grid-Warp views, the paper-lineage six-field/
+3,684-row evaluation contract, or any label-based metric. The full scored
+transfer remains gated.
 
 ## Exact planning-name mapping
+
+The following mapping and route recommendations are the 2026-08-29 pre-call
+snapshot. Current completion is: `gemini-3.5-flash` and
+`gemini-3.5-flash-lite` completed 5,598 rows each; `gemini-3.7-flash` is
+blocked at HTTP 403 and Qwen at HTTP 500 endpoint-not-found.
 
 | Planning name | Exact locally evidenced executable ID | Evidence quality | Mapping decision |
 |---|---|---|---|
@@ -64,4 +95,8 @@ Earlier direct-route evidence also proves `gemini-3.5-flash` and `gemini-3.1-fla
 4. Use the SageMaker L3 chat route for Qwen only after disabling redundant active-traffic keepalive and fixing prompt lineage.
 5. Do not call `models/gemini-2.0-flash`; its existing outputs are reference-only.
 
-The matrix must continue to say **live verification pending**. Local evidence proves prior route/model execution, not that the requested PA TTA payload will work now.
+The live-verification-pending sentence above belongs to the preserved
+pre-call recommendation. The current result is the completed two-model
+screen; only the requested 3.7 and Qwen routes remain blocked. Exact counts,
+ledger reconciliation, and the 3.5 substitute decision are in
+`local_agent/MODERN_FULL_RECEIPT.md`.

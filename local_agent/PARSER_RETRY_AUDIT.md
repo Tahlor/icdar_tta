@@ -1,6 +1,20 @@
 # Parser/retry gate audit
 
-Status: **PARTIAL** — the bounded offline parser and retry-policy gate is **PASS**; the experiment's paid/live-call gate remains **BLOCKED**. No route, image-render lineage, provider smoke, capacity, or live-call authorization gate is claimed passed.
+## Current modern-screen completion addendum — 2026-08-30
+
+The offline parser/retry implementation passed its focused and full tests and
+was used by the completed two-model screen. The screen produced 5,598
+terminal rows for each of `gemini-3.5-flash` and `gemini-3.5-flash-lite`;
+parse repairs and unrecovered failures are counted in
+`local_agent/MODERN_FULL_RECEIPT.md`. The 3.7 Gemini route (HTTP 403) and
+Qwen route (HTTP 500 endpoint-not-found) remain blocked, so this addendum
+does not claim a full screen for those IDs.
+
+The status below is the 2026-08-29 offline/pre-call audit scope. Its claims
+about the implementation remain valid; its blanket statement that no provider
+smoke or screen existed is historical and superseded by this addendum.
+
+Status: **offline implementation PASS; two-model modern screen reconciled; 3.7/Qwen routes blocked**. Historical exact-render and paper-lineage recomputation remain separate gates.
 
 Audit date: 2026-08-29
 Scope: offline implementation and tests only; no network access, provider call, inference, credential inspection, private image access, or raw-response access.
@@ -91,7 +105,9 @@ All commands ran from the repository root with Python source resolution set to `
 
 The matrix remains `BLOCKED`. The project manager still owns and must independently verify or approve:
 
-- recovery and hash freeze of the canonical 3,684-field evaluation filter;
+- application/hash freeze of the recovered paper-lineage six-field/24-record
+  exclusion rule, including the v9/v10 one-blank-row reporting convention
+  (`docs/GT_LINEAGE.md`);
 - deterministic render/source/mask lineage for all nine views, including unresolved Pad renderer details and Grid-Warp seeds/render hashes;
 - route selection and image transport for each model;
 - exact three-image, label-blind provider smoke and returned-model checks for all three exact IDs;

@@ -54,12 +54,12 @@ TABLE_MAP = {
     BASENAMES[8]: ("failure_examples.csv",),
 }
 TAKEAWAYS = {
-    BASENAMES[0]: "Useful ensembles need informative members that make different mistakes; the complete historical coordinates here exist only for WARP conditions.",
+    BASENAMES[0]: "Useful ensembles need informative members that make different mistakes; modern and historical coordinates are labelled by source.",
     BASENAMES[1]: "Adding correlated samples has rapidly diminishing informational value.",
     BASENAMES[2]: "Grid Warp can be useful as a selective confidence generator, but raw agreement is not a calibrated probability.",
     BASENAMES[3]: "The production objective is fewer human reviews for known quality and cost, but the historical cost axis is unavailable.",
     BASENAMES[4]: "Transcription agreement exhibits periodic sensitivity to image alignment, consistent with but not proof of patch or grid effects.",
-    BASENAMES[5]: "Modern transfer is not yet measured, so the cross-model claim remains blocked rather than implied.",
+    BASENAMES[5]: "Modern transfer is measured at a fixed descriptive precision target, with unresolved or unavailable routes shown explicitly.",
     BASENAMES[6]: "Historical validation selection frequency describes which families appeared often; it does not establish causal contribution.",
     BASENAMES[7]: "Source-reported historical aggregates show diminishing gains with more members under a noncanonical denominator.",
     BASENAMES[8]: "Qualitative failure examples remain blocked until stable redacted lineage and release-authorized crops exist.",
@@ -444,27 +444,44 @@ def chart_2(data, out):
 
 def chart_3(data, out):
     c = Canvas(BASENAMES[2], "Raw-agreement precision and coverage", TAKEAWAYS[BASENAMES[2]], TABLE_MAP[BASENAMES[2]],
-               ["All rows use 3,682 historical fields, not the unresolved canonical denominator.", "Intervals are two-sided 95% Wilson bounds supplied by the CSV.", "Raw consensus character agreement is not calibrated probability."])
+               ["Historical and modern rows retain their denominator status in the CSV.", "Intervals are two-sided 95% Wilson bounds supplied by the CSV.", "Raw consensus character agreement is not calibrated probability."])
     heading(c,"Raw agreement can triage review",TAKEAWAYS[BASENAMES[2]])
-    a=Axes(c,90,145,850,420,.25,1.0,.64,1.0)
-    a.draw([.25,.5,.75,1],[.65,.75,.85,.95,1],"Automatic coverage (accepted fields / 3,682)","Accepted-field precision",lambda v:f"{100*v:.0f}%",lambda v:f"{100*v:.0f}%")
-    colors={"Grid Warp":BLUE,"Pad":ORANGE,"Resize":GREEN}
-    for strategy in sorted(set(r["strategy"] for r in data)):
-        series=sorted((r for r in data if r["strategy"]==strategy),key=lambda r:number(r,"coverage"))
+    numeric = [r for r in data if number(r,"coverage") is not None and number(r,"precision") is not None]
+    ymin = max(0.0, min(number(r,"precision") for r in numeric) - .03) if numeric else .60
+    ymax = min(1.0, max(number(r,"precision") for r in numeric) + .02) if numeric else 1.0
+    if ymax - ymin < .10:
+        ymin, ymax = max(0.0, ymin - .05), min(1.0, ymax + .05)
+    a=Axes(c,90,145,850,420,0.0,1.0,ymin,ymax)
+    yticks=[ymin+(ymax-ymin)*i/4 for i in range(5)]
+    a.draw([0,.25,.5,.75,1],yticks,"Automatic coverage (accepted fields / source denominator)","Accepted-field precision",lambda v:f"{100*v:.0f}%",lambda v:f"{100*v:.0f}%")
+    colors={"Grid Warp":BLUE,"Pad":ORANGE,"Resize":GREEN,"unchanged_3":MUTED,"visual_mixed_6":PURPLE,"all_views_9":TEAL,"single":RED}
+    series_keys = sorted({
+        (r["model_id"], r["strategy"])
+        for r in data
+        if number(r, "coverage") is not None and number(r, "precision") is not None
+    })
+    strategies = sorted({strategy for _, strategy in series_keys})
+    for model_id, strategy in series_keys:
+        # Keep each model's curve separate. Sorting only by strategy would
+        # connect historical and modern rows into a fictitious trajectory.
+        series=sorted((r for r in data if r["model_id"]==model_id and r["strategy"]==strategy),key=lambda r:number(r,"coverage"))
         upper=[(a.px(number(r,"coverage")),a.py(number(r,"precision_ci_high"))) for r in series]
         lower=[(a.px(number(r,"coverage")),a.py(number(r,"precision_ci_low"))) for r in reversed(series)]
-        c.polygon(upper+lower,{"Grid Warp":"#dbeafe","Pad":"#ffedd5","Resize":"#dcfce7"}[strategy])
+        c.polygon(upper+lower,{"Grid Warp":"#dbeafe","Pad":"#ffedd5","Resize":"#dcfce7","unchanged_3":"#eef2f7","visual_mixed_6":"#ede9fe","all_views_9":"#cffafe","single":"#fee2e2"}.get(strategy,"#f1f5f9"))
         pts=[(a.px(number(r,"coverage")),a.py(number(r,"precision"))) for r in series]
-        c.polyline(pts,colors[strategy],3)
-    for i,name in enumerate(("Grid Warp","Pad","Resize")):
-        x=955; y=183+i*35; c.line(x,y,x+32,y,colors[name],4); c.text(x+42,y+5,f"{name} (n=20)",14,INK)
-    c.text(975,302,"SHADED: 95% WILSON",12,MUTED,"start","bold")
-    c.rect(970,340,180,115,PALE_ORANGE,"none")
-    c.text(985,365,"CAUTION",13,ORANGE,"start","bold")
-    c.text(985,389,"3,682-row source",12,INK)
-    c.text(985,410,"is noncanonical",12,INK)
-    c.text(985,434,"RAW, NOT CALIBRATED",11,RED,"start","bold")
-    footer(c,"RECOMPUTED historical sweep | Correct = source CER equals zero | Every distinct raw-agreement threshold plotted")
+        dash = "8,5" if str(model_id).startswith("gemini-") else ""
+        c.polyline(pts,colors.get(strategy,BLUE),3,dash)
+    for i,name in enumerate(strategies):
+        x=955; y=183+i*35; c.line(x,y,x+32,y,colors[name],4); c.text(x+42,y+5,name,14,INK)
+    caution_y=183+len(strategies)*35+25
+    c.text(975,caution_y,"SHADED: 95% WILSON",12,MUTED,"start","bold")
+    c.text(975,caution_y+20,"dashed = modern model",11,MUTED)
+    c.rect(970,caution_y+35,180,115,PALE_ORANGE,"none")
+    c.text(985,caution_y+60,"CAUTION",13,ORANGE,"start","bold")
+    c.text(985,caution_y+84,"raw agreement",12,INK)
+    c.text(985,caution_y+104,"not calibrated",12,INK)
+    c.text(985,caution_y+128,"source denominators labelled",10,RED,"start","bold")
+    footer(c,"RECOMPUTED historical + modern sweeps | Correct = normalized CER equals zero | Every distinct threshold plotted")
     c.save(out/(BASENAMES[2]+".svg"), out/(BASENAMES[2]+".png"))
 
 
@@ -499,7 +516,7 @@ def chart_4(cost_data, frontier, out):
         c.text(790,348+i*31,r["model_id"],11,INK)
         c.text(1120,348+i*31,r["cost_status"].replace("_"," "),10,RED,"end")
     c.text(790,500,"NO DOLLARS INVENTED",15,RED,"start","bold")
-    footer(c,"PARTIAL frontier | Descriptive target from CSV | Historical denominator: 3,682 fields (noncanonical)")
+    footer(c,"PARTIAL frontier | Descriptive target from CSV | Legacy/public v7 denominator: 3,682 fields; paper v9/v10 row target: 3,684")
     c.save(out/(BASENAMES[3]+".svg"),out/(BASENAMES[3]+".png"))
 
 
@@ -536,8 +553,8 @@ def model_label(value):
 
 def chart_6(data,out):
     c=Canvas(BASENAMES[5],"Cross-model auto-acceptance",TAKEAWAYS[BASENAMES[5]],TABLE_MAP[BASENAMES[5]],
-             ["Only one historical Grid Warp operating point is numeric.", "All rows for the three exact modern model IDs are blocked and shown as unavailable."])
-    heading(c,"Cross-model transfer remains an open measurement",TAKEAWAYS[BASENAMES[5]])
+             ["Operating points are descriptive rows at the predeclared target precision.", "Unavailable routes or targets remain explicit rather than being filled with estimates."])
+    heading(c,"Cross-model transfer at a fixed precision target",TAKEAWAYS[BASENAMES[5]])
     models=[]
     for r in data:
         if r["model_id"] not in models: models.append(r["model_id"])
@@ -563,9 +580,11 @@ def chart_6(data,out):
             else:
                 c.text(x,y,"-",14,MUTED,"middle")
     c.rect(55,585,1095,42,PALE_ORANGE,"none")
-    modern=sum(1 for r in data if r["evidence_status"]=="blocked_unavailable")
-    c.text(72,611,f"MEASURED: 1 historical point | HISTORICAL TARGET NOT MET: 1 row | BLOCKED MODERN: {modern} rows across 3 exact IDs",13,INK,"start","bold")
-    footer(c,"Target precision is the descriptive CSV target, not a frozen modern-test target | 3,682-field historical denominator")
+    numeric=sum(1 for r in data if number(r,"coverage") is not None)
+    unavailable=sum(1 for r in data if number(r,"coverage") is None)
+    measured_models=len({r["model_id"] for r in data if number(r,"coverage") is not None})
+    c.text(72,611,f"NUMERIC POINTS: {numeric} across {measured_models} models | UNAVAILABLE/TARGET NOT MET: {unavailable}",13,INK,"start","bold")
+    footer(c,"Target precision is the predeclared descriptive 95% target | Source denominators remain explicit in the table")
     c.save(out/(BASENAMES[5]+".svg"),out/(BASENAMES[5]+".png"))
 
 
@@ -594,28 +613,40 @@ def chart_8(data,out):
     colors=(MUTED,ORANGE,BLUE,GREEN,PURPLE)
     labels=("unchanged baseline","Pad / shift","GW masked 1.5","GW all 1.5","GW hw-only 1.5")
     selected=[r for r in data if r["strategy"] in key_names]
+    modern=[r for r in data if str(r["model_id"]).startswith("gemini-3.5-")]
+    selected.extend(modern)
     ymin=min(number(r,"consensus_cer") for r in selected)-.003; ymax=max(number(r,"consensus_cer") for r in selected)+.003
+    max_samples=max(number(r,"n_samples") for r in selected)
     c=Canvas(BASENAMES[7],"Ensemble size and diminishing returns",TAKEAWAYS[BASENAMES[7]],TABLE_MAP[BASENAMES[7]],
-             ["Five key source-reported series are shown from the 53-row table.", "Evaluated-field counts vary around 4,920 and are noncanonical."])
+             ["Historical source-reported series and modern measured strategy points are shown.", "Evaluated-field counts vary around the noncanonical source denominators."])
     heading(c,"More members help, but gains are not monotonic",TAKEAWAYS[BASENAMES[7]])
-    a=Axes(c,90,145,760,420,1,5,ymin,ymax)
+    a=Axes(c,90,145,760,420,1,max(5,max_samples),ymin,ymax)
     yticks=[ymin+(ymax-ymin)*i/4 for i in range(5)]
-    a.draw([1,2,3,4,5],yticks,"Ensemble members (source aggregate k)","Consensus CER",lambda v:f"{int(v)}",lambda v:f"{100*v:.1f}%")
+    a.draw(list(range(1,int(max(5,max_samples))+1)),yticks,"Ensemble members (source aggregate k)","Consensus CER",lambda v:f"{int(v)}",lambda v:f"{100*v:.1f}%")
     for name,color,label in zip(key_names,colors,labels):
         series=sorted((r for r in selected if r["strategy"]==name),key=lambda r:number(r,"n_samples"))
         pts=[(a.px(number(r,"n_samples")),a.py(number(r,"consensus_cer"))) for r in series]
         c.polyline(pts,color,3)
         for x,y in pts:c.circle(x,y,4,color,"#ffffff",1)
-    c.rect(885,145,265,270,"#ffffff",GRID)
+    modern_colors={"unchanged_3":TEAL,"Pad":ORANGE,"Grid Warp":BLUE,"visual_mixed_6":PURPLE,"all_views_9":RED,"single":GREEN}
+    modern_keys=sorted({(r["model_id"],r["strategy"]) for r in modern})
+    for model_id,name in modern_keys:
+        color=modern_colors.get(name,TEAL)
+        for r in modern:
+            if r["model_id"]==model_id and r["strategy"]==name:
+                x,y=a.px(number(r,"n_samples")),a.py(number(r,"consensus_cer"))
+                c.circle(x,y,6,color,"#ffffff",2)
+    c.rect(885,145,265,390,"#ffffff",GRID)
     c.text(905,174,"SOURCE-REPORTED",14,TEAL,"start","bold")
     for i,(color,label) in enumerate(zip(colors,labels)):
         y=207+i*36;c.line(905,y,935,y,color,4);c.text(945,y+5,label,12,INK)
-    c.rect(905,355,225,42,PALE_ORANGE,"none")
-    c.text(918,380,"NONCANONICAL ~4,920",12,ORANGE,"start","bold")
-    c.text(885,460,"Table rows: 53",12,INK)
-    c.text(885,485,"Displayed key rows: "+str(len(selected)),12,INK)
-    c.text(885,510,"Baseline has k=1..3",11,MUTED)
-    footer(c,"REPORTED historical aggregates | weighted_CER copied from by-k source | No canonical 3,684-field claim")
+    c.text(905,397,"MODERN MEASURED POINTS",14,TEAL,"start","bold")
+    for i,(model_id,name) in enumerate(modern_keys[:5]):
+        y=428+i*25; color=modern_colors.get(name,TEAL)
+        c.circle(920,y,5,color,"#ffffff",1); c.text(935,y+4,model_id+" / "+name,10,INK)
+    c.rect(905,552,225,42,PALE_ORANGE,"none")
+    c.text(918,577,"NONCANONICAL DENOMINATORS",11,ORANGE,"start","bold")
+    footer(c,"Historical curves + modern strategy points | Modern points are not connected into a fictitious curve")
     c.save(out/(BASENAMES[7]+".svg"),out/(BASENAMES[7]+".png"))
 
 

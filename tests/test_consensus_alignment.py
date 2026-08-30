@@ -62,6 +62,18 @@ class TestProgressiveConsensus(unittest.TestCase):
         result = progressive_consensus(["Mary", "Mary", "Mray"])
         self.assertEqual(result.consensus_text, "Mary")
 
+    def test_substitution_can_change_when_later_majority_arrives(self):
+        result = progressive_consensus(["cat", "cot", "cot"])
+        self.assertEqual(result.consensus_text, "cot")
+
+    def test_insertion_can_change_when_later_majority_arrives(self):
+        result = progressive_consensus(["cat", "cart", "cart"])
+        self.assertEqual(result.consensus_text, "cart")
+
+    def test_deletion_can_change_when_later_majority_arrives(self):
+        result = progressive_consensus(["cart", "cat", "cat"])
+        self.assertEqual(result.consensus_text, "cat")
+
     def test_missing_samples_counted_and_excluded_from_voting(self):
         result = progressive_consensus(["Mary", None, "Mary", None])
         self.assertEqual(result.n_valid_samples, 2)

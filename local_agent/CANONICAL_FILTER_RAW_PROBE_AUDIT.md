@@ -1,12 +1,22 @@
 # Canonical Filter Raw Probe Audit
 
+> **Scope clarification — 2026-08-30:** this probe remains negative for a
+> standalone filter artifact in the legacy database directory. A later direct
+> read recovered the historical code/configuration rule, while the exact v9/v10
+> row semantics retain one blank-row caveat. See
+> [`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md). No private row values were
+> added to this receipt.
+
 ## Status
 
 - Probe status: resumed single-file probe after interruption.
 - Scope: one bounded streaming metadata pass over the exact named CSV and one immediate-directory listing only.
 - Target under audit: the canonical 3,684 `(doc_id, field_name)` evaluation population.
 - Privacy constraints: no row values, document identifiers, ground truth, predictions, personal names, response bodies, credentials, or image bytes will be printed or saved.
-- Canonical-filter status: not established; this recovery will not create `config/canonical_field_filter.csv` or infer that an exact filter exists from a count alone.
+- Standalone exported-filter status: not established; this recovery will not
+  create `config/canonical_field_filter.csv` or infer that an exact filter
+  exists from a count alone. The historical code-level selector/exclusion rule
+  is documented separately in `docs/GT_LINEAGE.md`.
 
 ## Bounded probe result
 

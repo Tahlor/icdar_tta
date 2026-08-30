@@ -1,6 +1,27 @@
 # Historical transform shortlist evidence
 
-Status: frozen pre-call evidence record. No new inference was run. Evidence paths are portable logical paths, not workstation paths.
+Status: historical shortlist evidence; it is still the frozen input to the
+modern screen. The two-model execution result is recorded separately in
+`local_agent/MODERN_FULL_RECEIPT.md`; no modern labels were used to change
+this shortlist. Evidence paths are portable logical paths, not workstation
+paths.
+
+## GT-lineage addendum — 2026-08-30
+
+The earlier ground-truth conclusion in this receipt is superseded by the
+code/configuration follow-up. The six metric fields are explicitly listed in
+`chat2rec/processing/3_7_COLLAPSE.py` and the v9 analysis config. The historical
+`chat2rec/processing/common.py::_add_flags` rule scans the wider configured GT
+field universe for `stillborn|infant|know|maiden|baby`, then removes `Self*`
+rows for flagged records. It flags 24 records in the newer paper-lineage GT,
+giving `622 × 6 − 24 × 2 = 3,684` row slots. The v9/v10 outputs retain one
+blank `MotherSurname` row despite the config's `f_gt_missing: 0`; see
+[`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md) for the exact caveat and hashes.
+
+The older `f1b978...` processed file used by v7 and packaged as the public
+release is a separate lineage and yields 3,682 v7 rows. The old “34 additional
+exclusions are unrecovered” statement below is retained only as historical
+audit text and must not be used as the current status.
 
 ## Sources and implementation wiring
 
@@ -85,18 +106,26 @@ Frozen Pad subset: `shift_only.variant_00`, `.variant_01`, `.variant_02`. Rule: 
 
 `analysis - v7/paper/transform_metrics_table.tex` reports family-level 5/10-sample values: Grid Warp CER `0.0933/0.0855`, field accuracy `0.7171/0.7331`; Pad CER `0.0840/0.0810`, field accuracy `0.7369/0.7388`. This supports family relevance only. It does not identify the WARP YAML parameter shortlist or prove that the v4 table is a validation selection.
 
-## Ground-truth identity/provenance
+## Ground-truth identity/provenance — superseded historical snapshot
 
 Nine located `5164_gts.csv` candidates form two byte-identical groups, each with 622 rows:
 
 - SHA-256 `14219f17eeaaf45ffa4cec49f624de1edb3a739b40a87f0f838355a7fa414ccd`, 159,892 bytes, 20 columns: includes `SelfBirthPlace_orig` and `SelfBirthPlace_edt` (BIG_SHIFT, CONSISTENCY, ROTATE, SHIFT).
 - SHA-256 `cf24e896875280560023f6c8976ca6ab32de5d0bc8426c59c00b4d58b235810d`, 142,892 bytes, 18 columns: omits those two columns (LINE_THICKNESS, MONOTONIC_DEGRADATION, MONOTONIC_DEGRADATION2, PROMPT_VARIATION, WARP).
 
-Within WARP and SHIFT, `5164_gts.csv` and `5164_gts_no_post_processing.csv` are byte-identical to their local schema group. Across either schema, the six edited name columns contain 3,718 nonblank cells: 609 SelfGivenName, 622 SelfSurname, 622 FatherGivenName, 622 FatherSurname, 622 MotherGivenName, 621 MotherSurname. Therefore the claimed 3,684 evaluated nonblank name fields requires 34 additional exclusions from a canonical filter that was not recovered in the bounded v7 tables. The schemas are **not interchangeable**, and neither dropping `SelfBirthPlace` nor silently merging files reconciles 3,684. This remains a provenance/evaluation gate.
+Within WARP and SHIFT, `5164_gts.csv` and `5164_gts_no_post_processing.csv` are
+byte-identical to their local schema group. Across the historical schema
+groups, the six edited name columns contain 3,718 nonblank cells. The earlier
+interpretation that this required 34 additional unknown exclusions is
+superseded: the paper-lineage 3,684 row count comes from the recovered
+24-record `Self*` exclusion applied to the six-field rectangular population,
+with one retained blank row in v9/v10. The schemas and the newer/older
+processed GT files are **not interchangeable**; see
+[`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md).
 
-## Unresolved caveats
+## Remaining caveats
 
-- Recover and hash the exact canonical 3,684-field filtering/normalization code and fold assignments.
+- Apply the recovered six-field/24-record rule in a dedicated paper-lineage recomputation and decide how to report the one retained blank v9/v10 row; the current repository tables remain legacy v7 products.
 - Locate or implement the exact `granular_shift` renderer and produce source-to-render hashes.
 - Pre-render/harden random-state-null warp outputs before calls; otherwise an experiment name alone does not identify image bytes.
 - Confirm segmentation channel semantics and complete mask coverage for all 622 documents.

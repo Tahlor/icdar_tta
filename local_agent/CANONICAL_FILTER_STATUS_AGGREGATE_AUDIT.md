@@ -1,9 +1,15 @@
 # Canonical Filter Status — Aggregate Audit
 
+> **Scope clarification — 2026-08-30:** this audit remains a negative result
+> for discovering a standalone filter from the 68,880-row legacy database and
+> its aggregate flags. It does not test, and must not be read as disproving,
+> the historical selector/exclusion code recovered later. See
+> [`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md) for the current contract.
+
 ## Status and verdict
 
 - Status: `COMPLETE_NEGATIVE_PARTIAL_PRIVACY_SAFE`.
-- Verdict: **the authorized CSV and its immediate directory listing do not directly evidence the unresolved canonical 3,684 `(doc_id, field_name)` evaluation filter.**
+- Verdict: **the authorized legacy CSV and its immediate directory listing do not directly evidence a standalone 3,684 `(doc_id, field_name)` key list.** This remains a database-artifact negative result; it does not contradict the recovered code/configuration rule in `docs/GT_LINEAGE.md`.
 - Scope: one bounded, offline, streaming aggregate inspection of the single authorized historical metrics CSV, plus the exact immediate-directory listing and the repository-local task contract.
 - Interpretation guardrail: a count of 3,684—including any group or flag combination totaling 3,684—would not by itself evidence the canonical filter. No flags were combined, no exclusions were invented, and no filter was inferred.
 
@@ -161,4 +167,4 @@ Every reported grouping column sums to `68,880`. No individual reported group co
 4. The immediate-directory inspection was listing-only. It did not recursively inspect transform directories or open other external artifacts, scripts, notebooks, pickles, responses, images, or credentials.
 5. No broader filesystem/repository search for a generator was performed as part of this audit. Repository-local documents were consulted only to interpret the assigned contract and avoid repeating unsafe or semantically unsupported inference.
 6. No network/provider call, inference, image-byte access, raw-response output, file copy, row-level extract, or canonical-filter file creation occurred.
-7. `config/canonical_field_filter.csv` remains uncreated. The canonical 3,684-key filter therefore remains unresolved and a blocker for canonical evaluation.
+7. `config/canonical_field_filter.csv` remains uncreated. This audit did not export a label-bearing key list; the historical selector/exclusion rule is documented separately in `docs/GT_LINEAGE.md`, with the v9/v10 blank-row convention still requiring explicit treatment in a paper-lineage recomputation.

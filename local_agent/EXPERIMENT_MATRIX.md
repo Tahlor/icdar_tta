@@ -68,7 +68,12 @@ v7 products with 3,682 rows.
 - Comparability metrics: exact field accuracy and CER; extraction precision/recall only if the recovered canonical event definition makes false positives/negatives meaningful.
 - Modern labels must remain hidden while routes are smoked and while image/prompt/parser lineage is checked. No transform, prompt, threshold, model, or ensemble may be selected from modern test-label performance.
 
-## Exact model matrix
+## Historical pre-call exact model matrix (superseded)
+
+The table below is the 2026-08-29 pre-call planning snapshot. It is retained
+for the route-selection audit; current execution status is the completion
+addendum at the top of this file and the full receipt in
+`local_agent/MODERN_FULL_RECEIPT.md`.
 
 | Requested planning family | Exact executable ID evidenced locally | Local evidence | Screen status |
 |---|---|---|---|

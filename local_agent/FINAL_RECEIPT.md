@@ -175,6 +175,11 @@ code/configuration rule in `docs/GT_LINEAGE.md`.
 
 # Final QA receipt — 2026-08-29
 
+The C1–C9 table in this historical section is preserved as the pre-call
+2026-08-29 chart mapping. It is superseded by the current chart provenance
+and modern-result semantics in [`CHART_RECEIPT.md`](CHART_RECEIPT.md), which
+records the regenerated 2026-08-30 figures and all measured modern rows.
+
 Status: **final-QA pass complete for the artifacts owned by this receipt.** This
 document records the checks performed in this session against repository HEAD
 `cebf7778cea92692da9837f8914ae0b61a29c399` (branch `master`, tracking
@@ -237,7 +242,7 @@ roots are used.
 | C3 | `03_precision_coverage` | `precision_coverage.csv` | All 1,750 raw-agreement threshold rows (Grid Warp, Pad, Resize) with supplied 95% Wilson bounds; 3,682-row denominator labeled legacy/public v7 rather than paper-v9/v10; score labeled raw/not calibrated |
 | C4 | `04_cost_review_frontier` | `cost_by_run.csv`; `review_frontier.csv` | **Repaired in this lineage.** Prior pass had the strategy label (e.g. "GRID WARP (N=...") drawn at x=90 immediately left of a bar starting at x=250, bleeding behind the bar. Fix in `chart_4`: the strategy label now sits on its own text line above the bar at the full left margin (x=90), and the bar/track was widened to span x=90–670, so the label cannot overlap the bar regardless of name/sample-size length. One numeric review-burden coordinate is rendered; all four cost rows lack observed usage/pricing, so the cost axis and Pad/Resize target coordinates remain visibly blocked — no dollar figure was invented |
 | C5 | `05_shift_periodicity` | `shift_agreement.csv` | All 130 reported horizontal/vertical points plus 16-pixel guides; periodicity labeled observational, not architecture proof |
-| C6 | `06_cross_model_coverage` | `cross_model_operating_points.csv` | **Blocked-semantics chart.** One measured historical Grid Warp point (Gemini-2.0-Flash, rendered as a green dot, "40.4%" / "P=95.23%") and one historical Pad target-not-met row are shown; the remaining 12 cells across the three exact modern model IDs are explicit red BLOCKED cells. No modern-model result is implied or invented |
+| C6 | `06_cross_model_coverage` | `cross_model_operating_points.csv` | Historical pre-call mapping retained for audit. The current regenerated chart includes measured `gemini-3.5-flash` and `gemini-3.5-flash-lite` target-not-met rows, plus explicit route-blocked rows for `gemini-3.7-flash` and Qwen; see `CHART_RECEIPT.md` for current semantics |
 | C7 | `07_augmentation_contribution` | `augmentation_contribution.csv` | All five family selection counts and source descriptors; selection frequency labeled descriptive, not causal contribution |
 | C8 | `08_ensemble_size` | `ensemble_size.csv` | 23 key rows across five source-reported series from the 53-row table; ~4,920-field historical WARP aggregate kept distinct from the paper-v9/v10 3,684-row population |
 | C9 | `09_failure_examples` | `failure_examples.csv` | **Blocked-semantics chart.** Renders a blocked evidence panel from the single available source row; no prediction, ground truth, crop, or private path is copied, because stable redacted lineage and crop-release authorization remain unavailable |

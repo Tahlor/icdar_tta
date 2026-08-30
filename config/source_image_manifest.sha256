@@ -1,0 +1,4 @@
+7ad5e7a065bf8bd262953d8faf8e34344e861333c4655eff72bf80aee90f25ee  config/source_image_manifest.csv
+# serialization: sha256 computed over the exact byte content of config/source_image_manifest.csv as written (UTF-8, LF line endings, header row included, rows sorted ascending by doc_id, no trailing extra blank line beyond final LF).
+# row_count: 622
+# columns: doc_id,relative_filename,byte_size,sha256,source_role

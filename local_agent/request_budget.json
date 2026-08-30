@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "status": "pre_call_blocked_unspent",
+  "hard_cap": 20000,
+  "cohort_images": 622,
+  "views_per_image": 9,
+  "requested_model_families": 3,
+  "exact_available_model_ids_from_local_evidence": [
+    "gemini-3.7-flash",
+    "gemini-3.5-flash-lite",
+    "sagemaker-qwen3-vl-8b-instruct-fp8"
+  ],
+  "formulas": {
+    "scored_per_model": "622 * 9 = 5598",
+    "scored_three_models": "622 * 9 * 3 = 16794",
+    "remaining_after_scored_only": "20000 - 16794 = 3206",
+    "worst_case_total": "spent + scheduled + reserved = 0 + 16794 + 3190 = 19984",
+    "remaining_after_worst_case": "20000 - 19984 = 16"
+  },
+  "scored_requests": {
+    "per_model": 5598,
+    "three_model_formula": 16794,
+    "scheduled": 16794,
+    "by_model": {
+      "gemini-3.7-flash": 5598,
+      "gemini-3.5-flash-lite": 5598,
+      "sagemaker-qwen3-vl-8b-instruct-fp8": 5598
+    },
+    "derived_ensemble_calls": 0
+  },
+  "reserve_breakdown": {
+    "smoke": {
+      "reserved": 9,
+      "formula": "3 predeclared images * 3 models"
+    },
+    "qwen_warmup_keepalive": {
+      "reserved": 81,
+      "formula": "1 initial warmup request + at most 80 pings at 15-second intervals during a 20-minute warmup window",
+      "constraint": "No concurrent keepalive during active scored traffic; scored calls serve as activity. Stop when this reserve is exhausted."
+    },
+    "retries_and_capacity_failures": {
+      "reserved": 3000,
+      "constraint": "Shared cap across models; at most one retry for a failed scored/smoke call, never exceeding this ledger reserve; stop after five consecutive network/capacity failures."
+    },
+    "ambiguous_submission_reconciliation_contingency": {
+      "reserved": 100,
+      "constraint": "No blind resubmission. This count is available only after reconciliation proves no duplicate; otherwise stop with a failure receipt."
+    },
+    "total": 3190
+  },
+  "ledger": {
+    "reserved": 3190,
+    "scheduled": 16794,
+    "spent": 0,
+    "remaining": 16,
+    "worst_case_total": 19984
+  },
+  "fewer_exact_id_scenarios": {
+    "two_models": {
+      "scored_formula": "622 * 9 * 2",
+      "scored_requests": 11196,
+      "status": "scenario_only; omission requires an explicit evidence-backed matrix decision"
+    },
+    "one_model": {
+      "scored_formula": "622 * 9 * 1",
+      "scored_requests": 5598,
+      "status": "scenario_only; omission requires an explicit evidence-backed matrix decision"
+    },
+    "zero_models": {
+      "scored_requests": 0,
+      "status": "blocked"
+    }
+  },
+  "assumptions": [
+    "One scored provider request is counted for every document-view-model tuple, regardless of success, parse result, capacity result, or billing outcome.",
+    "The nine views are three unchanged calls, three Pad calls, and three Grid-Warp calls.",
+    "Single-run, unchanged, Pad, Grid-Warp, visual-mixed, and all-view ensembles are derived from the nine stored responses and generate no provider calls.",
+    "Smoke calls are conservatively additional to scored calls; no reuse credit is assumed.",
+    "The recommended synchronous direct routes have no provider-budget-consuming poll calls. Selecting a batch fallback requires a revised ledger that explicitly counts any poll/control calls that consume the same cap.",
+    "The existing Qwen runner's always-on 15-second keepalive thread is not authorized; it must be disabled during active scored traffic.",
+    "Historical Gemini 2.0 Flash responses consume zero new requests and no new Gemini 2.0 Flash call is allowed.",
+    "All fields are counts, not monetary cost estimates. Pricing and token-cost provenance must be recorded separately if execution is authorized."
+  ]
+}

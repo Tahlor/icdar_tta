@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img">
+<title>Useful diversity: complete historical coordinates</title>
+<desc>Useful ensembles need informative members that make different mistakes; the complete historical coordinates here exist only for WARP conditions.</desc>
+<metadata>{&quot;chart_id&quot;:&quot;01_useful_diversity&quot;,&quot;dimensions&quot;:[1200,675],&quot;limitations&quot;:[&quot;Only WARP per-condition rows contain both individual CER and error correlation.&quot;,&quot;v7 category rows contain consensus CER only and are not plotted as individual metrics.&quot;],&quot;numeric_inputs&quot;:[&quot;strategy_summary.csv&quot;],&quot;renderer&quot;:&quot;python-standard-library-svg-and-deterministic-bitmap-png&quot;,&quot;takeaway&quot;:&quot;Useful ensembles need informative members that make different mistakes; the complete historical coordinates here exist only for WARP conditions.&quot;}</metadata>
+<rect x="0" y="0" width="1200" height="675" fill="#f8fafc" stroke="none" stroke-width="1"/>
+<text x="55" y="40" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="bold" text-anchor="start">Useful diversity: accuracy and different mistakes</text>
+<text x="55" y="72" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">Useful ensembles need informative members that make different mistakes; the complete</text>
+<text x="55" y="92" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">historical coordinates here exist only for WARP conditions.</text>
+<line x1="90" y1="490.937" x2="780" y2="490.937" stroke="#d9e0ea" stroke-width="1"/>
+<text x="80" y="495.937" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="end">0.08</text>
+<line x1="90" y1="362.812" x2="780" y2="362.812" stroke="#d9e0ea" stroke-width="1"/>
+<text x="80" y="367.812" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="end">0.09</text>
+<line x1="90" y1="234.687" x2="780" y2="234.687" stroke="#d9e0ea" stroke-width="1"/>
+<text x="80" y="239.687" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="end">0.10</text>
+<line x1="90" y1="145" x2="90" y2="555" stroke="#d9e0ea" stroke-width="1"/>
+<text x="90" y="577" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="middle">0.6</text>
+<line x1="262.5" y1="145" x2="262.5" y2="555" stroke="#d9e0ea" stroke-width="1"/>
+<text x="262.5" y="577" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="middle">0.7</text>
+<line x1="435" y1="145" x2="435" y2="555" stroke="#d9e0ea" stroke-width="1"/>
+<text x="435" y="577" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="middle">0.8</text>
+<line x1="607.5" y1="145" x2="607.5" y2="555" stroke="#d9e0ea" stroke-width="1"/>
+<text x="607.5" y="577" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="middle">0.9</text>
+<line x1="780" y1="145" x2="780" y2="555" stroke="#d9e0ea" stroke-width="1"/>
+<text x="780" y="577" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="middle">1.0</text>
+<line x1="90" y1="145" x2="90" y2="555" stroke="#172033" stroke-width="2"/>
+<line x1="90" y1="555" x2="780" y2="555" stroke="#172033" stroke-width="2"/>
+<text x="435" y="607" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Mean pairwise field-error correlation (lower is more diverse)</text>
+<text x="90" y="133" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">WARP avg_cer (lower is better)</text>
+<circle cx="345.858" cy="442.442" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="312.331" cy="368.134" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="222.842" cy="244.433" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="723.752" cy="499.862" r="7" fill="#e87924" stroke="#ffffff" stroke-width="2"/>
+<text x="715.752" y="490.862" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="end">Pad/shift</text>
+<circle cx="304.844" cy="410.814" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="255.306" cy="359.237" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="147.382" cy="190.188" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="155.382" y="181.188" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">GW all 3</text>
+<circle cx="358.191" cy="431.318" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="296.087" cy="387.391" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="192.555" cy="251.48" r="7" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="105" y="166" fill="#2563eb" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="start">MEASURED WARP CONDITIONS (n=10 rows; 5 members each)</text>
+<rect x="815" y="145" width="335" height="410" fill="#ffffff" stroke="#d9e0ea" stroke-width="1"/>
+<text x="835" y="174" fill="#7557b8" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="bold" text-anchor="start">V7 CATEGORY CONSENSUS</text>
+<text x="835" y="196" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">Not individual CER; x coordinate unavailable</text>
+<text x="835" y="230" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="start">Baseline (n=1)</text>
+<text x="835" y="248" fill="#7557b8" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">consensus CER 8.81%</text>
+<line x1="835" y1="258" x2="1128" y2="258" stroke="#d9e0ea" stroke-width="1"/>
+<text x="835" y="282" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="start">Pad (n=10)</text>
+<text x="835" y="300" fill="#7557b8" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">consensus CER 8.10%</text>
+<line x1="835" y1="310" x2="1128" y2="310" stroke="#d9e0ea" stroke-width="1"/>
+<text x="835" y="334" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="start">Grid Warp (n=10)</text>
+<text x="835" y="352" fill="#7557b8" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">consensus CER 8.55%</text>
+<line x1="835" y1="362" x2="1128" y2="362" stroke="#d9e0ea" stroke-width="1"/>
+<text x="835" y="386" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="start">Resize (n=10)</text>
+<text x="835" y="404" fill="#7557b8" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">consensus CER 9.31%</text>
+<line x1="835" y1="414" x2="1128" y2="414" stroke="#d9e0ea" stroke-width="1"/>
+<text x="835" y="438" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="start">Temperature = 1.0 (n=10)</text>
+<text x="835" y="456" fill="#7557b8" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">consensus CER 9.49%</text>
+<line x1="835" y1="466" x2="1128" y2="466" stroke="#d9e0ea" stroke-width="1"/>
+<rect x="835" y="500" width="293" height="35" fill="#ffedd5" stroke="none" stroke-width="1"/>
+<text x="849" y="514" fill="#e87924" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="start">LIMITATION</text>
+<text x="849" y="529" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="start">No shared x/y metric across sources</text>
+<text x="55" y="654" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">MEASURED aggregate rows | Historical noncanonical denominators; metric roles preserved from CSV notes</text>
+</svg>

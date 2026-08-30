@@ -1,0 +1,2 @@
+example_id,model_id,run_id,strategy,transform_id,agreement,prediction,ground_truth,error_type,crop_reference,release_status,denominator_status,evidence_status,source_artifact,source_sha256,notes
+unavailable_releasable_examples,models/gemini-2.0-flash,,,,,,,,,blocked_private_lineage_and_crop_authorization,not_applicable,blocked_unavailable,,,No release-authorized crop references and stable redacted high-agreement-wrong example IDs were found. Raw private values are intentionally not copied.

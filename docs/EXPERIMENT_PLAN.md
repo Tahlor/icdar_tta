@@ -7,6 +7,12 @@ The new work has two purposes:
 1. Re-analyze the paper-era outputs around the presentation's deployment story: useful diversity, selective confidence, and manual-review reduction.
 2. Test whether the qualitative findings persist on newer multimodal models without turning the project into a full new paper.
 
+## Current deadline focus
+
+The new-inference deliverable is the modern-model transfer test: apply a frozen shortlist of the historically promising offset/Pad and mild Grid Warp parameters to the requested newer Gemini Flash, Gemini Flash-Lite, and Qwen models, then test whether combining their outputs predicts correctness or improves accuracy and selective precision/coverage. Existing Gemini 2.0 Flash responses are reuse-only reference evidence; do not generate new Flash 2 responses.
+
+The full design below remains the stronger follow-up. For the 2026-08-30 deadline and 20,000-request cap, `local_agent/TASK.md` defines a smaller predeclared screen with three unchanged, three offset/Pad, and three mild Grid Warp views per available modern model.
+
 ## Phase 0 — inventory before inference
 
 Do not spend API money until the local data inventory is complete.

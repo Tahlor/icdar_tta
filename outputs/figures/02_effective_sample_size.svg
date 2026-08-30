@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img">
+<title>Stylized effective sample size</title>
+<desc>Adding correlated samples has rapidly diminishing informational value.</desc>
+<metadata>{&quot;chart_id&quot;:&quot;02_effective_sample_size&quot;,&quot;dimensions&quot;:[1200,675],&quot;limitations&quot;:[&quot;The N=10 curve is theoretical intuition, not measured effective sample count.&quot;,&quot;Family-level Grid Warp and Resize correlations are blocked in the source table.&quot;],&quot;numeric_inputs&quot;:[&quot;error_correlation_summary.csv&quot;],&quot;renderer&quot;:&quot;python-standard-library-svg-and-deterministic-bitmap-png&quot;,&quot;takeaway&quot;:&quot;Adding correlated samples has rapidly diminishing informational value.&quot;}</metadata>
+<rect x="0" y="0" width="1200" height="675" fill="#f8fafc" stroke="none" stroke-width="1"/>
+<text x="55" y="40" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="bold" text-anchor="start">Ten calls can behave like barely more than one</text>
+<text x="55" y="72" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">Adding correlated samples has rapidly diminishing informational value.</text>
+<line x1="90" y1="565" x2="850" y2="565" stroke="#d9e0ea" stroke-width="1"/>
+<text x="80" y="570" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="end">1</text>
+<line x1="90" y1="518.333" x2="850" y2="518.333" stroke="#d9e0ea" stroke-width="1"/>
+<text x="80" y="523.333" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="end">2</text>
+<line x1="90" y1="425" x2="850" y2="425" stroke="#d9e0ea" stroke-width="1"/>
+<text x="80" y="430" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="end">4</text>
+<line x1="90" y1="331.667" x2="850" y2="331.667" stroke="#d9e0ea" stroke-width="1"/>
+<text x="80" y="336.667" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="end">6</text>
+<line x1="90" y1="238.333" x2="850" y2="238.333" stroke="#d9e0ea" stroke-width="1"/>
+<text x="80" y="243.333" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="end">8</text>
+<line x1="90" y1="145" x2="850" y2="145" stroke="#d9e0ea" stroke-width="1"/>
+<text x="80" y="150" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="end">10</text>
+<line x1="90" y1="145" x2="90" y2="565" stroke="#d9e0ea" stroke-width="1"/>
+<text x="90" y="587" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="middle">0.0</text>
+<line x1="242" y1="145" x2="242" y2="565" stroke="#d9e0ea" stroke-width="1"/>
+<text x="242" y="587" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="middle">0.2</text>
+<line x1="394" y1="145" x2="394" y2="565" stroke="#d9e0ea" stroke-width="1"/>
+<text x="394" y="587" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="middle">0.4</text>
+<line x1="546" y1="145" x2="546" y2="565" stroke="#d9e0ea" stroke-width="1"/>
+<text x="546" y="587" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="middle">0.6</text>
+<line x1="698" y1="145" x2="698" y2="565" stroke="#d9e0ea" stroke-width="1"/>
+<text x="698" y="587" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="middle">0.8</text>
+<line x1="850" y1="145" x2="850" y2="565" stroke="#d9e0ea" stroke-width="1"/>
+<text x="850" y="587" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="middle">1.0</text>
+<line x1="90" y1="145" x2="90" y2="565" stroke="#172033" stroke-width="2"/>
+<line x1="90" y1="565" x2="850" y2="565" stroke="#172033" stroke-width="2"/>
+<text x="470" y="617" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Pairwise error correlation rho</text>
+<text x="90" y="133" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">Stylized N_eff for N=10</text>
+<polyline points="90,145 97.6,183.532 105.2,216.186 112.8,244.213 120.4,268.529 128,289.828 135.6,308.636 143.2,325.368 150.8,340.349 158.4,353.84 166,366.053 173.6,377.161 181.2,387.308 188.8,396.613 196.4,405.177 204,413.085 211.6,420.41 219.2,427.213 226.8,433.55 234.4,439.465 242,445 249.6,450.19 257.2,455.067 264.8,459.658 272.4,463.987 280,468.077 287.6,471.946 295.2,475.612 302.8,479.091 310.4,482.396 318,485.541 325.6,488.536 333.2,491.392 340.8,494.118 348.4,496.724 356,499.217 363.6,501.604 371.2,503.891 378.8,506.086 386.4,508.193 394,510.217 401.6,512.164 409.2,514.038 416.8,515.842 424.4,517.581 432,519.257 439.6,520.875 447.2,522.438 454.8,523.947 462.4,525.407 470,526.818 477.6,528.184 485.2,529.507 492.8,530.789 500.4,532.031 508,533.235 515.6,534.404 523.2,535.538 530.8,536.64 538.4,537.71 546,538.75 553.6,539.761 561.2,540.745 568.8,541.702 576.4,542.633 584,543.54 591.6,544.424 599.2,545.284 606.8,546.124 614.4,546.942 622,547.74 629.6,548.518 637.2,549.278 644.8,550.02 652.4,550.744 660,551.452 667.6,552.143 675.2,552.818 682.8,553.479 690.4,554.125 698,554.756 705.6,555.374 713.2,555.979 720.8,556.57 728.4,557.15 736,557.717 743.6,558.272 751.2,558.817 758.8,559.35 766.4,559.872 774,560.385 781.6,560.887 789.2,561.379 796.8,561.862 804.4,562.336 812,562.801 819.6,563.257 827.2,563.705 834.8,564.145 842.4,564.576 850,565" fill="none" stroke="#7557b8" stroke-width="4"/>
+<text x="390" y="176" fill="#7557b8" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="bold" text-anchor="start">THEORETICAL: N_eff = 10 / (1 + 9 rho)</text>
+<circle cx="658.726" cy="551.334" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="643.955" cy="549.938" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="604.528" cy="545.875" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="825.218" cy="563.589" r="6" fill="#e87924" stroke="#ffffff" stroke-width="2"/>
+<circle cx="640.656" cy="549.618" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="618.83" cy="547.409" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="571.282" cy="542.009" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="664.16" cy="551.832" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="636.798" cy="549.238" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="591.184" cy="544.376" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="566.282" y="530.009" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="end">GW all 3: rho=0.633</text>
+<text x="820.218" y="587.589" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="end">Pad/shift: rho=0.967</text>
+<rect x="885" y="145" width="265" height="420" fill="#ffffff" stroke="#d9e0ea" stroke-width="1"/>
+<text x="905" y="176" fill="#2563eb" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">EMPIRICAL OVERLAY</text>
+<text x="905" y="199" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="start">10 measured WARP</text>
+<text x="905" y="219" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="start">correlations (5-member rows)</text>
+<text x="905" y="252" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">Points are projected onto</text>
+<text x="905" y="270" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">the N=10 theory curve.</text>
+<rect x="905" y="310" width="225" height="126" fill="#fee2e2" stroke="none" stroke-width="1"/>
+<text x="920" y="334" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" text-anchor="start">BLOCKED FAMILY ROWS</text>
+<text x="920" y="360" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">Grid Warp: no rho</text>
+<text x="920" y="385" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">Resize: no rho</text>
+<text x="920" y="420" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">No prose values promoted</text>
+<text x="55" y="654" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">THEORETICAL curve + MEASURED correlations | Correlation denominator: 4,920 historical fields (noncanonical)</text>
+</svg>

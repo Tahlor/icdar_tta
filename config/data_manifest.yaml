@@ -1,0 +1,254 @@
+schema_version: 1
+project: icdar_tta
+last_evidence_update: 2026-08-29
+
+# Portable, redacted provenance only. Machine-specific locations belong in
+# gitignored config/data_manifest.local.yaml. No provider call or inference was
+# performed to produce this metadata.
+
+sources:
+  source_images:
+    description: Pennsylvania death-record source-document cohort. A fifth candidate root (outside the four audited Windows TIFF mask roots) was inspected and verified as 622 unique JPEG source documents, distinct from the mask/render roots.
+    expected_count: 622
+    identity_status: resolved_622_unique_jpeg_source_documents
+    direct_file_count: 623
+    image_file_count: 622
+    other_file_count: 1
+    unique_doc_ids: 622
+    unique_sha256_values: 622
+    source_collection_sha256: c1c1bd78585d34da500d94cb4c838cdcd664f9d2f19615158d4e312c29afd769
+    source_collection_serialization: "relative_name<TAB>byte_size<TAB>file_sha256, sorted by relative_name, UTF-8 no BOM, LF with terminal LF"
+    mask_stem_cross_check: zero_source_or_mask_stem_differences
+    public: mixed
+    release_caveat: A two-image public sample exists, but the full-resolution corpus is not asserted public or releasable here.
+    checksum_manifest: config/source_image_manifest.csv
+    checksum_manifest_sha256_sidecar: config/source_image_manifest.sha256
+
+  segmentation_masks:
+    description: Three complete 622-stem TIFF sets and one incomplete render subset audited through bounded Windows metadata and hashes.
+    status: verified_complete_mask_coverage_not_source_images
+    public: false
+    complete_stem_count: 622
+    complete_stem_sets_equal: true
+    output_and_original_byte_identical_files: 622
+    output_and_resized_byte_identical_files: 0
+    output_mask_collection_sha256: A5EB7D728FCF09D7F8B9B4DEB45A1F56FF4CE49AF9B4787F7B8005EBD5CC61EF
+    original_mask_collection_sha256: A5EB7D728FCF09D7F8B9B4DEB45A1F56FF4CE49AF9B4787F7B8005EBD5CC61EF
+    resized_mask_collection_sha256: 13D8A44E03EEAE3F9D131521424722E8EE0193BE5DD0762DD74119CB07A21428
+    collection_hash_serialization: filename, byte size, and file SHA-256 separated by tabs; sorted by filename; LF with terminal LF
+    zip_tiff_entries: 622
+    zip_tiffs_identical_to_resized_direct_files: 622
+    incomplete_render_count: 298
+    incomplete_render_missing_stems: 324
+    incomplete_render_extra_stems: 0
+    missing_stem_list_sha256: 7B7EB11209A8355A05FF67FA6529E1B84BC7AD519E1A9CFFB1F5B43316F27F5A
+
+  ground_truth:
+    description: Audited 622-row candidates are not interchangeable, and no evidenced predicate reproduces the 3,684 regression target.
+    canonical_status: unresolved
+    canonical_nonblank_evaluated_name_fields_regression_target: 3684
+    raw_six_name_nonblank_count: 3718
+    filter_gap_count: 34
+    filter_status: blocked_missing_canonical_exclusion_artifact_or_generator
+    raw_per_field_database_probe:
+      status: metadata_verified_canonical_filter_unresolved
+      logical_path: historical/PA_DEATH/WARP/metrics_no_punc/master_first_sample_database.csv
+      byte_size: 23014921
+      sha256: 34cce8d33ce772af0fce762549b2d89b2c166e8c7e55cc21bdcfb332949ffb96
+      data_rows: 68880
+      header_column_count: 34
+      field_name_schema_token_count: 8
+      f_gt_missing_counts: {0: 68866, 1: 14}
+      f_flag_for_human_review_counts: {0: 68880}
+      immediate_directory_entry_count: 30
+      immediate_directory_filter_or_generator_name_matches: 0
+      evidence_artifact: local_agent/CANONICAL_FILTER_RAW_PROBE_AUDIT.md
+      caveat: Metadata does not define the canonical 3,684 doc_id/field_name population; no filter is inferred from a count coincidence.
+    raw_status_aggregate_probe:
+      status: complete_negative_partial
+      data_rows: 68880
+      malformed_rows: 0
+      aggregate_scope: all f_ columns plus safe experiment/category/transform-control group counts
+      groups_with_3684_rows: 0
+      distinct_doc_id_field_pairs_computed: false
+      flags_combined: false
+      evidence_artifact: local_agent/CANONICAL_FILTER_STATUS_AGGREGATE_AUDIT.md
+      caveat: Database aggregates are not canonical inclusion semantics; no filter was synthesized or exported.
+    historical_v7_snapshot_field_count: 3682
+    historical_warp_baseline_available_field_count: 3678
+    historical_warp_baseline_nonmissing_field_count: 3677
+    public: false
+    audited_candidates:
+      official_raw_fixed_v2:
+        columns: 62
+        rows: 622
+        sha256: EA4B7A7C39EA7179B22219BD9F8C7F16EDE84FD50B3B81686B5537A1F5E4E954
+        six_name_nonblank_fields: 3718
+      official_30_column:
+        columns: 30
+        rows: 622
+        sha256: F1B978699FDA076EA75A87A991F7656DE18A2195ED84B767EBB7C9758CB75727
+        six_name_nonblank_fields: 3719
+        caveat: Three edited-name values differ from fixed v2.
+      warp_18_column:
+        columns: 18
+        rows: 622
+        sha256: CF24E896875280560023F6C8976CA6AB32DE5D0BC8426C59C00B4D58B235810D
+        six_name_nonblank_fields: 3718
+        caveat: Six edited-name fields exactly match official raw fixed v2.
+    schema_groups:
+      group_18_column:
+        columns: 18
+        rows: 622
+        sha256: CF24E896875280560023F6C8976CA6AB32DE5D0BC8426C59C00B4D58B235810D
+        caveat: Omits SelfBirthPlace_orig and SelfBirthPlace_edt.
+      group_20_column:
+        columns: 20
+        rows: 622
+        sha256: 14219F17EEAAF45FFA4CEC49F624DE1EDB3A739B40A87F0F838355A7FA414CCD
+        caveat: Includes SelfBirthPlace_orig and SelfBirthPlace_edt; retained from prior inventory and not re-audited in this bounded pass.
+
+  fold_assignments:
+    description: Historical 622-record cross-validation assignments recoverable from the v7 Grid-Warp consensus snapshot.
+    status: recovered_from_historical_snapshot_generation_seed_unresolved
+    public: false
+    records: 622
+    one_fold_per_record: true
+    fold_counts: [125, 125, 124, 124, 124]
+    sha256: AF02BA5E2697FA71A826926EC22BC453567EC6F747E7897853A2669E69FFABBD
+    serialization: record_id and f_fold separated by a tab; sorted by record_id; LF with terminal LF
+    source_sha256: EAEE8BB37329E5E5C32177BBE5287CE0A884148D5819E60BC2C38D44DEB0D623
+
+  historical_responses:
+    description: Existing paper-era Gemini 2.0 Flash raw responses; reuse only and do not regenerate.
+    model_id: models/gemini-2.0-flash
+    status: existing_read_only_evidence
+    immutable: true
+    public: false
+    approximate_file_count: 13749
+
+  historical_augmentations:
+    description: Active historical Grid-Warp and Pad evidence frozen before modern labels or calls.
+    evidence_status: parameters_and_ids_frozen_exact_render_lineage_blocked
+    public: false
+    model_id: models/gemini-2.0-flash
+    prompt_id: prompt_v1.49_confidence
+    prompt_sha256: FD119108D3EF4DBF2F88984511D9F903B7D4C98B032A95C327A21F713335E48E
+    active_config_sha256: BB5B5A8FE53381F3139A413D148D8AA5BD74EBDE51A4854D91679007ED95164C
+    ranking_sha256: 3224861466C073BB8C21E5944268A910F437A178C76A335260389DC0F19EEA39
+    generation_temperature: 0
+    max_output_tokens: 2048
+    historical_pipeline: resize_max_dimension_1504_then_grid_warp_then_one_of_five_granular_pads
+    grid_random_state: null
+    grid_randomness_caveat: Null state uses global NumPy randomness; exact historical pixels require seeds or rendered-image hashes.
+    grid_warp_shortlist_status: frozen_historical_ensemble_score_v4_top_three
+    frozen_grid_warp_ids:
+      rank_1: dont_warp_text_and_lines_d003_r30_s10_std15
+      rank_2: warp_all_d003_r30_s10_std15
+      rank_3: warp_hw_only_dont_warp_text_and_lines_d003_r30_s10_std15
+    frozen_run_settings_sha256:
+      pad: 21B0DA1A77ED2FC056E15564F8DFFC108DC1FF0B19879B79E6B830652C2767E0
+      grid_rank_1: 1E200D09CE2331504824FCC11CFEF662B2486790B1A09A71E5772358509F61C8
+      grid_rank_2: 1391BE6765D0ABAF75685945B3CEA780B1290906B81030F2664F502B4FD682D0
+      grid_rank_3: 4F403FDC13C60120046B28A4B611C1B5A9DB401CE4B6FD8A6A5E9F577768C239
+    grid_warp_caveat: Historical v4 scores came from five-sample pipelines that also cycled Pad variants; pure-warp transfer is a frozen projection, not a historical ablation.
+    pad_shortlist_status: frozen_first_three_source_order_variants_without_individual_score_claims
+    frozen_pad_ids:
+      variant_00: shift_only.variant_00
+      variant_01: shift_only.variant_01
+      variant_02: shift_only.variant_02
+    pad_rendering_status: exact_granular_shift_renderer_and_render_hashes_not_located
+    exact_nine_view_status: blocked_pad_renderer_grid_seeds_and_render_hashes_unresolved_source_hashes_verified
+    inactive_config_caveat: Commented higher-severity definitions are not active-run evidence.
+
+  parameter_selection_evidence:
+    description: Historical Grid-Warp ranking table and Pad source-order evidence used to freeze the transfer shortlist.
+    status: frozen
+    public: false
+    ranking_rows: 10
+    selection_caveat: Grid shortlist is a historical ensemble_score_v4 ranking, not a validation-selected claim; Pad variants have only aggregate historical evidence.
+
+  shift_analysis:
+    description: Fine and coarse pixel-shift evidence supporting the historical 16-pixel periodicity analysis.
+    status: existing_historical_evidence
+    public: false
+
+  paper_code:
+    description: Historical analysis and transform implementations, including registry-proven handwriting_kernel_warp wiring.
+    status: grid_warp_located_granular_shift_renderer_not_located
+    public: false
+    transform_registry_sha256: 74A1860489BBB42BAF0A5E18ACE5CEA904C8C1445FC4B47C8BA740A40F36483C
+    grid_warp_implementation_sha256: 089DD75BA3B203A18DD347D08885851215FE64F842E9C1C52DA5CDDFF39BBFC8
+
+  usage_logs:
+    description: Historical token, latency, usage, and billing evidence.
+    status: not_yet_located
+    public: false
+    caveat: Generation settings exist, but observed usage and cost logs were not found in the bounded inventory.
+
+  parser_retry_gate:
+    description: Offline parser and retry-policy evidence for the frozen PA v1.49 modern-screen contract; no provider call or inference was performed.
+    status: offline_pass_live_execution_still_blocked
+    public: true
+    parser_spec_id: pa_v149_json_repair_v0
+    parser_implementation_path: src/icdar_tta/parser.py
+    parser_implementation_sha256: 656366a6215d008dd443abae45603e1a628513b5331a4752928e35fbb3ff9fde
+    parser_hash_serialization: SHA-256 over exact file bytes as stored; no text decoding, newline conversion, prefix, or suffix.
+    parser_focused_unittest_count: 40
+    parser_schema_target_module_unittest_count: 53
+    retry_policy_id: provider_neutral_retry_v1
+    retry_policy_implementation_path: src/icdar_tta/retry.py
+    retry_policy_implementation_sha256: b35f840a7cd0d8969e250fa62f89fef5a31ee7afc99232c03130e8b5ac4f7f0d
+    retry_hash_serialization: SHA-256 over exact file bytes as stored; no text decoding, newline conversion, prefix, or suffix.
+    retry_focused_unittest_count: 21
+    caveat: Offline implementation and tests close only the parser/retry policy gate; route, rendered-view lineage, model smoke, budget approval, and live-call authorization remain blocked or pending.
+
+  request_ledger_gate:
+    description: Dependency-free provider-neutral append-only JSONL request/response ledger; offline implementation and tests only, with no sample provider records or inference.
+    status: offline_pass_live_execution_still_blocked
+    public: true
+    implementation_path: src/icdar_tta/request_ledger.py
+    implementation_sha256: 6c727ee40ccada307f185d6c6ad56c2b5c608d7d2dc20a66ead9c76460929479
+    hash_serialization: SHA-256 over exact file bytes as stored; no text decoding, newline conversion, prefix, or suffix.
+    record_serialization: Canonical JSON with sorted keys and compact separators, encoded as UTF-8, one object per line with terminal LF on append.
+    request_fingerprint_serialization: SHA-256 over canonical UTF-8 JSON with sorted keys, compact separators, and finite JSON values; closed required dimensions are model, prompt/schema, source image, transform, sample index, generation parameters, and route/transport version.
+    focused_unittest_count: 24
+    caveat: Offline implementation and tests do not claim a provider route, rendered-view lineage, live durable ledger, provider smoke, budget approval, or live-call authorization passed.
+
+  modern_responses:
+    description: No modern PA responses exist in this control-plane inventory; no inference has been run.
+    status: not_started
+    public: false
+
+  modern_model_execution_code:
+    description: Exact locally evidenced requested model IDs; every PA route remains blocked pending the frozen live-call gates.
+    status: ids_evidenced_execution_blocked
+    public: false
+    exact_model_ids:
+      gemini_flash: gemini-3.7-flash
+      gemini_flash_lite: gemini-3.5-flash-lite
+      qwen_vision: sagemaker-qwen3-vl-8b-instruct-fp8
+    caveat: Locally evidenced IDs are not a claim that PA route smoke, returned-ID checks, capacity, or request authorization passed.
+
+  analysis_snapshots:
+    description: Historical paper-era analysis snapshots and presentation tables.
+    status: existing_historical_evidence
+    public: false
+
+  raptor_framework:
+    description: Optional generic extraction infrastructure, not a scientific requirement or an evidenced PA execution route.
+    status: optional
+    public: false
+
+  scratch:
+    description: Logical disposable transformed-image and cache location; actual location belongs only in the local manifest.
+    status: local_only
+    public: false
+
+caveats:
+  portability: This committed manifest contains no machine-specific absolute locations; resolve logical roots through the ignored local manifest.
+  privacy: Raw images, labels, and model responses remain private unless their release status is separately established.
+  evaluation: The 3718 raw six-name count is not canonical; 3684 remains an unresolved regression target requiring the missing 34-exclusion artifact or generator.
+  execution: Exact model IDs and frozen historical evidence do not authorize provider calls; the experiment matrix live-call gate remains closed.
+  render_lineage: Source-image identity and mask coverage are verified; exact Pad/Grid rendered pixels remain unresolved because seed, renderer, and input-rule evidence is incomplete.
+  provenance: Full bounded evidence and unresolved gates are recorded in local_agent/SOURCE_LINEAGE_AUDIT.md, local_agent/SHORTLIST_EVIDENCE.md, and local_agent/EXPERIMENT_MATRIX.md.

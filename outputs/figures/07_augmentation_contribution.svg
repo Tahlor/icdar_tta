@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img">
+<title>Descriptive augmentation selection</title>
+<desc>Historical validation selection frequency describes which families appeared often; it does not establish causal contribution.</desc>
+<metadata>{&quot;chart_id&quot;:&quot;07_augmentation_contribution&quot;,&quot;dimensions&quot;:[1200,675],&quot;limitations&quot;:[&quot;Selection frequency across CV folds is descriptive, not causal leave-one-family-out contribution.&quot;],&quot;numeric_inputs&quot;:[&quot;augmentation_contribution.csv&quot;],&quot;renderer&quot;:&quot;python-standard-library-svg-and-deterministic-bitmap-png&quot;,&quot;takeaway&quot;:&quot;Historical validation selection frequency describes which families appeared often; it does not establish causal contribution.&quot;}</metadata>
+<rect x="0" y="0" width="1200" height="675" fill="#f8fafc" stroke="none" stroke-width="1"/>
+<text x="55" y="40" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="bold" text-anchor="start">Which families appeared in validation selections?</text>
+<text x="55" y="72" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">Historical validation selection frequency describes which families appeared often; it</text>
+<text x="55" y="92" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">does not establish causal contribution.</text>
+<text x="70" y="190" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">pad</text>
+<rect x="255" y="165" width="720" height="34" fill="#e9eef5" stroke="none" stroke-width="1"/>
+<rect x="255" y="165" width="720" height="34" fill="#2563eb" stroke="none" stroke-width="1"/>
+<text x="990" y="189" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">38 selections</text>
+<text x="255" y="220" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">15 candidate transforms | mean MRR 0.096</text>
+<text x="70" y="269" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">grid warp</text>
+<rect x="255" y="244" width="720" height="34" fill="#e9eef5" stroke="none" stroke-width="1"/>
+<rect x="255" y="244" width="360" height="34" fill="#2563eb" stroke="none" stroke-width="1"/>
+<text x="990" y="268" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">19 selections</text>
+<text x="255" y="299" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">11 candidate transforms | mean MRR 0.032</text>
+<text x="70" y="348" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">blur and resize</text>
+<rect x="255" y="323" width="720" height="34" fill="#e9eef5" stroke="none" stroke-width="1"/>
+<rect x="255" y="323" width="341.053" height="34" fill="#2563eb" stroke="none" stroke-width="1"/>
+<text x="990" y="347" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">18 selections</text>
+<text x="255" y="378" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">12 candidate transforms | mean MRR 0.092</text>
+<text x="70" y="427" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">resize</text>
+<rect x="255" y="402" width="720" height="34" fill="#e9eef5" stroke="none" stroke-width="1"/>
+<rect x="255" y="402" width="284.211" height="34" fill="#2563eb" stroke="none" stroke-width="1"/>
+<text x="990" y="426" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">15 selections</text>
+<text x="255" y="457" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">10 candidate transforms | mean MRR 0.048</text>
+<text x="70" y="506" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">gaussian noise</text>
+<rect x="255" y="481" width="720" height="34" fill="#e9eef5" stroke="none" stroke-width="1"/>
+<rect x="255" y="481" width="189.474" height="34" fill="#2563eb" stroke="none" stroke-width="1"/>
+<text x="990" y="505" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">10 selections</text>
+<text x="255" y="536" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">7 candidate transforms | mean MRR 0.032</text>
+<rect x="850" y="568" width="300" height="55" fill="#ffedd5" stroke="none" stroke-width="1"/>
+<text x="865" y="590" fill="#e87924" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" text-anchor="start">DESCRIPTIVE, NOT CAUSAL</text>
+<text x="865" y="610" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">5 folds; 55 CV-rank summary rows</text>
+<text x="55" y="654" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">RECOMPUTED family sums from source-reported CV summary | Counts are not accuracy effects</text>
+</svg>

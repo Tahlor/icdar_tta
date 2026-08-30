@@ -25,6 +25,15 @@ cache/
 runs/raw/
 outputs/tmp/
 
+# Local-agent runtime state; keep the tracked handoff/task files, ignore execution data
+local_agent/runtime/
+local_agent/work/
+local_agent/raw/
+local_agent/logs/
+local_agent/*.local.yaml
+local_agent/*.local.json
+local_agent/*.local.jsonl
+
 # OS/editor
 .DS_Store
 Thumbs.db

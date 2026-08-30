@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img">
+<title>Review frontier with blocked cost axis</title>
+<desc>The production objective is fewer human reviews for known quality and cost, but the historical cost axis is unavailable.</desc>
+<metadata>{&quot;chart_id&quot;:&quot;04_cost_review_frontier&quot;,&quot;dimensions&quot;:[1200,675],&quot;limitations&quot;:[&quot;No source row contains observed usage, pricing, currency, or cost.&quot;,&quot;Only numeric review burden is rendered; no dollar coordinate is invented.&quot;],&quot;numeric_inputs&quot;:[&quot;cost_by_run.csv&quot;,&quot;review_frontier.csv&quot;],&quot;renderer&quot;:&quot;python-standard-library-svg-and-deterministic-bitmap-png&quot;,&quot;takeaway&quot;:&quot;The production objective is fewer human reviews for known quality and cost, but the historical cost axis is unavailable.&quot;}</metadata>
+<rect x="0" y="0" width="1200" height="675" fill="#f8fafc" stroke="none" stroke-width="1"/>
+<text x="55" y="40" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="bold" text-anchor="start">Human review is measurable; inference cost is not</text>
+<text x="55" y="72" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">The production objective is fewer human reviews for known quality and cost, but the</text>
+<text x="55" y="92" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">historical cost axis is unavailable.</text>
+<rect x="65" y="145" width="660" height="430" fill="#ffffff" stroke="#d9e0ea" stroke-width="1"/>
+<text x="90" y="178" fill="#2563eb" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">NUMERIC REVIEW BURDEN AT CSV TARGET</text>
+<text x="90" y="218" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">Grid Warp (n=20)</text>
+<rect x="90" y="227" width="580" height="28" fill="#eef2f7" stroke="none" stroke-width="1"/>
+<rect x="90" y="227" width="345.763" height="28" fill="#2563eb" stroke="none" stroke-width="1"/>
+<text x="655" y="248" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="end">596.1 reviews / 1,000</text>
+<text x="90" y="276" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">coverage 40.4% | observed precision 95.23%</text>
+<rect x="90" y="335" width="580" height="38" fill="#fee2e2" stroke="none" stroke-width="1"/>
+<text x="105" y="360" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" text-anchor="start">Pad: target/cost coordinate blocked</text>
+<rect x="90" y="387" width="580" height="38" fill="#fee2e2" stroke="none" stroke-width="1"/>
+<text x="105" y="412" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" text-anchor="start">Resize: target/cost coordinate blocked</text>
+<rect x="760" y="145" width="390" height="430" fill="#ffedd5" stroke="#e87924" stroke-width="2"/>
+<text x="790" y="183" fill="#e87924" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="bold" text-anchor="start">COST AXIS: BLOCKED</text>
+<text x="790" y="214" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">No observed usage logs</text>
+<text x="790" y="238" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">No pricing snapshot</text>
+<text x="790" y="262" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">No currency or cost amounts</text>
+<line x1="790" y1="292" x2="1120" y2="292" stroke="#e87924" stroke-width="2" stroke-dasharray="8,6"/>
+<text x="790" y="320" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="start">Blocked run/model rows: 4</text>
+<text x="790" y="348" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">models/gemini-2.0-flash</text>
+<text x="1120" y="348" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="end">blocked no observed usage</text>
+<text x="790" y="379" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">gemini-3.7-flash</text>
+<text x="1120" y="379" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="end">blocked no run</text>
+<text x="790" y="410" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">gemini-3.5-flash-lite</text>
+<text x="1120" y="410" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="end">blocked no run</text>
+<text x="790" y="441" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">sagemaker-qwen3-vl-8b-instruct-fp8</text>
+<text x="1120" y="441" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="end">blocked no run</text>
+<text x="790" y="500" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">NO DOLLARS INVENTED</text>
+<text x="55" y="654" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">PARTIAL frontier | Descriptive target from CSV | Historical denominator: 3,682 fields (noncanonical)</text>
+</svg>

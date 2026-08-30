@@ -1,0 +1,5 @@
+model_id,run_id,strategy,n_samples,request_count,usage_unit,usage_amount,currency,cost_amount,pricing_snapshot_id,cost_status,evidence_status,source_artifact,source_sha256,notes
+models/gemini-2.0-flash,historical_flash2,all_available,,,,,,,,blocked_no_observed_usage,blocked_unavailable,,,Historical generation settings are available but observed usage/pricing logs were not located.
+gemini-3.7-flash,modern_screen,all_available,,,,,,,,blocked_no_run,blocked_unavailable,,,"No modern inference was run; request count, usage, and cost are unavailable."
+gemini-3.5-flash-lite,modern_screen,all_available,,,,,,,,blocked_no_run,blocked_unavailable,,,"No modern inference was run; request count, usage, and cost are unavailable."
+sagemaker-qwen3-vl-8b-instruct-fp8,modern_screen,all_available,,,,,,,,blocked_no_run,blocked_unavailable,,,"No modern inference was run; request count, usage, and cost are unavailable."

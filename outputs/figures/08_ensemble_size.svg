@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img">
 <title>Ensemble size and diminishing returns</title>
-<desc>Source-reported historical aggregates show diminishing gains with more members under a noncanonical denominator.</desc>
-<metadata>{&quot;chart_id&quot;:&quot;08_ensemble_size&quot;,&quot;dimensions&quot;:[1200,675],&quot;limitations&quot;:[&quot;Historical source-reported series and modern measured strategy points are shown.&quot;,&quot;Evaluated-field counts vary around the noncanonical source denominators.&quot;],&quot;numeric_inputs&quot;:[&quot;ensemble_size.csv&quot;],&quot;renderer&quot;:&quot;python-standard-library-svg-and-deterministic-bitmap-png&quot;,&quot;takeaway&quot;:&quot;Source-reported historical aggregates show diminishing gains with more members under a noncanonical denominator.&quot;}</metadata>
+<desc>Historical aggregates plus modern points show diminishing gains with more members under explicit denominators.</desc>
+<metadata>{&quot;chart_id&quot;:&quot;08_ensemble_size&quot;,&quot;dimensions&quot;:[1200,675],&quot;limitations&quot;:[&quot;Historical source-reported series and modern measured strategy points are shown.&quot;,&quot;Evaluated-field counts vary around the noncanonical source denominators.&quot;],&quot;numeric_inputs&quot;:[&quot;ensemble_size.csv&quot;],&quot;renderer&quot;:&quot;python-standard-library-svg-and-deterministic-bitmap-png&quot;,&quot;takeaway&quot;:&quot;Historical aggregates plus modern points show diminishing gains with more members under explicit denominators.&quot;}</metadata>
 <rect x="0" y="0" width="1200" height="675" fill="#f8fafc" stroke="none" stroke-width="1"/>
 <text x="55" y="40" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="bold" text-anchor="start">More members help, but gains are not monotonic</text>
-<text x="55" y="72" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">Source-reported historical aggregates show diminishing gains with more members under a</text>
-<text x="55" y="92" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">noncanonical denominator.</text>
+<text x="55" y="72" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">Historical aggregates plus modern points show diminishing gains with more members</text>
+<text x="55" y="92" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">under explicit denominators.</text>
 <line x1="90" y1="565" x2="850" y2="565" stroke="#d9e0ea" stroke-width="1"/>
 <text x="80" y="570" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="end">4.7%</text>
 <line x1="90" y1="460" x2="850" y2="460" stroke="#d9e0ea" stroke-width="1"/>

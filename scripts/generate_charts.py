@@ -57,11 +57,11 @@ TAKEAWAYS = {
     BASENAMES[0]: "Useful ensembles need informative members that make different mistakes; modern and historical coordinates are labelled by source.",
     BASENAMES[1]: "Adding correlated samples has rapidly diminishing informational value.",
     BASENAMES[2]: "Grid Warp can be useful as a selective confidence generator, but raw agreement is not a calibrated probability.",
-    BASENAMES[3]: "The production objective is fewer human reviews for known quality and cost, but the historical cost axis is unavailable.",
+    BASENAMES[3]: "The production objective is fewer human reviews for known quality; modern usage is measured, but pricing is unavailable.",
     BASENAMES[4]: "Transcription agreement exhibits periodic sensitivity to image alignment, consistent with but not proof of patch or grid effects.",
     BASENAMES[5]: "Modern transfer is measured at a fixed descriptive precision target, with unresolved or unavailable routes shown explicitly.",
     BASENAMES[6]: "Historical validation selection frequency describes which families appeared often; it does not establish causal contribution.",
-    BASENAMES[7]: "Source-reported historical aggregates show diminishing gains with more members under a noncanonical denominator.",
+    BASENAMES[7]: "Historical aggregates plus modern points show diminishing gains with more members under explicit denominators.",
     BASENAMES[8]: "Qualitative failure examples remain blocked until stable redacted lineage and release-authorized crops exist.",
 }
 
@@ -374,36 +374,42 @@ def short_warp(name: str):
 def chart_1(data, out):
     valid = [r for r in data if number(r, "individual_cer") is not None and number(r, "error_correlation") is not None]
     categories = [r for r in data if number(r, "individual_cer") is None]
-    c = Canvas(BASENAMES[0], "Useful diversity: complete historical coordinates", TAKEAWAYS[BASENAMES[0]], TABLE_MAP[BASENAMES[0]],
+    c = Canvas(BASENAMES[0], "Useful diversity: historical and modern coordinates", TAKEAWAYS[BASENAMES[0]], TABLE_MAP[BASENAMES[0]],
                ["Only WARP per-condition rows contain both individual CER and error correlation.", "v7 category rows contain consensus CER only and are not plotted as individual metrics."])
     heading(c, "Useful diversity: accuracy and different mistakes", TAKEAWAYS[BASENAMES[0]])
-    a = Axes(c, 90, 145, 690, 410, .60, 1.00, .075, .107)
-    a.draw([.6,.7,.8,.9,1.0], [.08,.09,.10], "Mean pairwise field-error correlation (lower is more diverse)", "WARP avg_cer (lower is better)", lambda v:f"{v:.1f}", lambda v:f"{v:.2f}")
+    y_values = [number(r, "individual_cer") for r in valid]
+    ymin = max(0.0, min(y_values) - .005) if y_values else .0
+    ymax = min(1.0, max(y_values) + .005) if y_values else 1.0
+    y_ticks = [ymin + (ymax - ymin) * i / 4 for i in range(5)]
+    a = Axes(c, 90, 145, 690, 410, .60, 1.00, ymin, ymax)
+    a.draw([.6,.7,.8,.9,1.0], y_ticks, "Mean pairwise field-error correlation (lower is more diverse)", "Mean individual CER (lower is better)", lambda v:f"{v:.1f}", lambda v:f"{v:.2f}")
     label_rows = {min(valid, key=lambda q: number(q, "error_correlation"))["strategy"], "shift_only"}
     for r in valid:
         x, y = a.px(number(r,"error_correlation")), a.py(number(r,"individual_cer"))
-        color = ORANGE if r["family"] == "pad" else BLUE
+        is_modern = not str(r["model_id"]).startswith("models/")
+        color = (PURPLE if is_modern else ORANGE) if r["family"] == "pad" else (TEAL if is_modern else BLUE)
         c.circle(x, y, 7, color, "#ffffff", 2)
         if r["strategy"] in label_rows:
             c.text(x + (8 if x < 700 else -8), y-9, short_warp(r["strategy"]), 11, INK, "start" if x < 700 else "end")
-    c.text(105, 166, f"MEASURED WARP CONDITIONS (n={len(valid)} rows; 5 members each)", 12, BLUE, "start", "bold")
+    c.text(105, 166, f"MEASURED CONDITIONS (n={len(valid)} rows; historical + modern)", 12, BLUE, "start", "bold")
     c.rect(815, 145, 335, 410, "#ffffff", GRID, 1)
     c.text(835, 174, "V7 CATEGORY CONSENSUS", 16, PURPLE, "start", "bold")
     c.text(835, 196, "Not individual CER; x coordinate unavailable", 12, MUTED)
+    c.text(835, 214, "Plot: historical blue/orange; modern teal/purple", 10, MUTED)
     wanted = [("Baseline",1),("Pad",10),("Grid Warp",10),("Resize",10),("Temperature = 1.0",10)]
     selected = []
     for name, n in wanted:
         match = next((r for r in categories if r["strategy"] == name and int(r["n_samples"]) == n), None)
         if match: selected.append(match)
     for i, r in enumerate(selected):
-        yy = 230 + i*52
+        yy = 250 + i*48
         c.text(835, yy, f"{r['strategy']} (n={r['n_samples']})", 13, INK)
         c.text(835, yy+18, f"consensus CER {100*number(r,'consensus_cer'):.2f}%", 11, PURPLE)
         c.line(835, yy+28, 1128, yy+28, GRID)
     c.rect(835, 500, 293, 35, PALE_ORANGE, "none")
     c.text(849, 514, "LIMITATION", 10, ORANGE, "start", "bold")
     c.text(849, 529, "No shared x/y metric across sources", 10, INK)
-    footer(c, "MEASURED aggregate rows | Historical noncanonical denominators; metric roles preserved from CSV notes")
+    footer(c, "MEASURED aggregate rows | Historical and modern denominators; metric roles preserved from CSV notes")
     c.save(out/(BASENAMES[0]+".svg"), out/(BASENAMES[0]+".png"))
 
 
@@ -430,15 +436,15 @@ def chart_2(data, out):
         c.text(a.px(rho)-5,a.py(projected)+dy,f"{short_warp(r['strategy'])}: rho={rho:.3f}",12,INK,"end")
     c.rect(885,145,265,420,"#ffffff",GRID)
     c.text(905,176,"EMPIRICAL OVERLAY",15,BLUE,"start","bold")
-    c.text(905,199,f"{len(measured)} measured WARP",13,INK)
-    c.text(905,219,"correlations (5-member rows)",13,INK)
+    c.text(905,199,f"{len(measured)} measured",13,INK)
+    c.text(905,219,"historical/modern correlations",13,INK)
     c.text(905,252,"Points are projected onto",12,MUTED)
     c.text(905,270,"the N=10 theory curve.",12,MUTED)
     c.rect(905,310,225,126,PALE_RED,"none")
     c.text(920,334,"BLOCKED FAMILY ROWS",13,RED,"start","bold")
     for i,r in enumerate(blocked): c.text(920,360+i*25,f"{r['strategy']}: no rho",12,INK)
     c.text(920,420,"No prose values promoted",11,MUTED)
-    footer(c,"THEORETICAL curve + MEASURED correlations | Correlation denominator: 4,920 historical fields (noncanonical)")
+    footer(c,"THEORETICAL curve + MEASURED correlations | Historical ~4,920 fields; modern raw six-name 3,718 cells")
     c.save(out/(BASENAMES[1]+".svg"), out/(BASENAMES[1]+".png"))
 
 
@@ -488,7 +494,7 @@ def chart_3(data, out):
 def chart_4(cost_data, frontier, out):
     numeric=[r for r in frontier if number(r,"review_fields_per_1000") is not None]
     c=Canvas(BASENAMES[3],"Review frontier with blocked cost axis",TAKEAWAYS[BASENAMES[3]],TABLE_MAP[BASENAMES[3]],
-             ["No source row contains observed usage, pricing, currency, or cost.", "Only numeric review burden is rendered; no dollar coordinate is invented."])
+             ["Historical usage/pricing is unavailable; modern usage is measured without a pricing snapshot.", "Only numeric review burden is rendered; no dollar coordinate is invented."])
     heading(c,"Human review is measurable; inference cost is not",TAKEAWAYS[BASENAMES[3]])
     c.rect(65,145,660,430,"#ffffff",GRID)
     c.text(90,178,"NUMERIC REVIEW BURDEN AT CSV TARGET",15,BLUE,"start","bold")
@@ -507,9 +513,9 @@ def chart_4(cost_data, frontier, out):
             c.text(105,y,f"{r['strategy']}: target/cost coordinate blocked",13,RED,"start","bold")
     c.rect(760,145,390,430,PALE_ORANGE,ORANGE,2)
     c.text(790,183,"COST AXIS: BLOCKED",18,ORANGE,"start","bold")
-    c.text(790,214,"No observed usage logs",14,INK)
-    c.text(790,238,"No pricing snapshot",14,INK)
-    c.text(790,262,"No currency or cost amounts",14,INK)
+    c.text(790,214,"Historical usage not located",14,INK)
+    c.text(790,238,"Modern usage is measured",14,INK)
+    c.text(790,262,"No pricing/cost snapshot",14,INK)
     c.line(790,292,1120,292,ORANGE,2,"8,6")
     c.text(790,320,f"Blocked run/model rows: {len(cost_data)}",13,INK)
     for i,r in enumerate(cost_data):
@@ -575,7 +581,12 @@ def chart_6(data,out):
                 c.text(x,y+29,f"P={100*number(r,'observed_precision'):.2f}%",10,GREEN,"middle")
             elif r:
                 c.rect(x-32,y-19,64,28,PALE_RED,RED,1)
-                label="NO POINT" if r["evidence_status"]=="recomputed_historical_target_not_met" else "BLOCKED"
+                if r["evidence_status"]=="recomputed_historical_target_not_met":
+                    label="NO POINT"
+                elif r["evidence_status"]=="modern_measured_target_not_met":
+                    label="TARGET NOT MET"
+                else:
+                    label="ROUTE BLOCKED"
                 c.text(x,y+1,label,10,RED,"middle","bold")
             else:
                 c.text(x,y,"-",14,MUTED,"middle")

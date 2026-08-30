@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img">
 <title>Review frontier with blocked cost axis</title>
-<desc>The production objective is fewer human reviews for known quality and cost, but the historical cost axis is unavailable.</desc>
-<metadata>{&quot;chart_id&quot;:&quot;04_cost_review_frontier&quot;,&quot;dimensions&quot;:[1200,675],&quot;limitations&quot;:[&quot;No source row contains observed usage, pricing, currency, or cost.&quot;,&quot;Only numeric review burden is rendered; no dollar coordinate is invented.&quot;],&quot;numeric_inputs&quot;:[&quot;cost_by_run.csv&quot;,&quot;review_frontier.csv&quot;],&quot;renderer&quot;:&quot;python-standard-library-svg-and-deterministic-bitmap-png&quot;,&quot;takeaway&quot;:&quot;The production objective is fewer human reviews for known quality and cost, but the historical cost axis is unavailable.&quot;}</metadata>
+<desc>The production objective is fewer human reviews for known quality; modern usage is measured, but pricing is unavailable.</desc>
+<metadata>{&quot;chart_id&quot;:&quot;04_cost_review_frontier&quot;,&quot;dimensions&quot;:[1200,675],&quot;limitations&quot;:[&quot;Historical usage/pricing is unavailable; modern usage is measured without a pricing snapshot.&quot;,&quot;Only numeric review burden is rendered; no dollar coordinate is invented.&quot;],&quot;numeric_inputs&quot;:[&quot;cost_by_run.csv&quot;,&quot;review_frontier.csv&quot;],&quot;renderer&quot;:&quot;python-standard-library-svg-and-deterministic-bitmap-png&quot;,&quot;takeaway&quot;:&quot;The production objective is fewer human reviews for known quality; modern usage is measured, but pricing is unavailable.&quot;}</metadata>
 <rect x="0" y="0" width="1200" height="675" fill="#f8fafc" stroke="none" stroke-width="1"/>
 <text x="55" y="40" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="bold" text-anchor="start">Human review is measurable; inference cost is not</text>
-<text x="55" y="72" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">The production objective is fewer human reviews for known quality and cost, but the</text>
-<text x="55" y="92" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">historical cost axis is unavailable.</text>
+<text x="55" y="72" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">The production objective is fewer human reviews for known quality; modern usage is</text>
+<text x="55" y="92" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="normal" text-anchor="start">measured, but pricing is unavailable.</text>
 <rect x="65" y="145" width="660" height="430" fill="#ffffff" stroke="#d9e0ea" stroke-width="1"/>
 <text x="90" y="178" fill="#2563eb" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">NUMERIC REVIEW BURDEN AT CSV TARGET</text>
 <text x="90" y="218" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold" text-anchor="start">Grid Warp (n=20)</text>
@@ -20,9 +20,9 @@
 <text x="105" y="412" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" text-anchor="start">Resize: target/cost coordinate blocked</text>
 <rect x="760" y="145" width="390" height="430" fill="#ffedd5" stroke="#e87924" stroke-width="2"/>
 <text x="790" y="183" fill="#e87924" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="bold" text-anchor="start">COST AXIS: BLOCKED</text>
-<text x="790" y="214" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">No observed usage logs</text>
-<text x="790" y="238" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">No pricing snapshot</text>
-<text x="790" y="262" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">No currency or cost amounts</text>
+<text x="790" y="214" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">Historical usage not located</text>
+<text x="790" y="238" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">Modern usage is measured</text>
+<text x="790" y="262" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="normal" text-anchor="start">No pricing/cost snapshot</text>
 <line x1="790" y1="292" x2="1120" y2="292" stroke="#e87924" stroke-width="2" stroke-dasharray="8,6"/>
 <text x="790" y="320" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="normal" text-anchor="start">Blocked run/model rows: 5</text>
 <text x="790" y="348" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="normal" text-anchor="start">models/gemini-2.0-flash</text>

@@ -87,15 +87,15 @@ Raw historical JSON was not needed because the available aggregate and v7 consen
 
 | Output | Rows | Bytes | SHA-256 | Status |
 |---|---:|---:|---|---|
-| `outputs/derived/strategy_summary.csv` | 43 | 22,922 | `15e2ac62cf3c343366bcac8729a5b0be04c3f413e38c10f32e57b931c2ecbb14` | 31 historical rows plus 12 modern measured rows |
+| `outputs/derived/strategy_summary.csv` | 43 | 23,292 | `3b91626ffd22e05bcd215b8d76377b416433a356710b4a8aeccc364cde6c5798` | 31 historical rows plus 12 modern measured rows |
 | `outputs/derived/error_correlation_summary.csv` | 22 | 9,850 | `b85036eb073f98c21cb43ec2b941829665a63808207313888b82ee968cb92255` | 12 historical/blocked rows plus 10 modern measured rows |
-| `outputs/derived/precision_coverage.csv` | 2,499 | 1,415,590 | `596541deb76942030f3070f8ac5b74757c044bba09174da371819e2b3fd179ef` | 1,750 legacy/public v7 rows plus 749 modern raw-denominator rows |
-| `outputs/derived/cost_by_run.csv` | 5 | 1,541 | `489d13a789b8f2ad3142623e58d8fba1155f2ebbf42f396445a6a4fe0bc7d07b` | historical usage unavailable; modern usage measured but pricing unavailable |
+| `outputs/derived/precision_coverage.csv` | 2,499 | 1,452,340 | `1a6f8a21d2f7b51ebb03b38cf86fc22ee6f4ea07fbcb7b2bd7db03c06ee8dbc9` | 1,750 legacy/public v7 rows plus 749 modern raw-denominator rows |
+| `outputs/derived/cost_by_run.csv` | 5 | 1,615 | `6fd9c434cb75ccf946f779c5d20e82677f1b778139d860b47d8346078d1cafb5` | historical usage unavailable; modern usage measured but pricing unavailable |
 | `outputs/derived/review_frontier.csv` | 3 | 1,667 | `3192b4c711a30e15ffb3febd8c6cd8f3c0ecf203ba5c61456787157c7c03f4de` | review burden partial; cost axis blocked |
 | `outputs/derived/shift_agreement.csv` | 130 | 54,974 | `3e18fa536faf11992ae55ed8b5901f5a0d4c6b7ac1e394f07851d86158e77e96` | reported aggregate series |
-| `outputs/derived/cross_model_operating_points.csv` | 18 | 6,878 | `565557e69c11276452e8497388677a0940f41d65191c670f77f979ee8eaeff01` | 2 historical rows; 8 modern target-not-met rows; 8 route-blocked rows |
+| `outputs/derived/cross_model_operating_points.csv` | 18 | 6,350 | `e460f75784d305ff9aeeea311e3921d295054927a221bfead9eb7aef01080f48` | 2 historical rows; 8 modern target-not-met rows; 8 route-blocked rows |
 | `outputs/derived/augmentation_contribution.csv` | 5 | 2,427 | `6d6e2c4be232d77e94ee31560bbc327c04e9596721a79e34c456e78b6f1ceab6` | recomputed family selection frequency |
-| `outputs/derived/ensemble_size.csv` | 65 | 29,532 | `e8db65df14ffb42beff7301f97861372ce8fa03eae4db9edf593ca0fc54c1e5f` | 53 historical rows plus 12 modern measured strategy rows |
+| `outputs/derived/ensemble_size.csv` | 65 | 33,507 | `6a8c25f610abd99bfe80a71a811287f8940446f659f8e2beb3459568d1e0c673` | 53 historical rows plus 12 modern measured strategy rows |
 | `outputs/derived/failure_examples.csv` | 3 | 1,464 | `30f027e10639a469db528f87db33f6d3ea91d2deba59e1e650ee82ea28938aec` | modern count-only rows; release-authorized crop lineage unavailable |
 
 ## Blockers and nonclaims

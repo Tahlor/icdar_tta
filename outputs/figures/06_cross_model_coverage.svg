@@ -24,43 +24,43 @@
 <rect x="55" y="269" width="1095" height="73" fill="#f1f5f9" stroke="none" stroke-width="1"/>
 <text x="70" y="299" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="start">gemini-3.7-flash</text>
 <rect x="533" y="280" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="565" y="300" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="565" y="300" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">ROUTE BLOCKED</text>
 <rect x="673" y="280" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="705" y="300" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="705" y="300" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">ROUTE BLOCKED</text>
 <rect x="813" y="280" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="845" y="300" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="845" y="300" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">ROUTE BLOCKED</text>
 <rect x="953" y="280" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="985" y="300" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="985" y="300" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">ROUTE BLOCKED</text>
 <rect x="55" y="363" width="1095" height="73" fill="#ffffff" stroke="none" stroke-width="1"/>
 <text x="70" y="393" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="start">sagemaker-qwen3-vl-8b-instruct-fp8</text>
 <rect x="533" y="374" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="565" y="394" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="565" y="394" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">ROUTE BLOCKED</text>
 <rect x="673" y="374" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="705" y="394" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="705" y="394" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">ROUTE BLOCKED</text>
 <rect x="813" y="374" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="845" y="394" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="845" y="394" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">ROUTE BLOCKED</text>
 <rect x="953" y="374" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="985" y="394" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="985" y="394" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">ROUTE BLOCKED</text>
 <rect x="55" y="457" width="1095" height="73" fill="#f1f5f9" stroke="none" stroke-width="1"/>
 <text x="70" y="487" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="start">gemini-3.5-flash</text>
 <rect x="533" y="468" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="565" y="488" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="565" y="488" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">TARGET NOT MET</text>
 <rect x="673" y="468" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="705" y="488" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="705" y="488" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">TARGET NOT MET</text>
 <rect x="813" y="468" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="845" y="488" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="845" y="488" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">TARGET NOT MET</text>
 <rect x="953" y="468" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="985" y="488" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="985" y="488" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">TARGET NOT MET</text>
 <rect x="55" y="551" width="1095" height="73" fill="#ffffff" stroke="none" stroke-width="1"/>
 <text x="70" y="581" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold" text-anchor="start">gemini-3.5-flash-lite</text>
 <rect x="533" y="562" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="565" y="582" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="565" y="582" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">TARGET NOT MET</text>
 <rect x="673" y="562" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="705" y="582" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="705" y="582" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">TARGET NOT MET</text>
 <rect x="813" y="562" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="845" y="582" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="845" y="582" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">TARGET NOT MET</text>
 <rect x="953" y="562" width="64" height="28" fill="#fee2e2" stroke="#c23b4a" stroke-width="1"/>
-<text x="985" y="582" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">BLOCKED</text>
+<text x="985" y="582" fill="#c23b4a" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle">TARGET NOT MET</text>
 <rect x="55" y="585" width="1095" height="42" fill="#ffedd5" stroke="none" stroke-width="1"/>
 <text x="72" y="611" fill="#172033" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="bold" text-anchor="start">NUMERIC POINTS: 1 across 1 models | UNAVAILABLE/TARGET NOT MET: 17</text>
 <text x="55" y="654" fill="#596579" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="normal" text-anchor="start">Target precision is the predeclared descriptive 95% target | Source denominators remain explicit in the table</text>

@@ -10,12 +10,12 @@ The modern source-table snapshots used for this regeneration are:
 
 | Table | Rows | SHA-256 |
 |---|---:|---|
-| `strategy_summary.csv` | 43 | `15e2ac03cf3c343366bcac8729a5b0be04c3f413e38c10f32e57b931c2ecbb14` |
-| `precision_coverage.csv` | 2,499 | `596541de76942030f3070f8ac5b74757c044bba09174da371819e2b3fd179ef` |
+| `strategy_summary.csv` | 43 | `3b91626ffd22e05bcd215b8d76377b416433a356710b4a8aeccc364cde6c5798` |
+| `precision_coverage.csv` | 2,499 | `1a6f8a21d2f7b51ebb03b38cf86fc22ee6f4ea07fbcb7b2bd7db03c06ee8dbc9` |
 | `error_correlation_summary.csv` | 22 | `b85036eb073f98c21cb43ec2b941829665a63808207313888b82ee968cb92255` |
-| `cost_by_run.csv` | 5 | `489d13a789b8f2ad3142623e58d8fba1155f2ebbf42f396445a6a4fe0bc7d07b` |
-| `cross_model_operating_points.csv` | 18 | `565557e69c11276452e8497388677a0940f41d65191c670f77f979ee8eaeff01` |
-| `ensemble_size.csv` | 65 | `e8db65df14ffb42beff7301f97861372ce8fa03eae4db9edf593ca0fc54c1e5f` |
+| `cost_by_run.csv` | 5 | `6fd9c434cb75ccf946f779c5d20e82677f1b778139d860b47d8346078d1cafb5` |
+| `cross_model_operating_points.csv` | 18 | `e460f75784d305ff9aeeea311e3921d295054927a221bfead9eb7aef01080f48` |
+| `ensemble_size.csv` | 65 | `6a8c25f610abd99bfe80a71a811287f8940446f659f8e2beb3459568d1e0c673` |
 
 The exact command remains `python3 scripts/generate_charts.py
 --derived-dir outputs/derived --figure-dir outputs/figures`. This is an
@@ -73,36 +73,36 @@ Rows exclude the header.
 | Source table | Rows | Bytes | SHA-256 |
 |---|---:|---:|---|
 | `outputs/derived/augmentation_contribution.csv` | 5 | 2,427 | `6d6e2c4be232d77e94ee31560bbc327c04e9596721a79e34c456e78b6f1ceab6` |
-| `outputs/derived/cost_by_run.csv` | 5 | 1,541 | `489d13a789b8f2ad3142623e58d8fba1155f2ebbf42f396445a6a4fe0bc7d07b` |
-| `outputs/derived/cross_model_operating_points.csv` | 18 | 6,878 | `565557e69c11276452e8497388677a0940f41d65191c670f77f979ee8eaeff01` |
-| `outputs/derived/ensemble_size.csv` | 65 | 29,532 | `e8db65df14ffb42beff7301f97861372ce8fa03eae4db9edf593ca0fc54c1e5f` |
+| `outputs/derived/cost_by_run.csv` | 5 | 1,615 | `6fd9c434cb75ccf946f779c5d20e82677f1b778139d860b47d8346078d1cafb5` |
+| `outputs/derived/cross_model_operating_points.csv` | 18 | 6,350 | `e460f75784d305ff9aeeea311e3921d295054927a221bfead9eb7aef01080f48` |
+| `outputs/derived/ensemble_size.csv` | 65 | 33,507 | `6a8c25f610abd99bfe80a71a811287f8940446f659f8e2beb3459568d1e0c673` |
 | `outputs/derived/error_correlation_summary.csv` | 22 | 9,850 | `b85036eb073f98c21cb43ec2b941829665a63808207313888b82ee968cb92255` |
 | `outputs/derived/failure_examples.csv` | 3 | 1,464 | `30f027e10639a469db528f87db33f6d3ea91d2deba59e1e650ee82ea28938aec` |
-| `outputs/derived/precision_coverage.csv` | 2,499 | 1,415,590 | `596541deb76942030f3070f8ac5b74757c044bba09174da371819e2b3fd179ef` |
+| `outputs/derived/precision_coverage.csv` | 2,499 | 1,452,340 | `1a6f8a21d2f7b51ebb03b38cf86fc22ee6f4ea07fbcb7b2bd7db03c06ee8dbc9` |
 | `outputs/derived/review_frontier.csv` | 3 | 1,667 | `3192b4c711a30e15ffb3febd8c6cd8f3c0ecf203ba5c61456787157c7c03f4de` |
 | `outputs/derived/shift_agreement.csv` | 130 | 54,974 | `3e18fa536faf11992ae55ed8b5901f5a0d4c6b7ac1e394f07851d86158e77e96` |
-| `outputs/derived/strategy_summary.csv` | 43 | 22,922 | `15e2ac62cf3c343366bcac8729a5b0be04c3f413e38c10f32e57b931c2ecbb14` |
+| `outputs/derived/strategy_summary.csv` | 43 | 23,292 | `3b91626ffd22e05bcd215b8d76377b416433a356710b4a8aeccc364cde6c5798` |
 
 ## Output provenance
 
 | Output | Bytes | Dimensions | SHA-256 |
 |---|---:|---:|---|
-| `outputs/figures/01_useful_diversity.png` | 15,393 | 1200x675 | `60b93fc362f445bd89d4784fdd7da6a421573b4fb1c5c867cd69b70c93da7b96` |
-| `outputs/figures/01_useful_diversity.svg` | 9,453 | 1200x675 | `397b15b01cad2917555695fb1469435edbec545e0e703e16404c2b1d34e64d67` |
-| `outputs/figures/02_effective_sample_size.png` | 14,626 | 1200x675 | `560550936a76a3ce706690bbd89b17a1f91d3ff274eb67ca60686caec8744b49` |
-| `outputs/figures/02_effective_sample_size.svg` | 10,149 | 1200x675 | `70b8208f3e687e789250b3f4acc1ab75bc8d2c05e30beb7a9aea9fe90e2c3fa0` |
+| `outputs/figures/01_useful_diversity.png` | 16,249 | 1200x675 | `e60ceb390392196a6280fefa33b0bb21908127913bb1f396f7628e36f1b6c47f` |
+| `outputs/figures/01_useful_diversity.svg` | 10,068 | 1200x675 | `3a9cb70cb234f704fbf42ba661b83407f7c3cd6ec8f0f1267b9ddd7fb2b07e48` |
+| `outputs/figures/02_effective_sample_size.png` | 14,604 | 1200x675 | `8e74c225364f66d3ae8a0f92ad840e08e56cf3307b6dffa4cb123a85b41cadcd` |
+| `outputs/figures/02_effective_sample_size.svg` | 10,140 | 1200x675 | `75b066c931b400b65976f56fbb523e8f14e5bf9db6903da407479720d7e6aa29` |
 | `outputs/figures/03_precision_coverage.png` | 17,801 | 1200x675 | `845e9c951e2eedc09414b8667f3d4318dfb8b105c7fe686ef65b4c874bff4068` |
 | `outputs/figures/03_precision_coverage.svg` | 127,676 | 1200x675 | `da650840315f45d0567859abcd7134f662f2642041a62c6eeb4c05cd057cb5b1` |
-| `outputs/figures/04_cost_review_frontier.png` | 12,907 | 1200x675 | `9e682cf94c62e446cb0f8faedfa1e9e5309b2d15f19c0d61361d1ec121231ab3` |
-| `outputs/figures/04_cost_review_frontier.svg` | 6,224 | 1200x675 | `cf5fe081ca48b8a033c024bf5dafa9b2dd62b4aaca7779b364c390fbbab0e84e` |
+| `outputs/figures/04_cost_review_frontier.png` | 12,999 | 1200x675 | `aa0b2721ea4f38b122fabeda5a5a9ce6b4abddd9ddfbc974a8cbd87fba5b3fc3` |
+| `outputs/figures/04_cost_review_frontier.svg` | 6,259 | 1200x675 | `b701c90f46391d38c4f88f615cd3f23cb417f47f988646fa598b96be22efb67d` |
 | `outputs/figures/05_shift_periodicity.png` | 16,359 | 1200x675 | `50d12e231c7665364f401d71ef016ce7aaa659f15e4964616b4b91b074a17a48` |
 | `outputs/figures/05_shift_periodicity.svg` | 11,912 | 1200x675 | `9a10c3507a7f890f5439302abb389274328de1a41ff62fd05aaed560a1e3d24b` |
-| `outputs/figures/06_cross_model_coverage.png` | 10,524 | 1200x675 | `19427b31969d8d48baed07ec05d13b105df142cc8bdfb41f67651a0c2be3d044` |
-| `outputs/figures/06_cross_model_coverage.svg` | 9,048 | 1200x675 | `7d8444ad4ccd56eac555bf28516646ff0bfd2cf2317927cd40fc456e5e4c6ae8` |
+| `outputs/figures/06_cross_model_coverage.png` | 10,744 | 1200x675 | `a4bd595aca4bc0a79230b454ec77615415e735f12db019ae7dd8678d57b677da` |
+| `outputs/figures/06_cross_model_coverage.svg` | 9,152 | 1200x675 | `bfecbe6a7aefc4f3ba723689224677a1790cbcfeb5c98485bf191de099621665` |
 | `outputs/figures/07_augmentation_contribution.png` | 9,639 | 1200x675 | `b2b5f644420a87e9ef7a71b4b7fb58be9fad7c964c69039f249e73a2fe7d29ab` |
 | `outputs/figures/07_augmentation_contribution.svg` | 5,632 | 1200x675 | `d617be5e1772d1238178982a4e58c0e554917b13cd1bd33468b866474614b575` |
-| `outputs/figures/08_ensemble_size.png` | 17,138 | 1200x675 | `97d00ad54c02738825e87fb3ecdd4d1bf662cccb1a4999e59ad9796bef405e46` |
-| `outputs/figures/08_ensemble_size.svg` | 12,157 | 1200x675 | `c6702cd82f1021b92f855cafbba97aedb27e30685458f899022e6d73a7e46d7d` |
+| `outputs/figures/08_ensemble_size.png` | 17,145 | 1200x675 | `5bf0cfbb1e3a1f950106acd00caf91fbd7dde906cb5a7518a6a84d7b264bc007` |
+| `outputs/figures/08_ensemble_size.svg` | 12,151 | 1200x675 | `ff389bc07067323c3bdd4af64c2d575ef1aface0bbd8f82e36dec46f55287c86` |
 | `outputs/figures/09_failure_examples.png` | 11,194 | 1200x675 | `22b74fc1c500f421b8f270ed0fccfbc52c4fa8638aab0b72a5b02fd21eebf00f` |
 | `outputs/figures/09_failure_examples.svg` | 4,005 | 1200x675 | `e7a0687d203010419600105ccccb4443f693b51f07372ae7e64a9f426b1148bb` |
 
@@ -139,5 +139,5 @@ All nine PNGs were rendered and visually inspected directly (not inferred from c
 
 - C1–C3, C5, C7–C9: headings, subtitles, axis labels, legends, and side panels render without clipping or overlap.
 - C4 (`04_cost_review_frontier`): **fixed**. The prior pass's per-row strategy label (e.g. "GRID WARP (N=...") was drawn at x=90 immediately left of a bar container starting at x=250, and the label bled behind the bar rectangle. `chart_4` in `scripts/generate_charts.py` now places the strategy label ("GRID WARP (N=20)") on its own text line above the bar, at the container's full left margin (x=90), and widens the bar/track to span the full container width (x=90 to x=670) instead of starting at x=250. The label no longer shares a horizontal row with the bar it describes, so it cannot run behind the bar container regardless of strategy-name or n-sample length; the coverage/precision caption line and the two blocked-row panels (Pad, Resize) below are unaffected and still render without overlap. Verified visually in the regenerated PNG: the label sits cleanly above the fully visible blue/gray bar with no clipping.
-- C6 (`06_cross_model_coverage`): the single measured cell (Gemini-2.0-Flash / Grid Warp) renders as a green dot with "40.4%" and "P=95.23%" beneath it, clearly distinguished from the red BLOCKED cells; no overlap observed.
+- C6 (`06_cross_model_coverage`): the single numeric cell (Gemini-2.0-Flash / Grid Warp) renders as a green dot with "40.4%" and "P=95.23%" beneath it. Modern 3.5 rows render as red "TARGET NOT MET" cells, while the 3.7/Qwen rows render as red "ROUTE BLOCKED" cells; no overlap observed.
 - No SVG/PNG shows placeholder text, invented numbers, or unlabeled provider data.

@@ -156,9 +156,10 @@ Historical Grid-Warp order was resize to maximum dimension 1,504, then `handwrit
 | recover 622 fold assignments | **PASS** | v7 snapshot and mapping hash |
 | original fold-generation provenance | **BLOCKED** | seed/generator absent |
 | historical transform IDs and parameter dictionaries | **PASS** | active config, ranking, and run settings hashed |
-| exact nine rendered views | **BLOCKED** | Pad renderer, Grid seed/render hashes, and pure-warp lineage unresolved; source identity is now verified |
-| provider/model calls | **PASS (none made)** | this audit was offline and read-only |
-| modern live-experiment gate | **BLOCKED** | source identity and GT rule are resolved; paper-row convention, parser/render, route, and authorization gates remain closed |
+| historical exact nine rendered views | **BLOCKED** | Pad renderer, Grid seed/render hashes, and pure-warp lineage unresolved; source identity is now verified |
+| prospective modern nine-view render | **PASS for two Gemini 3.5 screens** | 5,598-row private render manifest; its hash and non-historical role are recorded in the completion receipt |
+| provider/model calls in this audit | **PASS (none made)** | this source-lineage audit was offline and read-only |
+| modern live-experiment gate | **COMPLETE for two Gemini 3.5 models; BLOCKED for 3.7/Qwen** | 11,196 terminal rows reconciled; 3.7 returned HTTP 403 and Qwen HTTP 500 endpoint-not-found |
 
 ## Commands and bounded methods
 

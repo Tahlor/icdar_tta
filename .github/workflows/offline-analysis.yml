@@ -43,7 +43,7 @@ jobs:
           cache: pip
 
       - name: Install package
-        run: python -m pip install -e .
+        run: python -m pip install -e '.[presentation]'
 
       - name: Compile Python sources
         run: python -m compileall -q src scripts tests
@@ -64,11 +64,14 @@ jobs:
             exit "$code"
           fi
 
-      - name: Regenerate presentation charts
+      - name: Regenerate audit chart package
         run: python scripts/generate_charts.py --derived-dir outputs/derived --figure-dir outputs/figures
 
-      - name: Verify generated charts are committed reproducibly
+      - name: Verify audit charts are committed reproducibly
         run: git diff --exit-code -- outputs/figures
+
+      - name: Generate focused editable presentation charts
+        run: python scripts/generate_presentation_charts.py --derived-dir outputs/derived --output-dir outputs/presentation_charts
 
       - name: Upload regenerated presentation artifacts
         uses: actions/upload-artifact@v4
@@ -77,6 +80,8 @@ jobs:
           path: |
             outputs/figures/*.svg
             outputs/figures/*.png
+            outputs/presentation_charts/*.svg
+            outputs/presentation_charts/*.png
             outputs/derived/*.csv
           if-no-files-found: error
           retention-days: 30

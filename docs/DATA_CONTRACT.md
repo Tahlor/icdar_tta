@@ -33,6 +33,7 @@ Scripts should resolve data through logical keys rather than embedding workstati
 - `paper_code`
 - `usage_logs`
 - `modern_responses`
+- `modern_render_manifest`
 - `scratch`
 
 If the local inventory reveals additional important sources, add keys rather than hard-coding paths in analysis scripts.

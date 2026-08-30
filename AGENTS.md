@@ -38,6 +38,12 @@ When sources disagree, use this order:
 
 Paper numbers are regression targets, not ground truth if raw evidence shows otherwise.
 
+For the current PA Death 622 field selector, historical exclusion rule, source
+hashes, and the distinct public/v7 versus paper/v9/v10 ground-truth lineages,
+use [`docs/GT_LINEAGE.md`](docs/GT_LINEAGE.md). Do not infer a denominator
+from the raw 3,718 edited-name cells or substitute the public 3,682-row
+lineage for the paper-era 3,684-row contract.
+
 ## Data policy
 
 - Raw/private archival images should remain outside Git unless their release status is explicitly known to permit repository inclusion.

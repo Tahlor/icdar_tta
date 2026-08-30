@@ -38,10 +38,10 @@ lineage labels when comparing it with the v7 or v9/v10 products.
 
 Chart generation should be deliberately decoupled from raw-image access.
 
-Once derived tables exist, the target command should look conceptually like:
+Once derived tables exist, the current repository command is:
 
 ```bash
-python -m icdar_tta.charts --input outputs/derived --output outputs/figures
+python3 scripts/generate_charts.py --derived-dir outputs/derived --figure-dir outputs/figures
 ```
 
 A generic cloud runner should only need:

@@ -44,6 +44,15 @@ use [`docs/GT_LINEAGE.md`](docs/GT_LINEAGE.md). Do not infer a denominator
 from the raw 3,718 edited-name cells or substitute the public 3,682-row
 lineage for the paper-era 3,684-row contract.
 
+Current handoff status (2026-08-30): the nine-view modern screen is complete
+for `gemini-3.5-flash` and `gemini-3.5-flash-lite` (5,598 terminal rows per
+model) and is summarized in `local_agent/MODERN_FULL_RECEIPT.md`. The modern
+analyzer used the raw 3,718 six-name nonblank population and did not apply the
+historical exclusion. The `gemini-3.7-flash` route is blocked by HTTP 403 and
+the Qwen route by HTTP 500 endpoint-not-found. Raw images, rendered views,
+responses, and ledgers remain outside Git; current aggregate tables and C1–C9
+figures are release-safe handoff artifacts.
+
 ## Data policy
 
 - Raw/private archival images should remain outside Git unless their release status is explicitly known to permit repository inclusion.

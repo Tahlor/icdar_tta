@@ -25,6 +25,11 @@ modern = [
   "numpy>=1.24",
   "opencv-python-headless>=4.8",
 ]
+presentation = [
+  "matplotlib>=3.7",
+  "numpy>=1.24",
+  "pandas>=2.0",
+]
 
 [project.scripts]
 icdar-tta-validate = "icdar_tta.validate:main"

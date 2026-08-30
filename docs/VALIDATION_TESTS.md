@@ -22,6 +22,19 @@ targets use the 3,684-row population with its one-blank-row caveat, while
 public/v7 regression tables use 3,682 rows. Discrepancies must be documented
 rather than hidden by changing a constant.
 
+## Current validation record — 2026-08-30
+
+The current repository handoff passes the following checks:
+
+- `PYTHONPATH=src python3 -m unittest discover -s tests -v`: **210 tests, OK**.
+- `PYTHONPATH=src python3 -m icdar_tta.validate --manifest config/data_manifest.local.yaml --portable-manifest config/data_manifest.yaml`: **six PASS gates; zero hard failures**.
+- `PYTHONPATH=src python3 -m unittest tests.test_chart_generation -v`: **six tests, OK**; all nine basenames exist in both SVG and PNG form and deterministic reruns match.
+- Modern screen receipt: **11,196 terminal response rows**, all terminal files hashed and reconciled; raw images, rendered bytes, responses, and ledger remain outside Git.
+
+The modern aggregate tables use the raw 3,718 six-name nonblank population
+and explicitly do not apply the historical 3,684-row exclusion. The 3.7 and
+Qwen routes remain blocked and are represented as explicit unavailable rows.
+
 ## 2. Normalization/CER unit tests
 
 Create small fixture cases covering:

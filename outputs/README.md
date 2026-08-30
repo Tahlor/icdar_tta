@@ -37,7 +37,7 @@ Machine-readable chart/analysis inputs. Candidate files:
 - `augmentation_contribution.csv` — compact contribution analysis for C7;
 - `ensemble_size.csv` — ensemble size, strategy, quality, and coverage series for C8;
 - `failure_examples.csv` — stable qualitative-example lineage and release metadata for C9.
-- `modern_smoke_metadata.csv` — redacted six-row route/parser/usage metadata for the latest label-blind Gemini smoke; raw response bodies remain outside Git.
+- `modern_smoke_metadata.csv` — redacted six-row route/parser/usage metadata for the initial U0 smoke. The complete two-model screen is represented by the modern rows in the aggregate tables and documented in `local_agent/MODERN_FULL_RECEIPT.md`; raw response bodies remain outside Git.
 
 Denominator rule: every table carrying `total_evaluated_fields` or an
 equivalent count must identify its GT lineage. Use “legacy/public v7, 3,682

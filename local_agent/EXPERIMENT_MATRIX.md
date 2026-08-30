@@ -2,8 +2,8 @@
 
 Status: **complete for the two executable modern Gemini models**. The final
 label-blind screen evaluated all 622 documents × nine frozen views for
-`gemini-3.5-flash` and `gemini-3.5-flash-lite` (11,196 terminal rows and zero
-derived provider calls). The requested 3.7 route was not usable in the PA
+`gemini-3.5-flash` and `gemini-3.5-flash-lite` (11,196 terminal rows; the
+offline analyzer made zero additional provider calls). The requested 3.7 route was not usable in the PA
 gateway, so the available 3.5 Flash route was used as the explicitly allowed
 substitute. The Qwen route was attempted only at its Vermont-style boundary
 and failed before any PA scored matrix was claimed.

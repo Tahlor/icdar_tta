@@ -17,6 +17,7 @@ Machine-readable chart/analysis inputs. Candidate files:
 - `augmentation_contribution.csv` — compact contribution analysis for C7;
 - `ensemble_size.csv` — ensemble size, strategy, quality, and coverage series for C8;
 - `failure_examples.csv` — stable qualitative-example lineage and release metadata for C9.
+- `modern_smoke_metadata.csv` — redacted six-row route/parser/usage metadata for the latest label-blind Gemini smoke; raw response bodies remain outside Git.
 
 ## `outputs/figures/`
 

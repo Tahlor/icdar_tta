@@ -32,6 +32,7 @@ The goal is not to reproduce the paper slide-by-slide. The presentation should t
 - [`docs/VALIDATION_TESTS.md`](docs/VALIDATION_TESTS.md): integrity, regression, leakage, cost, and figure-reproducibility checks.
 - [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md): local-first chart generation with a cloud fallback.
 - [`data/README.md`](data/README.md): what belongs in Git versus external storage.
+- [`examples/README.md`](examples/README.md): two release-authorized sample images and matching labels for smoke/visual checks.
 - [`config/data_manifest.example.yaml`](config/data_manifest.example.yaml): machine-readable path manifest template.
 - [`outputs/README.md`](outputs/README.md): expected derived tables and chart artifacts.
 - [`local_agent/TASK.md`](local_agent/TASK.md): deadline-driven project-manager brief for reusing Flash 2 evidence and testing historically promising offset/Grid-Warp ensembles on newer Flash, Flash-Lite, and Qwen models.

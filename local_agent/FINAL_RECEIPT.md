@@ -1,3 +1,12 @@
+# Historical offline handoff receipt — superseded only by the separate smoke addendum
+
+This receipt records the offline preparation state as of 2026-08-29. A later
+small label-blind Gemini smoke is documented in
+`local_agent/MODERN_SMOKE_RECEIPT.md`; its metadata is separate and does not
+alter the historical claims or the closed full-transfer gate below.
+
+---
+
 # Raw per-field database probe — 2026-08-29
 
 Sol 5.6 Max Kiro completed a resumed, bounded metadata pass over the exact

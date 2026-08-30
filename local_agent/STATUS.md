@@ -1,3 +1,23 @@
+# Modern label-blind smoke addendum — 2026-08-29 America/Denver (2026-08-30 UTC)
+
+A subsequent bounded smoke ran after the offline handoff. It used three
+predeclared source documents, the `U0` unchanged-repeat view, and two Gemini
+IDs: `gemini-3.5-flash` and `gemini-3.5-flash-lite`. All six provider requests
+returned `ok`, with six exact returned-model IDs, zero retries, and zero
+recorded failures. The six-row redacted metadata table is
+`outputs/derived/modern_smoke_metadata.csv`; the receipt is
+`local_agent/MODERN_SMOKE_RECEIPT.md`.
+
+This is route/parser/usage evidence only. It does not expose model
+transcription values, source/rendered image bytes, or private response bodies;
+those remain outside Git. It does not test `gemini-3.7-flash` or Qwen, does
+not open ground-truth labels, and does not make an accuracy/CER/precision/
+coverage claim. The full scored transfer gate remains closed.
+
+The pre-call material below remains a historical record of the earlier freeze.
+
+---
+
 # Git publication handoff addendum — 2026-08-29
 
 The portable handoff is prepared for Git publication. It includes the

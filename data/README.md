@@ -7,6 +7,7 @@ This repository is **not** assumed to be the canonical storage location for the 
 Good candidates:
 
 - public dataset index/metadata;
+- explicitly release-authorized representative sample images and labels;
 - portable manifests;
 - small fixtures for unit tests;
 - transform configuration tables;

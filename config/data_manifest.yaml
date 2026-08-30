@@ -1,10 +1,11 @@
 schema_version: 1
 project: icdar_tta
-last_evidence_update: 2026-08-29
+last_evidence_update: 2026-08-30
 
 # Portable, redacted provenance only. Machine-specific locations belong in
-# gitignored config/data_manifest.local.yaml. No provider call or inference was
-# performed to produce this metadata.
+# gitignored config/data_manifest.local.yaml. The inventory was generated
+# offline; a separate six-request label-blind Gemini smoke is recorded in
+# local_agent/MODERN_SMOKE_RECEIPT.md and outputs/derived/modern_smoke_metadata.csv.
 
 sources:
   source_images:
@@ -20,7 +21,7 @@ sources:
     source_collection_serialization: "relative_name<TAB>byte_size<TAB>file_sha256, sorted by relative_name, UTF-8 no BOM, LF with terminal LF"
     mask_stem_cross_check: zero_source_or_mask_stem_differences
     public: mixed
-    release_caveat: A two-image public sample exists, but the full-resolution corpus is not asserted public or releasable here.
+    release_caveat: Two representative release-authorized samples are committed under examples/; the full-resolution corpus is not asserted public or releasable here.
     checksum_manifest: config/source_image_manifest.csv
     checksum_manifest_sha256_sidecar: config/source_image_manifest.sha256
 
@@ -216,19 +217,25 @@ sources:
     caveat: Offline implementation and tests do not claim a provider route, rendered-view lineage, live durable ledger, provider smoke, budget approval, or live-call authorization passed.
 
   modern_responses:
-    description: No modern PA responses exist in this control-plane inventory; no inference has been run.
-    status: not_started
+    description: Six label-blind U0 smoke responses for three predeclared source documents and two Gemini IDs exist in private local storage; only redacted usage and lineage metadata is committed.
+    status: metadata_only_smoke_outside_git
     public: false
+    metadata_path: outputs/derived/modern_smoke_metadata.csv
+    receipt_path: local_agent/MODERN_SMOKE_RECEIPT.md
+    raw_response_content: outside_git
+    raw_source_and_rendered_images: outside_git
 
   modern_model_execution_code:
-    description: Exact locally evidenced requested model IDs; every PA route remains blocked pending the frozen live-call gates.
-    status: ids_evidenced_execution_blocked
+    description: Exact requested model IDs remain frozen; one requested Gemini Lite ID and one related Gemini ID have passed a small label-blind smoke, while the full PA screen remains gated.
+    status: partial_label_blind_smoke_execution_blocked
     public: false
     exact_model_ids:
       gemini_flash: gemini-3.7-flash
       gemini_flash_lite: gemini-3.5-flash-lite
       qwen_vision: sagemaker-qwen3-vl-8b-instruct-fp8
-    caveat: Locally evidenced IDs are not a claim that PA route smoke, returned-ID checks, capacity, or request authorization passed.
+    smoke_evidence_path: local_agent/MODERN_SMOKE_RECEIPT.md
+    smoke_status: gemini-3.5-flash-lite_passed; gemini-3.5-flash_related_only_passed; gemini-3.7-flash_pending; qwen_pending
+    caveat: The smoke is label-blind and U0-only; it is not a claim about accuracy, CER, precision, coverage, render completeness, capacity, or full-screen authorization.
 
   analysis_snapshots:
     description: Historical paper-era analysis snapshots and presentation tables.

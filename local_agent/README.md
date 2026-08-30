@@ -4,6 +4,12 @@ This directory is the control plane for the local data/compute work due by **202
 
 Start with [`TASK.md`](TASK.md). Its priority is the modern-model transfer question: reuse existing Flash 2 evidence to freeze the most promising historical offset and mild Grid Warp settings, run that focused subset on the requested newer Flash, Flash-Lite, and Qwen models, and test whether ensemble agreement predicts correctness or improves quality. No new Flash 2 inference is planned.
 
+The latest small label-blind Gemini route smoke is documented in
+[`MODERN_SMOKE_RECEIPT.md`](MODERN_SMOKE_RECEIPT.md), with redacted usage and
+lineage metadata in `outputs/derived/modern_smoke_metadata.csv`. It is smoke
+evidence only; it does not contain model transcription values or unlock the
+full scored transfer run.
+
 Completion also requires the exact C1–C9 chart set defined in [`docs/CHART_PLAN.md`](../docs/CHART_PLAN.md), with every required SVG/PNG generated from its named table and verified. A partial chart set is not done.
 
 ## Tracked artifacts

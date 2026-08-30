@@ -56,9 +56,15 @@ from icdar_tta.request_ledger import (
 
 MODELS = {
     "gemini-3.7-flash": "gemini",
+    "gemini-3.5-flash": "gemini",
     "gemini-3.5-flash-lite": "gemini",
     "sagemaker-qwen3-vl-8b-instruct-fp8": "qwen",
 }
+DEFAULT_MODELS = (
+    "gemini-3.7-flash",
+    "gemini-3.5-flash-lite",
+    "sagemaker-qwen3-vl-8b-instruct-fp8",
+)
 GEMINI_BASE_ENV = "AI_GATEWAY_GEMINI_BASE"
 QWEN_BASE_ENV = "AI_GATEWAY_QWEN_BASE"
 PROMPT_SHA256 = "fd119108d3ef4dbf2f88984511d9f903b7d4c98b032a95c327a21f713335e48e"
@@ -69,10 +75,15 @@ QWEN_WARMUP_MAX_ATTEMPTS = 81
 QWEN_WARMUP_INTERVAL_SECONDS = 15
 QWEN_MAX_DIMENSION = 1280
 QWEN_JPEG_QUALITY = 85
-GEMINI_ROUTE_VERSION = "gemini_l1_native_inline_jpeg95_v1"
+GEMINI_ROUTE_VERSION = "gemini_l1_native_inline_jpeg95_minimal4096_v2"
 QWEN_ROUTE_VERSION = "qwen_l3_openai_inline_jpeg85_max1280_v1"
 GENERATION_PARAMS = {
-    "gemini": {"temperature": 0, "candidateCount": 1, "maxOutputTokens": 2048},
+    "gemini": {
+        "temperature": 0,
+        "candidateCount": 1,
+        "maxOutputTokens": 4096,
+        "thinkingConfig": {"thinkingLevel": "MINIMAL"},
+    },
     "qwen": {
         "temperature": 0,
         "max_tokens": 2048,
@@ -137,8 +148,10 @@ def gateway_base(env_name: str) -> str:
 class LedgerStore:
     """Thread-safe append-only ledger using the package's validators."""
 
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, accounting_paths: tuple[Path, ...] = ()):
         self.path = path
+        main_path = path.resolve()
+        self.accounting_paths = tuple(candidate.resolve() for candidate in accounting_paths if candidate.resolve() != main_path)
         self.lock = threading.RLock()
         self.records = read_ledger(path)
         validate_history(self.records)
@@ -147,6 +160,15 @@ class LedgerStore:
             key = (record["doc_id"], record["model_id"], record["transform_id"], record["sample_index"])
             self.latest_by_key[key] = record
         self.provider_attempts = sum(1 for record in self.records if record["status"] == "submitted")
+        self.accounted_provider_attempts: dict[Path, int] = {}
+        for accounting_path in self.accounting_paths:
+            if not accounting_path.exists():
+                continue
+            accounting_records = read_ledger(accounting_path)
+            validate_history(accounting_records)
+            count = sum(1 for record in accounting_records if record["status"] == "submitted")
+            self.accounted_provider_attempts[accounting_path] = count
+            self.provider_attempts += count
 
     def latest(self, key: tuple[str, str, str, int]) -> dict[str, Any] | None:
         with self.lock:
@@ -586,9 +608,10 @@ def main() -> int:
     parser.add_argument("--render-manifest", required=True, type=Path)
     parser.add_argument("--local-manifest", default=Path("config/data_manifest.local.yaml"), type=Path)
     parser.add_argument("--ledger", default=Path("local_agent/runtime/modern_request_ledger.jsonl"), type=Path)
+    parser.add_argument("--accounting-ledger", action="append", default=[], type=Path, help="additional ledger(s) counted toward the shared hard cap")
     parser.add_argument("--raw-root", type=Path, default=None)
     parser.add_argument("--workers", type=int, default=8)
-    parser.add_argument("--models", default=",".join(MODELS), help="comma-separated exact model IDs")
+    parser.add_argument("--models", default=",".join(DEFAULT_MODELS), help="comma-separated exact model IDs")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
     if args.workers <= 0:
@@ -648,7 +671,7 @@ def main() -> int:
     auth_path = Path("local_agent/runtime/live_authorization.json")
     auth_path.parent.mkdir(parents=True, exist_ok=True)
     auth_path.write_text(canonical_json(auth) + "\n", encoding="utf-8")
-    store = LedgerStore(args.ledger)
+    store = LedgerStore(args.ledger, tuple(args.accounting_ledger))
     result_writer = ResultWriter(raw_root / "normalized")
     failure_counter = FailureCounter()
     stop_event = threading.Event()
@@ -678,6 +701,7 @@ def main() -> int:
         "render_rows": len(selected_rows),
         "planned_scored_requests": len(tasks),
         "provider_attempts_in_ledger": store.provider_attempts,
+        "accounting_ledgers": [str(path) for path in args.accounting_ledger],
         "hard_cap": HARD_CAP,
         "failure_counter": {"total": failure_counter.total_failures, "consecutive_at_end": failure_counter.consecutive},
         "ledger": str(args.ledger),

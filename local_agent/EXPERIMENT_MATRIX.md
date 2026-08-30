@@ -4,6 +4,11 @@ Status: **conditions frozen; live execution BLOCKED**
 Freeze date: 2026-08-29
 Scope: deadline screen only, 622 documents × 9 views × 3 requested modern models. No provider, network, or inference call was made in this audit.
 
+This remains the pre-call freeze. A later six-request, label-blind `U0`
+Gemini smoke is recorded separately in `MODERN_SMOKE_RECEIPT.md`; it does not
+change the three-model/full-nine-view matrix or make a label-based result
+claim.
+
 ## Cohort and evaluation roles
 
 - Cohort: the fixed Pennsylvania death-record cohort of 622 source documents. A provider call is blocked until a portable `doc_id`/source-image SHA-256 manifest proves exactly 622 unique inputs.
@@ -18,7 +23,7 @@ Scope: deadline screen only, 622 documents × 9 views × 3 requested modern mode
 | Requested planning family | Exact executable ID evidenced locally | Local evidence | Screen status |
 |---|---|---|---|
 | Flash 3.7 | `gemini-3.7-flash` | A 10-request Milan L3 batch canary returned `modelVersion=gemini-3.7-flash` in all 10 provider-output rows | **Pending PA route smoke and returned-ID check** |
-| Flash-Lite 3.5 | `gemini-3.5-flash-lite` | Vertex global batch evidence records `publishers/google/models/gemini-3.5-flash-lite`; completed 20/20, 36/36, and 500/500 returned-model checks are recorded | **Pending PA route smoke and returned-ID check** |
+| Flash-Lite 3.5 | `gemini-3.5-flash-lite` | Vertex global batch evidence records `publishers/google/models/gemini-3.5-flash-lite`; completed 20/20, 36/36, and 500/500 returned-model checks are recorded; a three-document PA `U0` smoke returned the exact ID | **U0 smoke passed; full nine-view screen still pending** |
 | Vermont Qwen vision | `sagemaker-qwen3-vl-8b-instruct-fp8` | Exact model field occurs in Vermont runner and raw JSONL metadata; SageMaker L3 OpenAI-compatible chat route | **Pending PA smoke, capacity check, and budget-safe keepalive change** |
 
 Related but **not substitutes**: `gemini-3.5-flash` and `gemini-3.1-flash-lite` have 500-row local raw-response evidence and direct L1 runner evidence. They do not replace either requested Gemini model. `models/gemini-2.0-flash` is historical reuse-only and is excluded from every new-call row.

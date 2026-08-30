@@ -1,162 +1,55 @@
 # 15-minute presentation outline
 
-Status: working narrative. The deck should be rehearsed to roughly **13.5–14 minutes**, leaving margin inside the 15-minute speaking slot and preserving the separate 5-minute Q&A.
+Status: **storyboard-first revision**. The authoritative next-deck plan is now [`PRESENTATION_STORYBOARD.md`](PRESENTATION_STORYBOARD.md). Do not build another visual deck until the text-only storyboard is reviewed and approved.
 
-Current evidence: the two-model nine-view modern screen is complete, the
-public/v7 and paper/v9/v10 GT lineages are explicitly separated, and the
-predeclared modern 95% precision target was not reached. Use
-`local_agent/MODERN_FULL_RECEIPT.md` as the source for modern numbers and do
-not present the legacy/public-v7 chart tables as a paper-lineage recomputation.
+The next draft deck should contain **editable placeholder text only**: every slide should describe the intended visual, chart axes, series, image/crop requirements, evidence status, and speaker intent. Do not insert fake charts or schematic data art. When real visuals are eventually added, they must come from committed derived tables or explicitly released image/crop assets.
+
+## Current evidence to respect
+
+- Ground-truth lineage is resolved in [`GT_LINEAGE.md`](GT_LINEAGE.md): the paper-era selector is six name fields, and the historical `Self*` exclusion rule yields `622 × 6 − 24 × 2 = 3,684` paper-era row slots, with one blank-row caveat in v9/v10 artifacts.
+- Existing historical precision/coverage charts that use the v7 reliability tables remain labeled as legacy/public 3,682-row products, not paper-v9/v10 recomputations.
+- The modern transfer screen is complete for `gemini-3.5-flash` and `gemini-3.5-flash-lite`: 622 documents × 9 frozen views = 5,598 terminal rows per model.
+- The requested `gemini-3.7-flash` PA route returned HTTP 403; Qwen returned HTTP 500 endpoint-not-found. Do not silently omit those limitations.
+- Modern visual TTA reduces error correlation relative to unchanged repetition and improves consensus CER for both executed models.
+- The predeclared 95% accepted-field precision target was not reached by any modern strategy. Do not claim a modern 95% auto-accept operating point.
+- The regenerated C1–C9 chart set now includes modern rows in C1, C2, C3, C4, C6, and C8. C5 remains historical shift evidence; C7 remains descriptive historical selection evidence; C9 remains blocked for release-safe qualitative examples.
 
 ## Narrative thesis
 
-**MLLM document transcription is surprisingly sensitive to irrelevant visual changes. Instead of treating that instability only as a bug, we can use carefully chosen perturbations to create useful disagreement, improve consensus, and estimate confidence without model internals. The practical objective is to reduce manual review at a fixed quality target.**
+MLLM document transcription is sensitive to seemingly irrelevant visual changes. Rather than treating that instability only as a bug, we can use carefully chosen perturbations to create useful disagreement, improve consensus, and obtain a black-box agreement signal. The practical objective is not maximum benchmark accuracy alone; it is reducing manual review at a validated quality target.
 
-## Proposed sequence
+## Main sequence
 
-### 1. Hook — same document, different answer (0:00–0:45)
+1. **Hook:** same document, visually near-equivalent views, different transcription.
+2. **Problem:** accuracy is not enough; deployment needs a trusted accept/review decision.
+3. **Method:** source image → visual variants → same MLLM → aligned strings → consensus + raw agreement.
+4. **Perturbation palette:** unchanged repeats, pad/shift, grid warp, blur/resize/noise, and non-visual sampling controls; explicitly note limited compound-transform search.
+5. **Consensus mechanics:** small alignment/voting example; avoid dense equations.
+6. **Evaluation lineage:** paper 3,684 row slots, v7 legacy 3,682 rows, modern 3,718 raw nonblank fields.
+7. **Historical headline:** paper-era Gemini 2.0 Flash improves exact field accuracy and CER.
+8. **Useful diversity (C1):** individual error versus error correlation; temperature/repetition is a control, visual perturbation is the interesting lever.
+9. **Correlation intuition (C2):** `N_eff = N / (1 + (N - 1) rho)`; ten calls are not ten independent opinions if errors correlate.
+10. **Precision/coverage (C3):** accepted-field precision versus automatic coverage; historical confidence signal is promising, modern 95% target is not met.
+11. **Shift periodicity (C5 redesign):** real measured agreement versus shift, preferably excluding/insetting zero; highlight 16 px multiples and avoid proprietary-internals overclaim.
+12. **Modern transfer:** two executable Gemini 3.5 models show consensus/CER gains and lower visual-error correlation; 3.7/Qwen remain route-blocked.
+13. **Cost/review frontier (C4):** request/token-based placeholder until a dated pricing snapshot exists; do not invent dollars.
+14. **Takeaways:** visual perturbations expose useful instability; error diversity matters; confidence/selectivity is promising but must be validated.
 
-Show one historical name/record crop and several visually near-equivalent views that produce different transcriptions.
+## Backup sequence
 
-Question: **Why does moving or slightly warping the same information change the answer?**
+- Ground-truth lineage and blank-row caveat.
+- Modern run accounting, route blockers, and parse accounting.
+- Full chart catalog C1–C9 with evidence status.
+- Augmentation contribution C7, explicitly descriptive not causal.
+- Failure examples C9, currently blocked pending release-safe crops/predictions.
+- Temperature/sampling details.
+- FFT/shift diagnostic details.
+- Cost/pricing assumptions once sourced.
 
-Do not open with related work or a taxonomy of OCR/HTR methods.
+## Immediate tasks
 
-### 2. Problem — accuracy is not enough (0:45–2:00)
-
-Three points:
-
-- MLLMs are strong zero/few-shot document transcribers.
-- Historical documents still produce errors/hallucinations.
-- Closed/proprietary models often do not expose a confidence signal we trust enough for automation.
-
-Research question: **Can the model's instability become an external confidence signal?**
-
-### 3. Method in one picture (2:00–3:00)
-
-Original image -> several label-preserving visual variants -> same MLLM -> several strings -> Needleman–Wunsch-style alignment and character voting -> consensus + agreement confidence.
-
-Message: **same model, no retraining, black-box API, multiple views.**
-
-### 4. What was perturbed? (3:00–3:45)
-
-One compact visual showing blur/resize, noise, padding/shift, grid warp, resize, and the non-visual sampling/temperature control.
-
-Do not spend time on the full parameter grid.
-
-Explicit limitation: **we varied perturbation families across ensemble members; we did not systematically search arbitrary compound transforms inside a single image.** Blur+resize and common resize preprocessing are specific exceptions.
-
-### 5. Consensus and confidence (3:45–4:45)
-
-Use a tiny aligned-string example. Explain Needleman–Wunsch in one sentence and show that per-character vote fractions create a black-box agreement score.
-
-Avoid a dense formal derivation here.
-
-### 6. Experimental context + headline result (4:45–5:45)
-
-Very short setup:
-
-- 622 Pennsylvania death certificates
-- 3,684 paper-era six-field evaluation rows (the v9/v10 artifact retains one blank row; see [`GT_LINEAGE.md`](GT_LINEAGE.md))
-- historical paper-era model: Gemini 2.0 Flash
-- cross-validated augmentation selection
-
-Keep the current repository chart package labeled as legacy/public v7 when it
-uses the 3,682-row tables; do not present those tables as a paper/v9/v10
-3,684-row recomputation until the dedicated paper-lineage rerun is complete.
-
-Show the headline accuracy/CER improvement as large numbers, not as a full table. This establishes that the method works, then move on.
-
-### 7. Where does useful diversity come from? (5:45–7:15)
-
-New chart: individual error vs pairwise error correlation, including temperature/repeated-sampling controls and visual transforms.
-
-Key contrast:
-
-- unchanged/repeated or resize-like predictions can remain highly correlated;
-- increasing sampling randomness can create diversity but may damage individual accuracy;
-- padding and grid warp create more useful visual diversity.
-
-Message: **randomness is not automatically useful diversity.**
-
-### 8. Slightly mathy slide — ten copies of the same mistake (7:15–8:30)
-
-Show
-
-`N_eff = N / (1 + (N - 1) rho)`
-
-for a stylized correlated-error model, with a curve for `N=10` and empirical augmentation-family correlations annotated.
-
-Message: **ensemble size on the invoice is not the same as effective independent evidence.**
-
-State explicitly that this is an intuition/model, not a complete theory of structured MLLM errors.
-
-### 9. Grid warp is valuable for confidence (8:30–10:00)
-
-New precision-vs-auto-acceptance/coverage curve.
-
-The key deployment story is not that grid warp is the most accurate single transformation. It is that its less-correlated mistakes can make high agreement more selective, giving strong precision when we auto-accept only the fields the ensemble strongly agrees on.
-
-Compare at least Pad, Grid Warp, and a practical mixed ensemble if supported by the recomputed data.
-
-### 10. Why does shifting work? (10:00–11:15)
-
-New simplified shift-periodicity plot: agreement vs pixel displacement, with 16-pixel markers/reveal. Keep the FFT and coarse diagnostic detail in backup unless needed.
-
-Interpret carefully as evidence consistent with sensitivity to patch/tile alignment, not proof of undocumented model internals.
-
-### 11. Cost vs manual review (11:15–12:45)
-
-New cost/review frontier.
-
-Frame the objective as:
-
-**How much inexpensive inference do we buy to avoid one human review while holding accepted-field precision fixed?**
-
-Show ensemble size/adaptive-sampling points and the measured modern-model
-alternatives where they clarify the review tradeoff. The current modern run
-has provider-reported token usage but no portable pricing snapshot, so do not
-invent dollar costs; label the comparison by request/token budget instead.
-
-### 12. Measured modern-model replication (12:45–13:30)
-
-Show the completed nine-view PA screen for `gemini-3.5-flash` and
-`gemini-3.5-flash-lite` (622 documents per model). The exact metrics and
-lineage are in `local_agent/MODERN_FULL_RECEIPT.md` and the derived tables.
-
-The measured message is deliberately mixed:
-
-- Visual variants reduce error correlation relative to unchanged repetition,
-  and consensus CER improves for both models.
-- Pad is the strongest individual tested family on consensus accuracy in this
-  screen; Grid Warp is useful but is not the top-accuracy family.
-- The predeclared 95% accepted-field precision target is not reached by any
-  modern strategy, so there is no claimed modern auto-accept operating point.
-- `gemini-3.5-flash` is the allowed substitute after the 3.7 PA route returned
-  HTTP 403; Qwen's route returned HTTP 500 endpoint-not-found. These are
-  honest route limitations, not silently omitted models.
-
-Success is **not** defined as reproducing a fixed accuracy gain. The useful
-replication result is that perturbation diversity and consensus effects can be
-measured on modern models, while the deployment precision target remains an
-open limitation.
-
-### 13. Takeaways (13:30–14:00)
-
-1. Small visual perturbations can improve consensus without retraining.
-2. **Error diversity matters as much as member accuracy.**
-3. The practical payoff is a black-box confidence signal that can reduce manual review.
-
-Closing line concept: **Do not just ask the model again; ask it a meaningfully different visual version of the same question and measure whether the answers agree.**
-
-## Likely backup slides
-
-- Full augmentation-family table.
-- Temperature sweep details.
-- Full calibration metrics (ECE/ACE/Brier/isotonic).
-- Fine + coarse shift plots and FFT.
-- Consensus algorithm details.
-- Failure examples/unanimous errors.
-- Full modern-model results, including models that do not follow the main pattern.
-- Exact cost assumptions/pricing snapshot.
-- Compound-transform limitation/future search space.
+1. Use [`PRESENTATION_STORYBOARD.md`](PRESENTATION_STORYBOARD.md) to create a text-only Google Slides placeholder deck.
+2. Redesign C5 from real `shift_agreement.csv` data so the 16-pixel story is understandable.
+3. Find or define a release-safe example protocol for the opening hook and failure-example backup.
+4. Decide whether historical confidence and modern target failure need separate visual slides in the final deck.
+5. Add pricing only after a dated source/usage snapshot is committed.

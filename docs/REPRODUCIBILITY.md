@@ -17,6 +17,23 @@ paper/v9/v10 lineage and the public/v7 lineage use different processed GT
 files and different emitted row populations (3,684 versus 3,682). The raw
 3,718 `_edt` cell count is descriptive, not a metric denominator.
 
+## Current modern-screen handoff
+
+The current nine-view transfer screen is complete for
+`gemini-3.5-flash` and `gemini-3.5-flash-lite`, with 5,598 terminal rows per
+model. Its analysis deliberately uses the 3,718 raw six-name nonblank
+population and does not apply the historical 3,684-row exclusion. The
+predeclared 95% accepted-field precision target was not reached. The
+`gemini-3.7-flash` route is blocked by HTTP 403 and the Qwen route by HTTP 500
+endpoint-not-found; no full screen is claimed for either.
+
+The raw source/render/response trees and private ledger remain outside Git.
+The release-safe handoff is the redacted receipt
+[`../local_agent/MODERN_FULL_RECEIPT.md`](../local_agent/MODERN_FULL_RECEIPT.md)
+plus the merged CSV tables under `outputs/derived/`. The two-model screen does
+not constitute a paper-lineage historical recomputation; preserve the GT
+lineage labels when comparing it with the v7 or v9/v10 products.
+
 ## Cloud-ready chart contract
 
 Chart generation should be deliberately decoupled from raw-image access.

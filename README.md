@@ -38,6 +38,24 @@ The goal is not to reproduce the paper slide-by-slide. The presentation should t
 - [`outputs/README.md`](outputs/README.md): expected derived tables and chart artifacts.
 - [`local_agent/TASK.md`](local_agent/TASK.md): deadline-driven project-manager brief for reusing Flash 2 evidence and testing historically promising offset/Grid-Warp ensembles on newer Flash, Flash-Lite, and Qwen models.
 
+## Current evidence status — 2026-08-30
+
+- Ground-truth lineage is resolved: the historical metric selector is six
+  name fields, the newer paper/v9/v10 rule yields `622 × 6 − 24 × 2 = 3,684`
+  row slots with one retained blank row, and the public/v7 release is a
+  separate 3,682-row lineage. See [`docs/GT_LINEAGE.md`](docs/GT_LINEAGE.md).
+- The nine-view modern screen is complete for `gemini-3.5-flash` and
+  `gemini-3.5-flash-lite` (5,598 terminal rows per model). The analyzer used
+  3,718 raw six-name nonblank cells and did not apply the historical 3,684-row
+  exclusion; this is explicit in the derived-table metadata.
+- The predeclared 95% accepted-field precision target was not reached. The
+  `gemini-3.7-flash` route returned HTTP 403 and the Qwen route returned HTTP
+  500 endpoint-not-found, so neither has a full scored PA screen.
+- All C1–C9 chart files are generated from the current derived tables. The
+  complete run, model metrics, route failures, ledger accounting, and private
+  artifact locations are recorded in
+  [`local_agent/MODERN_FULL_RECEIPT.md`](local_agent/MODERN_FULL_RECEIPT.md).
+
 ## Issue roadmap
 
 1. [#1 — Inventory historical data/code/run artifacts](https://github.com/Tahlor/icdar_tta/issues/1): local-agent first task; recover paths and provenance before new inference.

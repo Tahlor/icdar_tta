@@ -751,14 +751,14 @@ def write_local_manifest(path: Path, pa_root: Path, analysis_root: Path, sources
         "  segmentation_masks:", "    configured_windows_root: null",
         "    resolved_wsl_root: null", "    status: blocked_mask_root_outside_authorized_roots_and_coverage_unverified",
         "  usage_logs:", "    path: null", "    status: blocked_not_located",
-        "  modern_responses:", "    path: null", "    status: blocked_not_run",
+        "  modern_responses:", "    path: null", "    status: managed_by_separate_modern_screen_receipt",
         "  modern_models:",
         f"    gemini_flash: {MODERN_MODEL_IDS[0]}", f"    gemini_flash_lite: {MODERN_MODEL_IDS[1]}",
-        f"    qwen_vision: {MODERN_MODEL_IDS[2]}", "    status: ids_evidenced_execution_blocked",
+        f"    qwen_vision: {MODERN_MODEL_IDS[2]}", "    status: two_gemini_35_screens_complete_other_routes_blocked",
         "notes:", "  - No credentials or secrets are stored here.",
         "  - The current script intentionally recomputes legacy/public v7 tables from the WARP/SHIFT sources; it does not yet emit paper-lineage v9/v10 tables.",
         "  - See docs/GT_LINEAGE.md for the six fields, 24-record historical exclusion, 3684 row formula, and one blank-row caveat.",
-        "  - Source-image and mask coverage gates remain closed; no inference is authorized.",
+        "  - This historical-only command does not call providers; the separate modern screen is documented in local_agent/MODERN_FULL_RECEIPT.md.",
     ])
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

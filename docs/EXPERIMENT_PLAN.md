@@ -13,6 +13,22 @@ The new-inference deliverable is the modern-model transfer test: apply a frozen 
 
 The full design below remains the stronger follow-up. For the 2026-08-30 deadline and 20,000-request cap, `local_agent/TASK.md` defines a smaller predeclared screen with three unchanged, three offset/Pad, and three mild Grid Warp views per available modern model.
 
+## Current deadline result
+
+The frozen nine-view screen completed for `gemini-3.5-flash` and
+`gemini-3.5-flash-lite` (5,598 terminal rows per model). `gemini-3.5-flash`
+was the allowed substitute after the requested 3.7 PA route returned HTTP 403;
+the Qwen route returned HTTP 500 endpoint-not-found. The modern analyzer used
+the raw six-name nonblank count of 3,718 and did not apply the historical
+3,684-row exclusion. Both models improved consensus relative to their
+individual predictions and reduced error correlation for visual variants, but
+neither reached the predeclared 95% accepted-field precision target. Exact
+metrics and accounting are in
+[`../local_agent/MODERN_FULL_RECEIPT.md`](../local_agent/MODERN_FULL_RECEIPT.md).
+
+The 10-member design described below remains the stronger follow-up plan. It
+was not silently substituted for the completed nine-view deadline screen.
+
 ## Phase 0 — inventory before inference
 
 Do not spend API money until the local data inventory is complete.

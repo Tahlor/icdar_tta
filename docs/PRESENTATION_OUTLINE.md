@@ -2,6 +2,12 @@
 
 Status: working narrative. The deck should be rehearsed to roughly **13.5–14 minutes**, leaving margin inside the 15-minute speaking slot and preserving the separate 5-minute Q&A.
 
+Current evidence: the two-model nine-view modern screen is complete, the
+public/v7 and paper/v9/v10 GT lineages are explicitly separated, and the
+predeclared modern 95% precision target was not reached. Use
+`local_agent/MODERN_FULL_RECEIPT.md` as the source for modern numbers and do
+not present the legacy/public-v7 chart tables as a paper-lineage recomputation.
+
 ## Narrative thesis
 
 **MLLM document transcription is surprisingly sensitive to irrelevant visual changes. Instead of treating that instability only as a bug, we can use carefully chosen perturbations to create useful disagreement, improve consensus, and estimate confidence without model internals. The practical objective is to reduce manual review at a fixed quality target.**

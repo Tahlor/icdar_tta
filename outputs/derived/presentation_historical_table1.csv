@@ -1,0 +1,9 @@
+strategy,individual_cer_pct,error_correlation,consensus_cer_10_pct,ensemble_cer_gain_pp
+Temperature 0.5,9.3,0.871,8.7,0.6
+Temperature 1.0,10.2,0.780,8.8,1.4
+Temperature 2.0,11.9,0.715,9.3,2.6
+Blur + Resize,9.1,0.737,8.0,1.1
+Gaussian Noise,9.3,0.745,8.0,1.3
+Grid Warp,12.4,0.575,8.0,4.4
+Resize,8.8,0.973,8.7,0.1
+Pad,9.0,0.726,7.4,1.6

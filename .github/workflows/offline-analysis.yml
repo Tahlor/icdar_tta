@@ -52,7 +52,17 @@ jobs:
         run: python -m unittest discover -s tests -v
 
       - name: Validate portable manifest and derived artifacts
-        run: python -m icdar_tta.validate
+        shell: bash
+        run: |
+          set +e
+          python -m icdar_tta.validate
+          code=$?
+          set -e
+          # Exit 2 means all checkable gates passed but the gitignored local
+          # data manifest is intentionally unavailable on the cloud runner.
+          if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+            exit "$code"
+          fi
 
       - name: Regenerate presentation charts
         run: python scripts/generate_charts.py --derived-dir outputs/derived --figure-dir outputs/figures

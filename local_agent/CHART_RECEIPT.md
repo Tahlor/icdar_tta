@@ -87,26 +87,30 @@ Rows exclude the header.
 
 | Output | Bytes | Dimensions | SHA-256 |
 |---|---:|---:|---|
-| `outputs/figures/01_useful_diversity.png` | 15,166 | 1200x675 | `133c6ddd6180f1e9b72c3539503c75ba47eddde99ca16b9445ad04f0d8391138` |
-| `outputs/figures/01_useful_diversity.svg` | 8,589 | 1200x675 | `b9a60565fa1b64ce0ac65275298592fad66539cced29e6393596ea04374e2a9a` |
-| `outputs/figures/02_effective_sample_size.png` | 14,403 | 1200x675 | `5f65a6fc2fa5728b9c832bba8d31c5018dc274f1926535957f40965ebdb2752f` |
-| `outputs/figures/02_effective_sample_size.svg` | 9,246 | 1200x675 | `ca41c9316b788f493792ebf5a8799438948e6b68086b2f155ce802d773d7b7b0` |
-| `outputs/figures/03_precision_coverage.png` | 14,941 | 1200x675 | `2039ec6aa7e713de94dd814925e367f86dfb25b4663efd30b1bac7b87024b0a7` |
-| `outputs/figures/03_precision_coverage.svg` | 89,231 | 1200x675 | `77e103f790bab436e2e4ee2befd3806bdd1d5a77ff640b43557feec3feb1d5ec` |
-| `outputs/figures/04_cost_review_frontier.png` | 12,429 | 1200x675 | `c149623cb2d1b7121e27a4e978a06861dd7a54779b7a0b0fb71519b5aa8e2705` |
-| `outputs/figures/04_cost_review_frontier.svg` | 5,862 | 1200x675 | `70f2053cc9c86b2fe5e52c2d075cc9492548856b7357c7d199514d23a243a43b` |
+| `outputs/figures/01_useful_diversity.png` | 15,393 | 1200x675 | `60b93fc362f445bd89d4784fdd7da6a421573b4fb1c5c867cd69b70c93da7b96` |
+| `outputs/figures/01_useful_diversity.svg` | 9,453 | 1200x675 | `397b15b01cad2917555695fb1469435edbec545e0e703e16404c2b1d34e64d67` |
+| `outputs/figures/02_effective_sample_size.png` | 14,626 | 1200x675 | `560550936a76a3ce706690bbd89b17a1f91d3ff274eb67ca60686caec8744b49` |
+| `outputs/figures/02_effective_sample_size.svg` | 10,149 | 1200x675 | `70b8208f3e687e789250b3f4acc1ab75bc8d2c05e30beb7a9aea9fe90e2c3fa0` |
+| `outputs/figures/03_precision_coverage.png` | 17,801 | 1200x675 | `845e9c951e2eedc09414b8667f3d4318dfb8b105c7fe686ef65b4c874bff4068` |
+| `outputs/figures/03_precision_coverage.svg` | 127,676 | 1200x675 | `da650840315f45d0567859abcd7134f662f2642041a62c6eeb4c05cd057cb5b1` |
+| `outputs/figures/04_cost_review_frontier.png` | 12,907 | 1200x675 | `9e682cf94c62e446cb0f8faedfa1e9e5309b2d15f19c0d61361d1ec121231ab3` |
+| `outputs/figures/04_cost_review_frontier.svg` | 6,224 | 1200x675 | `cf5fe081ca48b8a033c024bf5dafa9b2dd62b4aaca7779b364c390fbbab0e84e` |
 | `outputs/figures/05_shift_periodicity.png` | 16,359 | 1200x675 | `50d12e231c7665364f401d71ef016ce7aaa659f15e4964616b4b91b074a17a48` |
 | `outputs/figures/05_shift_periodicity.svg` | 11,912 | 1200x675 | `9a10c3507a7f890f5439302abb389274328de1a41ff62fd05aaed560a1e3d24b` |
-| `outputs/figures/06_cross_model_coverage.png` | 10,024 | 1200x675 | `8fd911f5dffcdac45443e1321da750eded86b2887359e72a82321de483ad1c2f` |
-| `outputs/figures/06_cross_model_coverage.svg` | 7,774 | 1200x675 | `d03c8f08ad9ecf454030deaaa34b0c31ecf71fe74d8b12670fb0db5576781e63` |
+| `outputs/figures/06_cross_model_coverage.png` | 10,524 | 1200x675 | `19427b31969d8d48baed07ec05d13b105df142cc8bdfb41f67651a0c2be3d044` |
+| `outputs/figures/06_cross_model_coverage.svg` | 9,048 | 1200x675 | `7d8444ad4ccd56eac555bf28516646ff0bfd2cf2317927cd40fc456e5e4c6ae8` |
 | `outputs/figures/07_augmentation_contribution.png` | 9,639 | 1200x675 | `b2b5f644420a87e9ef7a71b4b7fb58be9fad7c964c69039f249e73a2fe7d29ab` |
 | `outputs/figures/07_augmentation_contribution.svg` | 5,632 | 1200x675 | `d617be5e1772d1238178982a4e58c0e554917b13cd1bd33468b866474614b575` |
-| `outputs/figures/08_ensemble_size.png` | 14,625 | 1200x675 | `60f2a16a30aeaccd1152a06fe049ba30b9c7c18fe5b14901ba84d3819872f23a` |
-| `outputs/figures/08_ensemble_size.svg` | 9,251 | 1200x675 | `fcbae1f29311d9c3074b7deb2107d7906902d0129df5d41b4eec50df6e982798` |
+| `outputs/figures/08_ensemble_size.png` | 17,138 | 1200x675 | `97d00ad54c02738825e87fb3ecdd4d1bf662cccb1a4999e59ad9796bef405e46` |
+| `outputs/figures/08_ensemble_size.svg` | 12,157 | 1200x675 | `c6702cd82f1021b92f855cafbba97aedb27e30685458f899022e6d73a7e46d7d` |
 | `outputs/figures/09_failure_examples.png` | 11,194 | 1200x675 | `22b74fc1c500f421b8f270ed0fccfbc52c4fa8638aab0b72a5b02fd21eebf00f` |
 | `outputs/figures/09_failure_examples.svg` | 4,005 | 1200x675 | `e7a0687d203010419600105ccccb4443f693b51f07372ae7e64a9f426b1148bb` |
 
-Byte sizes/hashes for `04_cost_review_frontier.png/.svg` changed from the prior receipt because of the C4 row-label-overlap fix described below; all other 16 files (including `03_precision_coverage.png/.svg`, whose bytes/hashes had changed in the prior heading-layout pass and are unchanged by this pass) are identical to the prior receipt. Confirmed via an independent temporary rerun into a fresh `mktemp -d` directory: all 18 files in that rerun are byte-identical (`cmp -s`) to the corresponding files in `outputs/figures/`.
+The table above is the current 2026-08-30 chart-set provenance after
+regenerating from the merged historical-plus-modern derived tables. An
+independent temporary rerun into a fresh directory confirmed that all 18
+files are byte-identical (`cmp -s`) to the corresponding files in
+`outputs/figures/`.
 
 ## Verification and portability notes
 
@@ -114,14 +118,20 @@ Byte sizes/hashes for `04_cost_review_frontier.png/.svg` changed from the prior 
 
 `python3 -m compileall -q scripts tests` completed with no output (all `.py` files under both directories compile cleanly).
 
-Full-repository `python3 -m unittest discover -s tests` currently reports `Ran 16 tests in 2.360s` with 6 import errors (`ModuleNotFoundError: No module named 'icdar_tta'`) because `src/icdar_tta` is a `src`-layout package (`pyproject.toml`, `[tool.setuptools.packages.find] where = ["src"]`) that is not installed or on `PYTHONPATH` in this environment; this affects `tests/test_metrics_agreement.py`, `tests/test_normalize.py`, `tests/test_schema_and_parser.py`, `tests/test_validate_cli.py`, `tests/test_consensus_alignment.py`, and `tests/test_lineage_manifest.py`, none of which are chart-generation files. This is a pre-existing environment condition unrelated to the chart task and outside the files owned by this receipt. Running the identical discovery with `PYTHONPATH=src` set (no file changes) passes fully: `Ran 158 tests in 2.375s`, `OK`, confirming the full suite is correct given a normal editable/installed environment. `tests/test_chart_generation.py` itself has no `icdar_tta` dependency and passes under both invocations.
+The complete suite was also rerun with `PYTHONPATH=src`: `Ran 210 tests` and
+`OK`. `tests/test_chart_generation.py` passes independently and the chart
+renderer remains standard-library-only. A bare discovery without the
+`src`-layout path is not the supported invocation; use the documented
+`PYTHONPATH=src` command.
 
 An explicit temporary rerun (`python3 scripts/generate_charts.py --derived-dir outputs/derived --figure-dir <mktemp -d>`) followed by `cmp -s` against every one of the 18 files in `outputs/figures/` showed 18/18 byte-identical, 0 mismatches. The temporary directory was removed after comparison.
 
-All paths in this receipt and chart metadata are repository-relative. C4, C6,
-and C9 are truthful blocked/partial evidence artifacts; their existence does
-not resolve the missing usage/pricing, modern inference, paper-lineage
-recomputation, or release-authorization blockers.
+All paths in this receipt and chart metadata are repository-relative. C4 and
+C9 remain partial/blocked because pricing and release-authorized qualitative
+examples are unavailable. C6 contains measured modern target failures plus
+explicit route blockers; it does not imply a modern 95% operating point. The
+chart set does not resolve the separate paper-lineage recomputation or
+historical exact-render limitations.
 
 ## Visual inspection (post C4 row-label-overlap fix)
 

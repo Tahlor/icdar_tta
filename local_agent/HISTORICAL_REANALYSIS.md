@@ -1,5 +1,22 @@
 # Historical Gemini 2.0 Flash re-analysis
 
+## Current modern-screen addendum — 2026-08-30
+
+This report now accompanies, rather than gates, the completed modern transfer
+screen. The private nine-view run produced 5,598 terminal rows for each of
+`gemini-3.5-flash` and `gemini-3.5-flash-lite`; the derived modern rows are
+merged into the repository tables and are identified by their own denominator
+status. The analyzer used 3,718 raw six-name nonblank cells and did not apply
+the historical 3,684-row exclusion. The modern 95% accepted-field precision
+target was not reached. The 3.7 Gemini route (HTTP 403) and Qwen route (HTTP
+500 endpoint-not-found) have no full scored screen. See
+[`MODERN_FULL_RECEIPT.md`](MODERN_FULL_RECEIPT.md).
+
+The historical products below remain deliberately legacy/public v7 outputs,
+and the paper-lineage recomputation remains a separate future product. The
+historical-only command in this report should write to a separate output
+directory if the merged modern tables are to be preserved.
+
 ## GT-lineage addendum — 2026-08-30
 
 The tables in this report were generated from the legacy/public v7 evidence and
@@ -11,7 +28,7 @@ retain one blank row despite the configured `f_gt_missing: 0`. This report has
 not silently converted its v7 tables to the paper-lineage population. See
 [`docs/GT_LINEAGE.md`](../docs/GT_LINEAGE.md).
 
-Status: **offline legacy-v7 products generated; paper-lineage recomputation and modern screen remain pending**. This report records only aggregate, portable evidence. No provider call, network request, inference run, external-root write, raw response copy, or private field-value copy was performed.
+Status: **legacy-v7 products retained; modern two-model screen reconciled; paper-lineage recomputation remains pending**. This report records the historical aggregate products and their portable provenance. The modern screen's raw response archive remains outside Git.
 
 ## Scope and evidence semantics
 
@@ -70,21 +87,21 @@ Raw historical JSON was not needed because the available aggregate and v7 consen
 
 | Output | Rows | Bytes | SHA-256 | Status |
 |---|---:|---:|---|---|
-| `outputs/derived/strategy_summary.csv` | 31 | 15,951 | `815c0d66b688f75cb736fe7765979dc14ad67ab370407e1804ff12981977f9c7` | reported aggregates; denominator explicit |
-| `outputs/derived/error_correlation_summary.csv` | 12 | 5,368 | `93157ddd6c16b8f928df5f32cc6b29d353b0cea2b921c71d8a158473d90b985b` | 10 WARP rows plus 2 blocked v7 family rows |
-| `outputs/derived/precision_coverage.csv` | 1,750 | 998,692 | `619210cd328762df6b87b8195f18d506bf61dcfa236c44e27c207b31d83bd53a` | recomputed on legacy/public v7 3,682-row sources |
-| `outputs/derived/cost_by_run.csv` | 4 | 911 | `bad4ed762ddf9761a6ea3b57171f26e3a8086c225d3672e4c023837fba17e665` | blocked: no observed historical usage; no modern runs |
+| `outputs/derived/strategy_summary.csv` | 43 | 22,922 | `15e2ac62cf3c343366bcac8729a5b0be04c3f413e38c10f32e57b931c2ecbb14` | 31 historical rows plus 12 modern measured rows |
+| `outputs/derived/error_correlation_summary.csv` | 22 | 9,850 | `b85036eb073f98c21cb43ec2b941829665a63808207313888b82ee968cb92255` | 12 historical/blocked rows plus 10 modern measured rows |
+| `outputs/derived/precision_coverage.csv` | 2,499 | 1,415,590 | `596541deb76942030f3070f8ac5b74757c044bba09174da371819e2b3fd179ef` | 1,750 legacy/public v7 rows plus 749 modern raw-denominator rows |
+| `outputs/derived/cost_by_run.csv` | 5 | 1,541 | `489d13a789b8f2ad3142623e58d8fba1155f2ebbf42f396445a6a4fe0bc7d07b` | historical usage unavailable; modern usage measured but pricing unavailable |
 | `outputs/derived/review_frontier.csv` | 3 | 1,667 | `3192b4c711a30e15ffb3febd8c6cd8f3c0ecf203ba5c61456787157c7c03f4de` | review burden partial; cost axis blocked |
 | `outputs/derived/shift_agreement.csv` | 130 | 54,974 | `3e18fa536faf11992ae55ed8b5901f5a0d4c6b7ac1e394f07851d86158e77e96` | reported aggregate series |
-| `outputs/derived/cross_model_operating_points.csv` | 14 | 5,145 | `ee1c9f00ccfa5014ab34c69a1a4c07d2870277f513ee9a5a4e1a5f79b7b4b438` | 2 historical rows; 12 modern blocked rows |
+| `outputs/derived/cross_model_operating_points.csv` | 18 | 6,878 | `565557e69c11276452e8497388677a0940f41d65191c670f77f979ee8eaeff01` | 2 historical rows; 8 modern target-not-met rows; 8 route-blocked rows |
 | `outputs/derived/augmentation_contribution.csv` | 5 | 2,427 | `6d6e2c4be232d77e94ee31560bbc327c04e9596721a79e34c456e78b6f1ceab6` | recomputed family selection frequency |
-| `outputs/derived/ensemble_size.csv` | 53 | 24,457 | `3deecacbf92eb76b17521adbef3e3294cbb4fe49dd96a68f02abd3d09b79d0cf` | reported by-k aggregates |
-| `outputs/derived/failure_examples.csv` | 1 | 495 | `c4ecf82d3d5e5c0f909d0992cd2b3a3acaf0e3b2d87130b49c22541618b54b55` | blocked: no release-authorized crop lineage |
+| `outputs/derived/ensemble_size.csv` | 65 | 29,532 | `e8db65df14ffb42beff7301f97861372ce8fa03eae4db9edf593ca0fc54c1e5f` | 53 historical rows plus 12 modern measured strategy rows |
+| `outputs/derived/failure_examples.csv` | 3 | 1,464 | `30f027e10639a469db528f87db33f6d3ea91d2deba59e1e650ee82ea28938aec` | modern count-only rows; release-authorized crop lineage unavailable |
 
 ## Blockers and nonclaims
 
 - **Paper-lineage evaluation:** the six-field selector and 24-record historical exclusion are recovered, but this report's tables remain legacy/public v7 at 3,682 rows. The v9/v10 emitted 3,684-row population retains one blank row, so a dedicated paper-lineage recomputation still needs to freeze its strict-nonblank reporting convention. All existing table rows carry `denominator_status`.
-- **Modern transfer:** exact IDs are recorded for `gemini-3.7-flash`, `gemini-3.5-flash-lite`, and `sagemaker-qwen3-vl-8b-instruct-fp8`, but no modern scored responses exist. The exact 622-image/hash manifest, paper-lineage row convention, shared parser hash, source/mask/render lineage, route smoke, and explicit live-call authorization remain closed gates.
+- **Modern transfer:** the two executable Gemini 3.5 screens are complete and reconciled; the raw response bodies and rendered views remain private. The modern analyzer used 3,718 raw six-name nonblank cells rather than the historical 3,684-row rule. The 3.7 route is blocked by HTTP 403 and Qwen by HTTP 500 endpoint-not-found, so those IDs have no full scored screen.
 - **Cost:** run settings do not provide observed token/usage/billing records or a pricing snapshot. No dollar estimate is invented.
 - **Qualitative examples:** no stable redacted high-agreement-wrong IDs with authorized crop references were found. Predictions, labels, image paths, and crops are left empty.
 - **Correlation cross-check:** the v7 transform table contains family CER and field accuracy but not family error correlation. Prose regression targets remain targets, not measured output rows.
@@ -103,5 +120,10 @@ python3 -m compileall -q scripts src tests
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 PYTHONPATH=src python3 -m icdar_tta.validate
 ```
+
+This command recomputes the historical/public-v7 products only. Do not point
+`--output-dir` at the merged modern tables unless replacing them intentionally;
+the modern rows are produced by `scripts/analyze_modern_screen.py` from the
+private run archive and are documented in `MODERN_FULL_RECEIPT.md`.
 
 Omit `--local-manifest` to guarantee the CLI writes only beneath `--output-dir`. The local manifest is ignored and is the only permitted output outside that directory.

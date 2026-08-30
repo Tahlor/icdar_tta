@@ -1,5 +1,11 @@
 # Modern label-blind smoke receipt
 
+This six-row U0 receipt is a superseded route/parser smoke, not the latest
+modern result. It was subsequently extended to the complete nine-view screen
+for the two executable Gemini models; see
+[`MODERN_FULL_RECEIPT.md`](MODERN_FULL_RECEIPT.md) for current metrics,
+ledger accounting, and route blockers.
+
 Run window: 2026-08-30T04:48:11Z–2026-08-30T04:48:26Z. This is a small
 route/parser/usage smoke, not the modern accuracy experiment.
 

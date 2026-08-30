@@ -15,7 +15,7 @@ does not retroactively make U0–G2 historically reproducible or resolve the
 historical Pad/Grid lineage gaps described below. The modern screen's raw
 images and response bodies remain in private storage.
 
-**Status: BLOCKED**
+**Historical exact-render status: BLOCKED**
 **Audit date:** 2026-08-29
 **Repository HEAD inspected:** `cebf7778cea92692da9837f8914ae0b61a29c399`
 **Owned artifact:** `local_agent/RENDER_LINEAGE_AUDIT.md`

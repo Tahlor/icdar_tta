@@ -578,7 +578,7 @@ def derive_all(pa_root: Path, analysis_root: Path) -> tuple[dict[str, list[dict[
                 "n_samples": "3" if strategy != "visual_mixed_6" else "6",
                 "target_precision": target_text, "denominator_status": "unavailable_modern_screen_blocked",
                 "evidence_status": "blocked_unavailable", "source_artifact": "local_agent/EXPERIMENT_MATRIX.md",
-                "notes": "No modern PA responses exist. Provider calls are outside this offline task and the source-image/hash, paper-row-convention, historical-GT-lineage, parser, mask/render, route-smoke, and authorization gates remain closed.",
+                "notes": "This historical-only recomputation does not ingest modern responses; the separate two-model screen and model-specific route blockers are documented in local_agent/MODERN_FULL_RECEIPT.md.",
             })
             cross_rows.append(row)
 
@@ -589,7 +589,7 @@ def derive_all(pa_root: Path, analysis_root: Path) -> tuple[dict[str, list[dict[
             "model_id": model_id, "run_id": run_id, "strategy": "all_available",
             "cost_status": "blocked_no_observed_usage" if model_id == MODEL_HISTORICAL else "blocked_no_run",
             "evidence_status": "blocked_unavailable", "source_artifact": "",
-            "notes": "Historical generation settings are available but observed usage/pricing logs were not located." if model_id == MODEL_HISTORICAL else "No modern inference was run; request count, usage, and cost are unavailable.",
+            "notes": "Historical generation settings are available but observed usage/pricing logs were not located." if model_id == MODEL_HISTORICAL else "This historical-only recomputation does not include the separate modern screen; see local_agent/MODERN_FULL_RECEIPT.md for its measured usage and route blockers.",
         })
         cost_rows.append(row)
 
